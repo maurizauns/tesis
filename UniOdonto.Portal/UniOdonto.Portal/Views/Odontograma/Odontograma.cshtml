@@ -1,0 +1,508 @@
+﻿@using UniOdonto.Models.Filters
+@using MvcJqGrid
+@using MvcJqGrid.Enums
+@using RP.Website.Helpers
+
+@model UniOdonto.Models.OdontogramaViewModel
+<form role="form" class="frmConsultas" name="frmConsultas" action='@Url.Action("save")'>
+    <div class="form-horizontal">
+        <div class="panel panel-primary">
+            <div class="panel-heading row">
+                @ViewBag.Title. @Html.ActionLink("(Inicio)", "Index", "Home", null, new { @class = "regresar" })
+                <div style="display:inline-block; position:relative; float:right">
+                    <a href="#" data-bind="click: Nuevo, enable:IsNotOpen" title="Nuevo" data-toggle="tooltip" class="pull-right btn btn-success btn-sm">
+                        <i class="fa fa-plus fa-lg"></i>
+                    </a>
+                    <button type="button" class="btn btn-material-teal btn-sm" data-bind="click:UpdateData, visible: IsEdit">
+                        <span class="glyphicon glyphicon-floppy-saved"></span> Actualizar
+                    </button>
+                    <button type="button" data-bind="click: Editar, visible: IsView() && BtnEditar()" class="btn btn-material-teal btn-sm">
+                        <span class="glyphicon glyphicon-edit"></span> Editar
+                    </button>
+                    <button type="button" id="GuardarId" class="btn btn-primary btn-sm" data-bind="click: Save" data-toggle="tooltip" title="Guardar" style="margin-right:2mm"><i class="fa fa-save fa-lg"></i></button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <b>Consulta Odontológica</b>
+                            </div>
+                            <div class="panel-body">
+                                <div data-bind="visible: IsNotBlank">
+                                    <div class="col-md-12">
+                                        <table class="col-md-12" id="tbDesaNew" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th width="10%">Fecha</th>
+                                                    <th width="16.6%">Dientes</th>
+                                                    <th width="6%">Pieza</th>
+                                                    <th width="25%">Indicación</th>
+                                                    <th width="6%">Pieza Fin</th>
+                                                    <th width="15.6%">Estado</th>
+                                                    <th width="19%">Cara</th>
+                                                    <th width="0.6%"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody data-bind="template: { name: 'EncuestaDesayunoNew', foreach: EvolucionesConductoDesa_ }"></tbody>
+
+                                            <script type="text/html" id="EncuestaDesayunoNew">
+                                                <tr data-bind="attr: {'id': EncuestaID}">
+                                                    <td><input type="text" style="font-size:13px" data-bind="value:EvolucionDate" disabled class="form-control" /></td>
+                                                    <td><input type="text" style="font-size:13px" data-bind="value:Diente" disabled class="form-control" /></td>
+                                                    <td>
+                                                        <div style="float:left;width:80%">
+                                                            <input type="text" data-bind="value:Pieza" disabled class="form-control" />
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div style="float:left;width:80%">
+                                                            <input type="text" style="font-size:13px" data-bind="value:Indicacion" disabled class="form-control" />
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div style="float:left;width:80%">
+                                                            <input type="text" data-bind="value:Pieza2" disabled class="form-control" />
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div style="float:left;width:80%">
+
+                                                            <select data-placeholder="Seleccione..." class="form-control" data-bind="value:Estado, enable:  validar2 && validar && ($root.IsNew() || $root.IsEdit()),event:{change:$root.CambioIR}">
+                                                                <option value="" selected disabled hidden>Seleccione..</option>
+                                                                <option value="Indicada">Indicada</option>
+                                                                <option value="Realizada">Realizada</option>
+
+                                                            </select>
+
+                                                        </div>
+                                                    </td>
+                                                    <td>
+
+                                                        <div class="multiselect">
+                                                            <div class="selectBox">
+
+                                                                <div class="overSelect"></div>
+                                                            </div>
+                                                            <div>
+                                                                <label for="one">
+                                                                    <input type="checkbox" data-bind="checked: Cara,event:{change:$root.CambioCara}, enable:  validar2 && !(validar) && ($root.IsNew() || $root.IsEdit())" />Oclusal
+                                                                </label>
+                                                                <label for="two">
+                                                                    <input type="checkbox" data-bind="checked: Cara1,event:{change:$root.CambioCara}, enable:validar2 && !(validar) && ($root.IsNew() || $root.IsEdit())" />Mesial
+                                                                </label>
+                                                                <label for="three">
+                                                                    <input type="checkbox" data-bind="checked: Cara2,event:{change:$root.CambioCara}, enable: validar2 && !(validar) && ($root.IsNew() || $root.IsEdit())" />Lingual
+                                                                </label>
+                                                                <label for="three">
+                                                                    <input type="checkbox" data-bind="checked: Cara3,event:{change:$root.CambioCara}, enable: validar2 && !(validar) && ($root.IsNew() || $root.IsEdit())" />Distal
+                                                                </label>
+                                                                <label for="three">
+                                                                    <input type="checkbox" data-bind="checked: Cara4,event:{change:$root.CambioCara}, enable: validar2 && !(validar) && ($root.IsNew() || $root.IsEdit())" />Vestibular
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </td>
+
+
+                                                    <td>
+                                                        <button type="button" data-bind="click: vmOdonto.DelDesaNew, visible:$root.IsNew() || $root.IsEdit()" class="btn btn-sm" style="padding:0;">
+                                                            <span class="glyphicon glyphicon-remove red" style="color:red"></span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </script>
+                                            <tfoot data-bind="visible:IsNew() || IsEdit()">
+                                                <tr>
+                                                    <td><input type="text" id="EvolucionDateNew" disabled class="form-control" /></td>
+                                                    <td>
+                                                        <select id="DientesNew" data-placeholder="Seleccione Diente" class="chosen-select form-control" data-bind="event:{change:CargarDatosDientes}">
+                                                            <option value="" selected disabled hidden>Seleccione..</option>
+                                                            <option value="Superior Adultos">Superior Adultos</option>
+                                                            <option value="Inferior Adultos">Inferior Adultos</option>
+                                                            <option value="Superior Infancia">Superior Infancia</option>
+                                                            <option value="Inferior Infancia">Inferior Infancia</option>
+                                                        </select>
+                                                    </td>
+
+                                                    <td>
+                                                        <select id="PiezaNew" placeholder="#" class="chosen-select form-control">
+                                                            <option value="" selected disabled hidden>#</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="18">18</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="17">17</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="16">16</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="15">15</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="14">14</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="13">13</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="12">12</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="11">11</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="21">21</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="22">22</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="23">23</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="24">24</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="25">25</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="26">26</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="27">27</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="28">28</option>
+
+                                                            <option data-bind="visible:$root.SInferior" value="48">48</option>
+                                                            <option data-bind="visible:$root.SInferior" value="47">47</option>
+                                                            <option data-bind="visible:$root.SInferior" value="46">46</option>
+                                                            <option data-bind="visible:$root.SInferior" value="45">45</option>
+                                                            <option data-bind="visible:$root.SInferior" value="44">44</option>
+                                                            <option data-bind="visible:$root.SInferior" value="43">43</option>
+                                                            <option data-bind="visible:$root.SInferior" value="42">42</option>
+                                                            <option data-bind="visible:$root.SInferior" value="41">41</option>
+                                                            <option data-bind="visible:$root.SInferior" value="31">31</option>
+                                                            <option data-bind="visible:$root.SInferior" value="32">32</option>
+                                                            <option data-bind="visible:$root.SInferior" value="33">33</option>
+                                                            <option data-bind="visible:$root.SInferior" value="34">34</option>
+                                                            <option data-bind="visible:$root.SInferior" value="35">35</option>
+                                                            <option data-bind="visible:$root.SInferior" value="36">36</option>
+                                                            <option data-bind="visible:$root.SInferior" value="37">37</option>
+                                                            <option data-bind="visible:$root.SInferior" value="38">38</option>
+
+                                                            <option data-bind="visible:$root.SInfancia" value="55">55</option>
+                                                            <option data-bind="visible:$root.SInfancia" value="54">54</option>
+                                                            <option data-bind="visible:$root.SInfancia" value="53">53</option>
+                                                            <option data-bind="visible:$root.SInfancia" value="52">52</option>
+                                                            <option data-bind="visible:$root.SInfancia" value="51">51</option>
+                                                            <option data-bind="visible:$root.SInfancia" value="61">61</option>
+                                                            <option data-bind="visible:$root.SInfancia" value="62">62</option>
+                                                            <option data-bind="visible:$root.SInfancia" value="63">63</option>
+                                                            <option data-bind="visible:$root.SInfancia" value="64">64</option>
+                                                            <option data-bind="visible:$root.SInfancia" value="65">65</option>
+
+                                                            <option data-bind="visible:$root.IInfancia" value="85">85</option>
+                                                            <option data-bind="visible:$root.IInfancia" value="84">84</option>
+                                                            <option data-bind="visible:$root.IInfancia" value="83">83</option>
+                                                            <option data-bind="visible:$root.IInfancia" value="82">82</option>
+                                                            <option data-bind="visible:$root.IInfancia" value="81">81</option>
+                                                            <option data-bind="visible:$root.IInfancia" value="71">71</option>
+                                                            <option data-bind="visible:$root.IInfancia" value="72">72</option>
+                                                            <option data-bind="visible:$root.IInfancia" value="73">73</option>
+                                                            <option data-bind="visible:$root.IInfancia" value="74">74</option>
+                                                            <option data-bind="visible:$root.IInfancia" value="75">75</option>
+                                                        </select>
+                                                    </td>
+
+
+                                                    <td>
+                                                        <select id="IndicacionNew" data-placeholder="Seleccione Estado" class="form-control" data-bind="event:{change:CargarCaras}">
+                                                            <option value="" selected disabled hidden>Seleccione..</option>
+                                                            <option value="Caries">Caries</option>
+                                                            <option value="Restauracion">Restauracion</option>
+                                                            <option value="Incrustacion">Incrustacion</option>
+                                                            <option value="Sellante">Sellante</option>
+                                                            <option value="Extraccion">Extraccion</option>
+                                                            <option value="Endodoncia">Endodoncia</option>
+                                                            <option value="Corona">Corona</option>
+                                                            <option value="Ausente">Ausente</option>
+                                                            <option value="Protesis Parcial Fija">Protesis Parcial Fija</option>
+                                                            <option value="Protesis Parcial Removible">Protesis Parcial Removible</option>
+                                                            <option value="Protesis Total">Protesis Total</option>
+
+                                                        </select>
+                                                    </td>
+
+                                                    <td>
+                                                        <select id="Pieza2New" disabled placeholder="#" class="chosen-select form-control">
+                                                            <option value="" selected disabled hidden>#</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="18">18</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="17">17</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="16">16</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="15">15</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="14">14</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="13">13</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="12">12</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="11">11</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="21">21</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="22">22</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="23">23</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="24">24</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="25">25</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="26">26</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="27">27</option>
+                                                            <option data-bind="visible:$root.SAdulto" value="28">28</option>
+
+                                                            <option data-bind="visible:$root.SInferior" value="48">48</option>
+                                                            <option data-bind="visible:$root.SInferior" value="47">47</option>
+                                                            <option data-bind="visible:$root.SInferior" value="46">46</option>
+                                                            <option data-bind="visible:$root.SInferior" value="45">45</option>
+                                                            <option data-bind="visible:$root.SInferior" value="44">44</option>
+                                                            <option data-bind="visible:$root.SInferior" value="43">43</option>
+                                                            <option data-bind="visible:$root.SInferior" value="42">42</option>
+                                                            <option data-bind="visible:$root.SInferior" value="41">41</option>
+                                                            <option data-bind="visible:$root.SInferior" value="31">31</option>
+                                                            <option data-bind="visible:$root.SInferior" value="32">32</option>
+                                                            <option data-bind="visible:$root.SInferior" value="33">33</option>
+                                                            <option data-bind="visible:$root.SInferior" value="34">34</option>
+                                                            <option data-bind="visible:$root.SInferior" value="35">35</option>
+                                                            <option data-bind="visible:$root.SInferior" value="36">36</option>
+                                                            <option data-bind="visible:$root.SInferior" value="37">37</option>
+                                                            <option data-bind="visible:$root.SInferior" value="38">38</option>
+
+                                                            <option data-bind="visible:$root.SInfancia" value="55">55</option>
+                                                            <option data-bind="visible:$root.SInfancia" value="54">54</option>
+                                                            <option data-bind="visible:$root.SInfancia" value="53">53</option>
+                                                            <option data-bind="visible:$root.SInfancia" value="52">52</option>
+                                                            <option data-bind="visible:$root.SInfancia" value="51">51</option>
+                                                            <option data-bind="visible:$root.SInfancia" value="61">61</option>
+                                                            <option data-bind="visible:$root.SInfancia" value="62">62</option>
+                                                            <option data-bind="visible:$root.SInfancia" value="63">63</option>
+                                                            <option data-bind="visible:$root.SInfancia" value="64">64</option>
+                                                            <option data-bind="visible:$root.SInfancia" value="65">65</option>
+
+                                                            <option data-bind="visible:$root.IInfancia" value="85">85</option>
+                                                            <option data-bind="visible:$root.IInfancia" value="84">84</option>
+                                                            <option data-bind="visible:$root.IInfancia" value="83">83</option>
+                                                            <option data-bind="visible:$root.IInfancia" value="82">82</option>
+                                                            <option data-bind="visible:$root.IInfancia" value="81">81</option>
+                                                            <option data-bind="visible:$root.IInfancia" value="71">71</option>
+                                                            <option data-bind="visible:$root.IInfancia" value="72">72</option>
+                                                            <option data-bind="visible:$root.IInfancia" value="73">73</option>
+                                                            <option data-bind="visible:$root.IInfancia" value="74">74</option>
+                                                            <option data-bind="visible:$root.IInfancia" value="75">75</option>
+                                                        </select>
+                                                    </td>
+
+                                                    <td>
+                                                        <select disabled id="EstadoNew" data-placeholder="Seleccione Estado" class="form-control">
+                                                            <option value="" selected disabled hidden>Seleccione..</option>
+                                                            <option value="Indicada">Indicada</option>
+                                                            <option value="Realizada">Realizada</option>
+
+                                                        </select>
+                                                    </td>
+                                                    <td id="CarasDiente">
+                                                        <div class="multiselect">
+                                                            <div class="selectBox">
+
+                                                                <div class="overSelect"></div>
+                                                            </div>
+                                                            <div>
+                                                                <label for="one">
+                                                                    <input id="CaraNew" disabled type="checkbox" value="Oclusal" />Oclusal
+                                                                </label>
+                                                                <label for="two">
+                                                                    <input id="CaraNew1" disabled type="checkbox" value="Mesial" />Mesial
+                                                                </label>
+                                                                <label for="three">
+                                                                    <input id="CaraNew2" disabled type="checkbox" value="Lingual" />Lingual
+                                                                </label>
+                                                                <label for="three">
+                                                                    <input id="CaraNew3" disabled type="checkbox" value="Distal" />Distal
+                                                                </label>
+                                                                <label for="three">
+                                                                    <input id="CaraNew4" disabled type="checkbox" value="Vestibular" />Vestibular
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                    </td>
+
+                                                    <td>
+                                                        <input type="image" src="~/Content/Images/plus.png" data-bind="click: AddDesayunoNew" class="btn btn-sm" style="padding:0; width:30px" />
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <b>ODONTOGRAMA</b>
+                                    </div>
+
+
+
+                                    <div class="col-md-12" id="motivoconsultaprueba">
+                                        <div style=" padding-left:0px;padding-right:50px" class="col-md-12 table-responsive">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>18</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>17</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>16</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>15</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>14</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>13</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>12</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>11</center></td>
+
+                                                        <td style="width: 3%; padding-left:10px; font-size:11px;"><center>21</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>22</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>23</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>24</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>25</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>26</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>27</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>28</center></td>
+                                                    </tr>
+                                                    <tr>
+
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px; text-align:center" data-bind="value: R1, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: R2, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: R3, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: R4, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: R5, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: R6, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: R7, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: R8, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:10px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: R9, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: R10, enable:IsNotView" /></td>
+
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: R11, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: R12, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: R13, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: R14, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: R15, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: R16, enable:IsNotView" /></td>
+                                                    </tr>
+                                                    <tr>
+
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: M1, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: M2, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: M3, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: M4, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: M5, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: M6, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: M7, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: M8, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:10px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: M9, enable:IsNotView" /></td>
+
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: M10, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: M11, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: M12, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: M13, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: M14, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: M15, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: M16, enable:IsNotView" /></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="panel-body svg-container" id="PrintID">
+                                            <div id="menu"> </div>
+                                            <svg id="draw" class="svg-content-responsive" style="visibility: none;" oncontextmenu="return false;">
+                                            </svg>
+                                        </div>
+                                        <div style="padding-left:0px;padding-right:50px" class="col-md-12 table-responsive ">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Mo1, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Mo2, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Mo3, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Mo4, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Mo5, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Mo6, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Mo7, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Mo8, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:10px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Mo9, enable:IsNotView" /></td>
+
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Mo10, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Mo11, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Mo12, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Mo13, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Mo14, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Mo15, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Movilidad" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Mo16, enable:IsNotView" /></td>
+
+
+                                                    </tr>
+                                                    <tr>
+
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px; text-align:center" data-bind="value: Re1, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Re2, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Re3, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Re4, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Re5, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Re6, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Re7, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Re8, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:10px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Re9, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Re10, enable:IsNotView" /></td>
+
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Re11, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Re12, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Re13, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Re14, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Re15, enable:IsNotView" /></td>
+                                                        <td style="width: 3%; padding-left:0px"><input placeholder="Recesión" type="text" class="form-control" style="font-size:11px;text-align:center" data-bind="value: Re16, enable:IsNotView" /></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>48</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>47</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>46</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>45</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>44</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>43</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>42</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>41</center></td>
+
+                                                        <td style="width: 3%; padding-left:10px; font-size:11px;"><center>31</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>32</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>33</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>34</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>35</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>36</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>37</center></td>
+                                                        <td style="width: 3%; padding-left:0px; font-size:11px;"><center>38</center></td>
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12 form-group">
+                                        <br />
+                                        <br />
+                                        <label class="control-label col-md-3">PLAN DE TRATAMIENTO:</label>
+                                        <div class="col-md-12">
+                                            <textarea rows="3" placeholder="Agregar Detalle" class="form-control" data-bind="value: Comentarios, enable:IsNotView"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <label class="control-label col-md-3 ">ACCIONES CLINICAS:</label>
+                                        <div class="col-md-12">
+                                            <textarea rows="3" placeholder="Agregar Detalle" class="form-control" data-bind="value: Acciones, enable:IsNotView"></textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="panel panel-default">
+                            <button class="panel-heading" style="width:100%" data-toggle="collapse" href="#historial-receta" aria-expanded="false" aria-controls="collapseExample">
+                                Historial <span class="fa fa-chevron-down" style="float:right;"></span>
+                            </button>
+                            <ul class="timeline" data-bind="template: {name: 'listaConsutlas', foreach: Odontogramas}">  </ul>
+                            <script id="listaConsutlas" type="text/html">
+                                <li>
+                                    <a href="#" style="padding-left: 25px;" data-bind="click:LoadTeeth"> <span data-bind="text: moment(Fecha, 'DD/MM/YYYY hh:mm a').format('DD/MM/YYYY')"></span></a>
+                                </li>
+                            </script>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Simbología Odontograma</div>
+                            <img align="middle" width="150" height="300" src="~/Content/Images/tablaOdontograma.png" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="~/Scripts/odontograma2.js"></script>
+<script src="~/Scripts/Pages/Odontograma/Odontograma.js"></script>

@@ -1,0 +1,111 @@
+﻿@using UniOdonto.Models.Filters
+@using MvcJqGrid
+@using MvcJqGrid.Enums
+@using RP.Website.Helpers
+
+@model UniOdonto.Models.MedicamentosViewModel
+
+<div class="form-horizontal">
+    <div class="panel panel-primary">
+        <div class="panel-heading row">
+            @ViewBag.Title @Html.ActionLink("(Inicio)", "Index", "Home", null, new { @class = "regresar" })
+            <div style="display:inline-block; position:relative; float:right">
+                <button type="button" class="pull-right btn btn-primary btn-sm modal-crud" style="margin-top: -1mm" data-toggle="modal" data-target="#medicamentos-modal">
+                    <i class="fa fa-plus fa-lg" data-toggle="tooltip" title="Nuevo"></i>
+                </button>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    @{
+                        Html.RenderPartial("_filtersPartial", new ModelFilter { FormId = "search_form", GridId = "medicamentos-grid", FieldFilters = ViewBag.Filters });
+                    }
+                    @(Html.MyjqGrid("medicamentos-grid", UniOdonto.Comun.Context.PageSize)
+                    .AddColumn(new Column("Generico").SetLabel("Genérico").SetWidth(50).SetSortable(true).SetAlign(Align.Center))
+                    .AddColumn(new Column("Comercial").SetLabel("Comercial").SetWidth(50).SetSortable(true).SetAlign(Align.Center))
+                    .AddColumn(new Column("Dosis").SetLabel("Dosis").SetWidth(50).SetSortable(false).SetAlign(Align.Center))
+                    .AddColumn(new Column("Presentacion").SetLabel("Presentación").SetWidth(50).SetSortable(true).SetAlign(Align.Center))
+                    .AddColumn(new Column("Cantidad").SetLabel("Cantidad").SetWidth(50).SetSortable(true).SetAlign(Align.Center))
+                    .AddColumn(new Column("Indicaciones").SetLabel("Indicaciones").SetSortable(true))
+                    .AddColumn(new Column("Actions").SetFixedWidth(true).SetWidth(120).SetLabel("</br>").SetSortable(false).SetAlign(Align.Center))
+                   .SetUrl(Url.Action("GetList")))
+
+                    <div class="clearfix" style="text-align:center">
+                        @Html.PaginationBtn("medicamentos-grid", "pull-right")
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="medicamentos-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-primary">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title" id="myModalLabel">@ViewBag.Title</h4>
+            </div>
+            <form role="form" class="modal-Crud" action='@Url.Action("Save")' data-modal="medicamentos-modal" data-grid="medicamentos-grid">
+                <div class="modal-body" style="background-color:#fff !important">
+                    <div class="row" >
+                        <div class="col-md-12 col-sm-12">
+                            @Html.HiddenFor(x => x.Id)
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Generico, new { @class = "col-md-3 col-sm-4 text-right control-label" })
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(x => x.Generico, new { @class = "form-control input-sm", placeholder = "Genérico", style = "max-width: 100% !important", autocomplete = "off"})
+                                    @Html.ValidationMessageFor(model => model.Generico, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Comercial, new { @class = "col-md-3 col-sm-4 text-right control-label" })
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(x => x.Comercial, new { @class = "form-control input-sm", placeholder = "Comercial", style = "max-width: 100% !important", autocomplete = "off"})
+                                    @Html.ValidationMessageFor(model => model.Comercial, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Dosis, new { @class = "col-md-3 col-sm-4 text-right control-label" })
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(x => x.Dosis, new { @class = "form-control input-sm", placeholder = "Dosis", style = "max-width: 100% !important", autocomplete = "off"})
+                                    @Html.ValidationMessageFor(model => model.Dosis, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Presentacion, new { @class = "col-md-3 col-sm-4 text-right control-label" })
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(x => x.Presentacion, new { @class = "form-control input-sm", placeholder = "Presentación", style = "max-width: 100% !important", autocomplete = "off"})
+                                    @Html.ValidationMessageFor(model => model.Presentacion, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Cantidad, new { @class = "col-md-3 col-sm-4 text-right control-label" })
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(x => x.Cantidad, new { @class = "form-control input-sm", placeholder = "Cantidad", style = "max-width: 100% !important", autocomplete = "off"})
+                                    @Html.ValidationMessageFor(model => model.Cantidad, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Indicaciones, new { @class = "col-md-3 col-sm-4 text-right control-label" })
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(x => x.Indicaciones, new { @class = "form-control input-sm", placeholder = "Indicaciones", style = "max-width: 100% !important", autocomplete = "off"})
+                                    @Html.ValidationMessageFor(model => model.Indicaciones, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript" language="javascript" src="~/Scripts/Pages/Operaciones/Medicamentos.js"></script>
+}

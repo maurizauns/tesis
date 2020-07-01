@@ -1,0 +1,120 @@
+﻿@using UniOdonto.Models.Filters
+@using MvcJqGrid
+@using MvcJqGrid.Enums
+@using RP.Website.Helpers
+
+@model UniOdonto.Models.EmpresaViewModel
+
+@{
+    ViewBag.Title = "Empresas";
+}
+<div class="form-horizontal">
+    <div class="panel panel-primary">
+        <div class="panel-heading row">
+            @ViewBag.Title
+            <div style="display:inline-block; position:relative; float:right">
+                @if (User.IsInRole("Administrador"))
+                {
+                    @*<div class="row AddButton" style="padding-right:10px">*@
+                        <div data-toggle="tooltip" title="Agregar" data-placement="left">
+                            <button type="button" class="pull-right btn btn-success btn-xs" data-toggle="modal" data-target="#empresas-modal" style="margin-right:2mm; margin-left:2mm">
+                                <i class="fa fa-plus fa-lg"></i>
+                            </button>
+                        </div>
+                    @*</div>*@
+                }
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    @{
+                        Html.RenderPartial("_filtersPartial", new ModelFilter { FormId = "search_form", GridId = "empresas-grid", FieldFilters = ViewBag.Filters });
+                    }
+                    @(Html.MyjqGrid("empresas-grid", UniOdonto.Comun.Context.PageSize)
+                    .AddColumn(new Column("Ruc").SetLabel("Ruc").SetSortable(true).SetAlign(Align.Center))
+                    .AddColumn(new Column("RazonSocial").SetLabel("Razón Social").SetSortable(true).SetAlign(Align.Center))
+                    .AddColumn(new Column("Actions").SetFixedWidth(true).SetWidth(160).SetLabel("</br>").SetSortable(false))
+                     .SetUrl(Url.Action("GetList")))
+                    <div class="clearfix">
+                        @Html.PaginationBtn("empresas-grid", "pull-right")
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="empresas-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header modal-header-primary">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title" id="myModalLabel">@ViewBag.Title</h4>
+            </div>
+            <form role="form" class="modal-Crud" action='@Url.Action("SaveEmpresa")' data-modal="empresas-modal" data-grid="empresas-grid">
+                <div class="modal-body">
+                    @Html.HiddenFor(x => x.Id)
+                    <div class="form-group ">
+                        <div class="row">
+                            <div class="col-md-2">
+                                @Html.LabelFor(x => x.Ruc)
+                                @Html.TextBoxFor(x => x.Ruc, new { @class = "form-control", placeholder = "Ruc", style = "max-width: 100% !important" })
+                                @Html.ValidationMessageFor(model => model.Ruc, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-5">
+                                @Html.LabelFor(x => x.RazonSocial)
+                                @Html.TextBoxFor(x => x.RazonSocial, new { @class = "form-control", placeholder = "Razon Social", style = "max-width: 100% !important" })
+                                @Html.ValidationMessageFor(model => model.RazonSocial, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-5">
+                                @Html.LabelFor(x => x.NombreComercial)
+                                @Html.TextBoxFor(x => x.NombreComercial, new { @class = "form-control", placeholder = "Nombre Comercial", style = "max-width: 100% !important" })
+                                @Html.ValidationMessageFor(model => model.NombreComercial, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.LabelFor(x => x.DireccionMatriz)
+                                    @Html.TextAreaFor(x => x.DireccionMatriz, new { @class = "form-control", placeholder = "Dirección Matriz", style = "max-width: 100% !important" })
+                                    @Html.ValidationMessageFor(model => model.DireccionMatriz, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-6" style="padding-top: 5mm;">
+                                    <div class="checkbox icheck-turquoise">
+                                        <div class="label-check">
+                                            <div class="checkbox">
+                                                <input type="checkbox" name="ContribuyenteEspecial" id="ContribuyenteEspecial">
+                                                @Html.LabelFor(x => x.ContribuyenteEspecial, new { @class = "col-md-10 col-sm-4 text-left recomendacion", style = "font-weight:bold" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" style="padding-top: 5mm;">
+                                    <div class="checkbox icheck-turquoise">
+                                        <div class="label-check">
+                                            <div class="checkbox">
+                                                <input type="checkbox" name="ObligadoContabilidad" id="ObligadoContabilidad">
+                                                @Html.LabelFor(x => x.ObligadoContabilidad, new { @class = "col-md-10 col-sm-4 text-left recomendacion", style = "font-weight:bold" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript" language="javascript" src="~/Scripts/Pages/EmpresaConfig.js"></script>
+}

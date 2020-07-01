@@ -1,0 +1,119 @@
+﻿@using UniOdonto.Models.Filters
+@using MvcJqGrid
+@using MvcJqGrid.Enums
+@using RP.Website.Helpers
+
+@model UniOdonto.Models.ConsultasViewModel
+<form role="form" class="frmConsultas" name="frmConsultas" action='@Url.Action("save")'>
+    <div class="form-horizontal">
+        <div class="panel panel-primary">
+            <div class="panel-heading row">
+                @ViewBag.Title. @Html.ActionLink("(Inicio)", "Index", "Home", null, new { @class = "regresar" })
+                <div style="display:inline-block; position:relative; float:right">
+                    <a href="@Url.Action("Personas")" title="Nuevo" data-toggle="tooltip" class="pull-right btn btn-success btn-sm">
+                        <i class="fa fa-plus fa-lg"></i>
+                    </a>
+                    <button type="submit" id="GuardarId" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Guardar" style="margin-right:2mm"><i class="fa fa-save fa-lg"></i></button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <div class="col-md-10">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="color:#317eac">
+                                <b>Consulta Odontológica</b>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-md-12 col-sm-12 row">
+
+                                        <div class="form-horizontal">
+                                            @Html.AntiForgeryToken()
+                                            @Html.HiddenFor(x => x.Id)
+                                            @Html.HiddenFor(x => x.PersonasId)
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => x.Fecha, new { @class = "col-md-1 col-sm-4 text-right control-label" })
+                                                <div class="col-md-2">
+                                                    @Html.TextBoxFor(x => x.Fecha, new { @class = "form-control calendar", placeholder = "Fecha Emision" })
+                                                    @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+                                                </div>
+                                                @Html.LabelFor(x => x.Fc, new { @class = "col-md-1 col-sm-4 text-right control-label" })
+                                                <div class="col-md-2">
+                                                    @Html.TextBoxFor(x => x.Fc, new { @class = "form-control input-sm", placeholder = "Fc", style = "max-width: 100% !important", autocomplete = "off" })
+                                                    @Html.ValidationMessageFor(model => model.Fc, "", new { @class = "text-danger" })
+                                                </div>
+                                                @Html.LabelFor(x => x.Fr, new { @class = "col-md-1 col-sm-4 text-right control-label" })
+                                                <div class="col-md-2">
+                                                    @Html.TextBoxFor(x => x.Fr, new { @class = "form-control input-sm", placeholder = "FR", style = "max-width: 100% !important", autocomplete = "off" })
+                                                    @Html.ValidationMessageFor(model => model.Fr, "", new { @class = "text-danger" })
+                                                </div>
+                                                @Html.LabelFor(x => x.So2, new { @class = "col-md-1 col-sm-4 text-right control-label" })
+                                                <div class="col-md-2">
+                                                    @Html.TextBoxFor(x => x.So2, new { @class = "form-control input-sm", placeholder = "SO2", style = "max-width: 100% !important", autocomplete = "off" })
+                                                    @Html.ValidationMessageFor(model => model.So2, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => x.Ta, new { @class = "col-md-1 col-sm-4 text-right control-label" })
+                                                <div class="col-md-2">
+                                                    @Html.TextBoxFor(x => x.Ta, new { @class = "form-control input-sm", placeholder = "TA", style = "max-width: 100% !important", autocomplete = "off" })
+                                                    @Html.ValidationMessageFor(model => model.Ta, "", new { @class = "text-danger" })
+                                                </div>
+                                                @Html.LabelFor(x => x.Temp, new { @class = "col-md-1 col-sm-4 text-right control-label" })
+                                                <div class="col-md-2">
+                                                    @Html.TextBoxFor(x => x.Temp, new { @class = "form-control input-sm", placeholder = "Temp", style = "max-width: 100% !important", autocomplete = "off" })
+                                                    @Html.ValidationMessageFor(model => model.Temp, "", new { @class = "text-danger" })
+                                                </div>
+                                                @Html.LabelFor(x => x.Peso, new { @class = "col-md-1 col-sm-4 text-right control-label" })
+                                                <div class="col-md-2">
+                                                    @Html.TextBoxFor(x => x.Peso, new { @class = "form-control input-sm", placeholder = "Peso", style = "max-width: 100% !important", autocomplete = "off" })
+                                                    @Html.ValidationMessageFor(model => model.Peso, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => x.Motivo, new { @class = "col-md-1 col-sm-3 text-right control-label" })
+                                                <div class="col-md-11">
+                                                    @Html.TextAreaFor(x => x.Motivo, new { @class = "form-control input-sm", style = "max-width: 100% !important" })
+                                                    @Html.ValidationMessageFor(model => model.Motivo, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => x.Diagnostico, new { @class = "col-md-1 col-sm-3 text-right control-label" })
+                                                <div class="col-md-11">
+                                                    @Html.TextAreaFor(x => x.Diagnostico, new { @class = "form-control input-sm", style = "max-width: 100% !important" })
+                                                    @Html.ValidationMessageFor(model => model.Diagnostico, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => x.Plan, new { @class = "col-md-1 col-sm-1 text-right control-label" })
+                                                <div class="col-md-11">
+                                                    @Html.TextAreaFor(x => x.Plan, new { @class = "form-control input-sm", style = "max-width: 100% !important" })
+                                                    @Html.ValidationMessageFor(model => model.Plan, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="panel panel-default">
+                            <button class="panel-heading" style="width:100%" data-toggle="collapse" href="#historial-receta" aria-expanded="false" aria-controls="collapseExample">
+                                Historial <span class="fa fa-chevron-down" style="float:right;"></span>
+                            </button>
+                            <ul class="timeline" data-bind="template: {name: 'listaConsutlas', foreach: consultasDto}">  </ul>
+                            <script id="listaConsutlas" type="text/html">
+                                <li>
+                                    <a href="#"> <span data-bind="text: Fecha()"></span></a>
+                                </li>
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="~/Scripts/Pages/Historia/Consultas.js"></script>

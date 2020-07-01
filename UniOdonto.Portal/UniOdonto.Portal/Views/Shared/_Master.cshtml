@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html style="height: auto;" class="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>UniOdonto | @ViewBag.Title</title>
+    @RenderSection("head", required: false)
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <link rel="icon" href="~/Content/Images/icono.ico" />
+    <link rel="stylesheet" href="~/Content/template/fontawesome/css/all.css">
+    <link rel="stylesheet" href="~/Content/template/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/template/adminlte.min.css">
+    <link rel="stylesheet" href="~/Content/template/overlayScrollbars/css/OverlayScrollbars.min.css">
+    @Scripts.Render("~/bundles/basico")
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script>
+        google.load('visualization', '1', { packages: ['corechart'] });
+    </script>
+</head>
+<body class="sidebar-mini layout-fixed text-sm accent-lightblue sidebar-collapse" style="height: auto;">
+
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/util")
+    @Scripts.Render("~/bundles/jqGrid")
+
+
+    <script src="~/Scripts/template/adminlte.js"></script>
+    <script src="~/Scripts/template/demo.js"></script>
+
+    <script src="~/Scripts/custom.js"></script>
+    <script src="~/Scripts/nprogress.js"></script>
+    <script src="~/Scripts/jquery-ui.js"></script>
+
+    @RenderSection("scripts", required: false)
+
+    </body>
+</html>

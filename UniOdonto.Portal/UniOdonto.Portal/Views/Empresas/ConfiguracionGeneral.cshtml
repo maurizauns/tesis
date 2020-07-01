@@ -1,0 +1,245 @@
+﻿@model UniOdonto.Models.EmpresaConfiguracionViewModel
+
+@{
+    ViewBag.Title = "Configuración General";
+    Layout = "~/Views/Shared/_EmpresaConfiguracionLayout.cshtml";
+    ViewBag.Panel = "ConfiguracionGeneral";
+}
+
+<div role="tabpanel" class="tab-pane active">
+
+    @using (Html.BeginForm("ConfiguracionGeneral", "Empresas", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.Ruc)
+
+            <div class="form-horizontal">
+                <div class="col-md-12 col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Configuracion Empresa</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-md-12 col-sm-12">
+                                    <table id="tconfig" class="table table-bordered table-hover" style="background-color:white;">
+                                        <thead>
+                                            <tr>
+                                                <th width="80px:"></th>
+                                                <th width="255px;"><b>Configuración</b></th>
+                                                <th><b>Descripción</b></th>
+                                                <th width="50px;"><b>Archivo</b></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="even">
+
+                                                <td></td>
+
+                                                <td><b>Ruc:</b></td>
+                                                <td>@Html.TextBoxFor(x => x.Ruc, new { @class = "form-control input-sm", placeholder = "Ruc", style = "max-width: 100% !important", @readonly = "true" })</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr class="odd">
+                                                <td></td>
+                                                <td><b>Razón social:</b></td>
+                                                <td>@Html.TextBoxFor(x => x.RazonSocial, new { @class = "form-control input-sm", placeholder = "Razon Social", style = "max-width: 100% !important", @readonly = "true" })</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr class="even">
+
+                                                <td></td>
+
+                                                <td><b>Nombre comercial:</b></td>
+                                                <td>@Html.TextBoxFor(x => x.NombreComercial, new { @class = "form-control input-sm", placeholder = "Nombre Comercial", style = "max-width: 100% !important", @readonly = "true" })</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr class="odd">
+                                                <td></td>
+                                                <td><b>Número de Establecimientos:</b><br><span class="recomendacion">(Formato válido: 001,002,003 etc.)</span></td>
+                                                <td>
+                                                    <div class="col-md-2 col-sm-3" style="padding-left:0;">
+                                                        @Html.TextBoxFor(x => x.NumeroEstablecimientos, new { @class = "form-control input-sm", placeholder = "Numero Establecimientos", style = "max-width: 100% !important" })
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr class="even">
+                                                <td></td>
+                                                <td><b>Obligado a llevar contabilidad:</b><br></td>
+                                                <td>
+                                                    <div class="col-md-3"  style="padding-left:0;">
+                                                        <div class="label-check">
+                                                            <div class="checkbox">
+                                                                <input type="checkbox" name="ObligadoContabilidad" id="ObligadoContabilidad" checked="@Model.ObligadoContabilidad">
+                                                                <label for="ObligadoContabilidad"></label>
+                                                            </div>
+                                                        </div>
+                                                        @Html.ValidationMessageFor(model => model.ObligadoContabilidad, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr class="odd">
+                                                <td></td>
+                                                <td><b>Contribuyente especial:</b><br></td>
+                                                <td>
+                                                    <div class="col-md-3"  style="padding-left:0;">
+                                                        <div class="label-check">
+                                                            <div class="checkbox">
+                                                                <input type="checkbox" name="ContribuyenteEspecial" id="ContribuyenteEspecial" checked="@Model.ContribuyenteEspecial">
+                                                                <label for="ContribuyenteEspecial"></label>
+                                                            </div>
+                                                        </div>
+                                                        @Html.ValidationMessageFor(model => model.ContribuyenteEspecial, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr class="even">
+                                                <td></td>
+                                                <td><b>Exportador:</b><br></td>
+                                                <td>
+                                                    <div class="col-md-3"  style="padding-left:0;">
+                                                        <div class="label-check">
+                                                            <div class="checkbox">
+                                                                <input type="checkbox" name="Exportador" id="Exportador" checked="@Model.Exportador">
+                                                                <label for="Exportador"></label>
+                                                            </div>
+                                                        </div>
+                                                        @Html.ValidationMessageFor(model => model.Exportador, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr class="odd">
+                                                <td></td>
+                                                <td><b>Ciudad:</b></td>
+                                                <td>@Html.TextBoxFor(x => x.DireccionMatriz, new { @class = "form-control input-sm", placeholder = "Direccion Matriz", style = "max-width: 100% !important" })</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr class="even">
+                                                <td></td>
+                                                <td><b>Teléfonos:</b></td>
+                                                <td>@Html.TextBoxFor(x => x.Telefonos, new { @class = "form-control input-sm", placeholder = "Telefonos", style = "max-width: 100% !important" })</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr class="odd">
+                                                <td></td>
+                                                <td><b>Num. Decimales::</b></td>
+                                                <td>
+                                                    <div class="col-md-2 col-sm-3" style="padding-left:0;">
+                                                        @Html.DropDownListFor(x => x.Decimales, (SelectList)ViewBag.Decimaless, null, new { @class = "form-control", style = "max-width: 100% !important" })
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr class="even">
+                                                <td></td>
+                                                <td><b>Actividad económica:</b></td>
+                                                <td>@Html.TextAreaFor(x => x.ActividadEconomica, new { @class = "form-control input-sm", placeholder = "Actividad Economica", style = "max-width: 100% !important" })</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr class="odd">
+                                                <td></td>
+                                                <td><b>Logo de la Empresa:</b><br><span class="recomendacion">(Ancho y alto recomendado: 110x35 px)</span></td>
+                                                <td>
+                                                    <input id="Imagen" name="Imagen" type="file" class="form-control input-sm">
+
+                                                </td>
+                                                <td>
+
+                                                    <a href="/sistema/empresa/configuracion/logo/" target="_blank" style="padding-left:5px;">Ver</a>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <h2>Más Configuraciones</h2>
+                                    <hr />
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.RecepcionTimeOut, new { @class = "control-label col-md-2" })
+                                        <div class="col-md-4">
+                                            @Html.TextBoxFor(model => model.RecepcionTimeOut, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.RecepcionTimeOut, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span aria-hidden="true" class="glyphicon glyphicon-info-sign"></span>
+                                            miliseguntos
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.AutorizacionTimeOut, new { @class = "control-label col-md-2" })
+                                        <div class="col-md-4">
+                                            @Html.TextBoxFor(model => model.AutorizacionTimeOut, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.AutorizacionTimeOut, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span aria-hidden="true" class="glyphicon glyphicon-info-sign"></span>
+                                            miliseguntos
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.GeneraClaveAcceso, new { @class = "control-label col-md-2" })
+                                        <div class="col-md-4">
+                                            @Html.CheckBoxFor(m => m.GeneraClaveAcceso)
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span aria-hidden="true" class="glyphicon glyphicon-info-sign"></span>
+                                            Seleccionar si el portal genera Clave de Acceso
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.InformacionAdicional1, new { @class = "control-label col-md-2" })
+                                        <div class="col-md-4">
+                                            @Html.TextBoxFor(model => model.InformacionAdicional1, new { @class = "form-control" })
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span aria-hidden="true" class="glyphicon glyphicon-info-sign"></span>
+                                            Nombre campo adicional en el Xml
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.InformacionAdicional2, new { @class = "control-label col-md-2" })
+                                        <div class="col-md-4">
+                                            @Html.TextBoxFor(model => model.InformacionAdicional2, new { @class = "form-control" })
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span aria-hidden="true" class="glyphicon glyphicon-info-sign"></span>
+                                            Nombre campo adicional en el Xml
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.InformacionAdicional3, new { @class = "control-label col-md-2" })
+                                        <div class="col-md-4">
+                                            @Html.TextBoxFor(model => model.InformacionAdicional3, new { @class = "form-control" })
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span aria-hidden="true" class="glyphicon glyphicon-info-sign"></span>
+                                            Nombre campo adicional en el Xml
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10  text-right">
+                    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" })
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+</div>

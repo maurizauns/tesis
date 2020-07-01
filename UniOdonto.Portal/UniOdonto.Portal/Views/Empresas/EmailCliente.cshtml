@@ -1,0 +1,150 @@
+﻿@using UniOdonto.Models.Filters
+@using MvcJqGrid
+@using MvcJqGrid.Enums
+@using RP.Website.Helpers
+
+@model UniOdonto.Models.EmpresaEmailClienteViewModel
+
+@{
+    ViewBag.Title = "Email del Cliente";
+    Layout = "~/Views/Shared/_EmpresaConfiguracionLayout.cshtml";
+    ViewBag.Panel = "EmailCliente";
+}
+@section head {
+
+}
+<div role="tabpanel" class="tab-pane active">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-horizontal">
+            <div class="form-horizontal">
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Email del Cliente</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.EmailAsunto, new { @class = "control-label col-md-3 text-right" })
+                                        <div class="col-md-5">
+                                            @Html.TextBoxFor(model => model.EmailAsunto, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.EmailAsunto)
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => x.EmailIncluyeTipoDocumento, new { @class = "control-label col-md-3 col-sm-4 text-right" })
+                                        <div class="col-md-5">
+                                            <div class="label-check">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" name="EmailIncluyeTipoDocumento" id="EmailIncluyeTipoDocumento" checked="@Model.EmailIncluyeTipoDocumento">
+                                                    <label for="EmailIncluyeTipoDocumento"></label>
+                                                </div>
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.EmailIncluyeTipoDocumento, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.EmailDe, new { @class = "control-label col-md-3 text-right" })
+                                        <div class="col-md-5">
+                                            @Html.TextBoxFor(model => model.EmailDe, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.EmailDe, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.EmailPara, new { @class = "control-label col-md-3 text-right" })
+                                        <div class="col-md-5">
+                                            @Html.TextBoxFor(model => model.EmailPara, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.EmailPara, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-md-4">
+                                            <span aria-hidden="true" class="glyphicon glyphicon-info-sign"></span>
+                                            Nombre campo adicional en el Xml
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.EmailParaAdicional, new { @class = "control-label col-md-3 text-right" })
+                                        <div class="col-md-5">
+                                            @Html.TextBoxFor(model => model.EmailParaAdicional, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.EmailParaAdicional, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.EmailCc, new { @class = "control-label col-md-3 text-right" })
+                                        <div class="col-md-5">
+                                            @Html.TextBoxFor(model => model.EmailCc, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.EmailCc, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.EmailCco, new { @class = "control-label col-md-3 text-right" })
+                                        <div class="col-md-5">
+                                            @Html.TextBoxFor(model => model.EmailCco, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.EmailCco, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.EmailMensajeHtml, new { @class = "control-label col-md-1 text-left" })
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.EmailMensajeHtml, new { @class = "form-control", rows = "10" })
+                                            @Html.ValidationMessageFor(model => model.EmailMensajeHtml, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-md-4">
+                                            <span aria-hidden="true" class="glyphicon glyphicon-info-sign"></span>
+                                            Mensaje que recibira el cliente en su correo electronico
+                                            <div class="row">
+                                                <div class="col-md-12"><code>&lt;NUMEROCOMPROBANTE&gt;</code></div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">Comodin para reemplazar por NumeroComprobante</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12"><code>&lt;TIPOCOMPROBANTE&gt;</code></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">Comodin para reemplazar por Tipo de Comprobante</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12"><code>&lt;LOGIN&gt;</code></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">Comodin para reemplazar por Url del Login</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12"><code>&lt;XML&gt;</code></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">Comodin para reemplazar por Url del Xml</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12"><code>&lt;PDF&gt;</code></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">Comodin para reemplazar por Url del Pdf</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-6 text-right">
+                    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" })
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+</div>

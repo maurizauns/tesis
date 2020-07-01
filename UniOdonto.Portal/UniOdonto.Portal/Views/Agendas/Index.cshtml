@@ -1,0 +1,174 @@
+﻿@using UniOdonto.Models.Filters
+@using MvcJqGrid
+@using MvcJqGrid.Enums
+@using RP.Website.Helpers
+
+@model UniOdonto.Models.AgendasViewModel
+<script src="~/Scripts/moment.js"></script>
+<script src="~/Scripts/moment-with-locales.js"></script>
+<script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+<link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<div class="form-horizontal">
+    <div class="panel panel-primary">
+        <div class="panel-heading row">
+            @ViewBag.Title. @Html.ActionLink("(Inicio)", "Index", "Home", null, new { @class = "regresar" })
+            <div style="display:inline-block; position:relative; float:right">
+                <div class="btn-group" style="margin-right:2mm">
+                    <a class="btn btn-default btn-sm text-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <i class="far fa-file-excel fa-lg" title="Exportar" data-toggle="tooltip"></i>
+                        <span class="caret" style="border-top-color:black;"></span>
+                    </a>
+                    <ul class="excel-menu dropdown-menu pull-right" role="menu">
+                        <li><a href="@Url.Action("Exportar")" title="Normal" data-toggle="tooltip">Excel</a></li>
+                        <li><a href="@Url.Action("ExportarDetalle")" title="Detallado" data-toggle="tooltip">Excel Detallado</a></li>
+                    </ul>
+                </div>
+                <button type="button" class="pull-right btn btn-success btn-xs" data-toggle="modal" data-target="#agendas-modal" style="margin-right:2mm; margin-left:2mm">
+                    <i class="fa fa-plus fa-lg"></i>
+                </button>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    @{
+                        Html.RenderPartial("_filtersPartial", new ModelFilter { FormId = "search_form", GridId = "agendas-grid", FieldFilters = ViewBag.Filters });
+                    }
+                    @(Html.MyjqGrid("agendas-grid", UniOdonto.Comun.Context.PageSize)
+                    .AddColumn(new Column("Nombre").SetLabel("Tipo").SetWidth(30).SetSortable(true).SetAlign(Align.Center))
+                    .AddColumn(new Column("Propietario.NombresCompletos").SetLabel("Identificacion").SetWidth(50).SetSortable(true).SetAlign(Align.Center))
+                    .AddColumn(new Column("Actions").SetFixedWidth(true).SetWidth(120).SetLabel("</br>").SetSortable(false).SetAlign(Align.Center))
+                   .SetUrl(Url.Action("GetList")))
+
+                    <div class="clearfix" style="text-align:center">
+                        @Html.PaginationBtn("agendas-grid", "pull-right")
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="agendas-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-primary">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title" id="myModalLabel">@ViewBag.Title</h4>
+            </div>
+            <form role="form" class="modal-Crud" action='@Url.Action("SaveAgenda")' data-modal="agendas-modal" data-grid="agendas-grid">
+                <div class="modal-body">
+                    @Html.HiddenFor(x => x.Id)
+                    <div class="form-group ">
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(x => x.Codigo)
+                                @Html.TextBoxFor(x => x.Codigo, new { @class = "form-control", placeholder = "Código", style = "max-width: 100% !important" })
+                                @Html.ValidationMessageFor(model => model.Codigo, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(x => x.Descripcion)
+                                @Html.TextBoxFor(x => x.Descripcion, new { @class = "form-control", placeholder = "Descripción", style = "max-width: 100% !important" })
+                                @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(x => x.Nombre)
+                                @Html.TextBoxFor(x => x.Nombre, new { @class = "form-control", placeholder = "Nombre de Agenda", style = "max-width: 100% !important" })
+                                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(x => x.DuracionCitaId)
+                                @Html.DropDownListFor(x => x.DuracionCitaId, (SelectList)ViewBag.TipoIdentificacionService, "seleccione", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DuracionCitaId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="horario-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-primary">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title" id="myModalLabelHorario">@ViewBag.Title</h4>
+            </div>
+            <form role="form" class="modal-Crud" action='@Url.Action("SaveEmpresa")' data-modal="horario-modal" data-grid="horario-grid">
+                <div class="modal-body">
+                    <div class="form-group ">
+                        <div class="row">
+                            <table width="100%" class="table table-striped" id="tablaHorarios">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4"> <label class="control-label text-center">Horario</label></th>
+                                    </tr>
+                                    <tr>
+                                        <th><label class="control-label text-center"> Dia de la Semana</label></th>
+                                        <th><label class="control-label text-center"> Hora Inicio</label></th>
+                                        <th><label class="control-label text-center"> Hora Fin</label></th>
+                                        <th><label class="control-label text-center">Acción</label></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <div class="col-md-12">
+                                <div class="form-group col-md-3">
+                                    <label class="control-label col-md-12 text-left">Día</label>
+                                    <select class="form-control col-md-12" id="diaSchedule">
+                                        <option value="1">Lunes</option>
+                                        <option value="2">Martes</option>
+                                        <option value="3">Miercoles</option>
+                                        <option value="4">Jueves</option>
+                                        <option value="5">Viernes</option>
+                                        <option value="6">Sabado</option>
+                                        <option value="7">Domingo</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="control-label col-md-12 text-left">Inicio</label>
+                                    <div class="col-md-12">
+                                        <div class='input-group date' id='inicio1'>
+                                            <input data-bind='datetimepickerHour: startToAdd' class="form-control" id="inicio" />
+                                            <span class="input-group-addon cal-sm" style="pointer-events:none;">
+                                                <span class="glyphicon glyphicon-time"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="control-label col-md-12 text-left">fin</label>
+                                    <div class="col-md-12">
+                                        <div class='input-group date' id='fin1'>
+                                            <input data-bind='datetimepickerHour: startToAdd' class="form-control" id="fin" />
+                                            <span class="input-group-addon cal-sm" style="pointer-events:none;">
+                                                <span class="glyphicon glyphicon-time"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-1">
+                                    <label class="control-label col-md-12 text-left">&nbsp;</label>
+                                    <div class="col-md-12">
+                                        <a href="#" class="addSchedule" onclick="AgregarHorario()"><i class="fas fa-plus" ></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/Pages/Operaciones/Agendas.js"></script>

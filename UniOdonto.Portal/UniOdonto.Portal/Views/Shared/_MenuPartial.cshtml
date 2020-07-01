@@ -1,0 +1,64 @@
+﻿@using UniOdonto.BO
+@using Microsoft.AspNet.Identity
+@{
+    var menus = MenuService.GetMenuByIdUser(User.Identity.GetUserId());
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                    Dashboard
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="./index.html" class="nav-link active">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Dashboard v1</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-header">Menu</li>
+        @foreach (var menu in menus)
+        {
+            if (menu.MenuItems.Count > 0)
+            {
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas @(string.IsNullOrWhiteSpace(menu.icon) ? "fa fa-circle" : menu.icon) @(string.IsNullOrWhiteSpace(menu.iconColor) ? "text-primary" : menu.iconColor)"></i>
+                        <p>
+                            @menu.Descripcion
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        @foreach (var menuItem in menu.MenuItems)
+                        {
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index",menuItem.Url)" class="nav-link" title="@menuItem.Descripcion">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>@menuItem.Descripcion</p>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item">
+                    <a href="@Url.Action("Index",menu.Url)" class="nav-link">
+                        <i class="nav-icon fas @(string.IsNullOrWhiteSpace(menu.icon) ? "fa fa-circle" : menu.icon) @(string.IsNullOrWhiteSpace(menu.iconColor) ? "text-primary" : menu.iconColor)"></i>
+                        <p>@menu.Descripcion</p>
+                    </a>
+                </li>
+            }
+        }
+    </ul>
+}

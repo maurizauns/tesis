@@ -1,0 +1,108 @@
+﻿@model PagedList.IPagedList<UniOdonto.Models.PersonasViewModel>
+@using PagedList.Mvc;
+<html class="responsejs scrollbar">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        .table {
+            font-size: 14px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 9px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #ccc;
+            border-radius: 10px;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #999;
+            }
+    </style>
+
+    <script>
+        function cambiarPagina(pagina) {
+            
+            var pagina_el = document.getElementById('pagina_id');
+            pagina_el.setAttribute('value', pagina);
+            document.forms.selForm.submit();
+            return false;
+        }
+    </script>
+</head>
+<body style="background-color:#f5f7f7">
+
+    <div style="background-color:#F5F7F7">
+        <div id="dform"></div>
+        <form method="GET" name="selForm">
+            <input type="hidden" id="pagina_id" name="page" value="2">
+            <input type="hidden" name="tipocuenta" value="">
+            <input type="hidden" name="todas" value="">
+
+            <table id="tbfilter">
+                <tbody>
+                    <tr>
+                        <td valign="middle" style="padding-right:10px;"><b>Filtro:</b></td>
+                        <td valign="middle" style="padding-right:10px;">
+                            <input type="text" class="form-control input-sm" id="filtro" name="filtro" size="40" value="">
+                        </td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="javascript:cambiarPagina(1);">
+                                <span class="glyphicon glyphicon-search"></span>
+                                Consultar
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <table id="tcuentas" class="table table-bordered table-striped table-condensed">
+                <thead>
+                    <tr style="background-color:#F5F5F5">
+                        <th width="120" class="text-left"><b>Código</b></th>
+                        <th class="text-left"><b>Nombre</b></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td>
+                                @item.Identificacion
+                            </td>
+                            <td>
+                                <a id="@item.Id" href="#" onclick="parent.ObjectField.currentField.selectObj('@item.Id');">
+                                    @Html.DisplayFor(modelItem => item.NombreCompleto)
+                                </a>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </form>
+        @if (@Model.PageNumber > 1)
+        {
+            <a href="?pagina=3" onclick="return cambiarPagina(@Model.PageNumber - 1);">Anterior</a>
+        }
+        Página  @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount.
+        @if (@Model.PageNumber < @Model.PageCount)
+        {
+            <a href="?pagina=3" onclick="return cambiarPagina(@Model.PageNumber + 1);">Siguiente</a>
+        }
+        <br />
+        Total de registros: @ViewBag.Total
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+﻿@using UniOdonto.Models.Filters
+@using MvcJqGrid
+@using MvcJqGrid.Enums
+@using RP.Website.Helpers
+
+@model UniOdonto.Models.PersonasViewModel
+
+@{
+    ViewBag.Title = "Personas";
+}
+<script src="~/Scripts/Pages/Personas/Personas.js"></script>
+<div class="form-horizontal">
+    <div class="panel panel-primary">
+        <div class="panel-heading row">
+            @ViewBag.Title. @Html.ActionLink("(Inicio)", "Index", "Home", null, new { @class = "regresar" })
+            <div style="display:inline-block; position:relative; float:right">
+                <div class="btn-group" style="margin-right:2mm">
+                    <a class="btn btn-default btn-sm text-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <i class="far fa-file-excel fa-lg" title="Exportar" data-toggle="tooltip"></i>
+                        <span class="caret" style="border-top-color:black;"></span>
+                    </a>
+                    <ul class="excel-menu dropdown-menu pull-right" role="menu">
+                        <li><a href="@Url.Action("Exportar")" title="Normal" data-toggle="tooltip">Excel</a></li>
+                        <li><a href="@Url.Action("ExportarDetalle")" title="Detallado" data-toggle="tooltip">Excel Detallado</a></li>
+                    </ul>
+                </div>
+                <a href="@Url.Action("Personas")" title="Nuevo" data-toggle="tooltip" class="pull-right btn btn-success btn-sm modal-crud">
+                    <i class="fa fa-plus fa-lg"></i>
+                </a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    @{
+                        Html.RenderPartial("_filtersPartial", new ModelFilter { FormId = "search_form", GridId = "personas-grid", FieldFilters = ViewBag.Filters });
+                    }
+                    @(Html.MyjqGrid("personas-grid", UniOdonto.Comun.Context.PageSize)
+                    .AddColumn(new Column("NumeroPaciente").SetLabel("Número. HC").SetWidth(30).SetSortable(true).SetAlign(Align.Center))
+                    .AddColumn(new Column("TipoIdentificacion.Descripcion").SetLabel("Tipo").SetWidth(30).SetSortable(true).SetAlign(Align.Center))
+                    .AddColumn(new Column("Identificacion").SetLabel("Identificacion").SetWidth(30).SetSortable(true).SetAlign(Align.Center))
+                    .AddColumn(new Column("FechaNacimiento").SetLabel("Fecha de Nacimiento").SetWidth(40).SetSortable(true))
+                    .AddColumn(new Column("TipoSangre").SetLabel("Sangre").SetWidth(15).SetSortable(true))
+                    .AddColumn(new Column("Provincias.Descripcion").SetLabel("Provincia - Ciudad").SetWidth(50).SetSortable(true))
+                    .AddColumn(new Column("SeguroMedico").SetLabel("Seguro Médico").SetWidth(30).SetSortable(true))
+                    .AddColumn(new Column("Sexo").SetLabel("Sexo").SetWidth(25).SetSortable(true))
+                    .AddColumn(new Column("PrimerNombre").SetLabel("Nombres y Apellidos").SetSortable(false))
+                    .AddColumn(new Column("Actions").SetFixedWidth(true).SetWidth(120).SetLabel("</br>").SetSortable(false).SetAlign(Align.Center))
+                   .SetUrl(Url.Action("GetList")))
+
+                    <div class="clearfix" style="text-align:center">
+                        @Html.PaginationBtn("personas-grid", "pull-right")
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript" language="javascript" src="~/Scripts/Pages/Personas/Personas.js"></script>
+}

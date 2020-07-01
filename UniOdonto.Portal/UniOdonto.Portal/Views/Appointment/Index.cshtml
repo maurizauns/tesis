@@ -1,0 +1,147 @@
+﻿@using UniOdonto.Models.Filters
+@using MvcJqGrid
+@using MvcJqGrid.Enums
+@using RP.Website.Helpers
+
+@model UniOdonto.Models.AppointmentViewModel
+
+@{
+    ViewBag.Title = "Agendas";
+}
+<script src="~/Scripts/knockout.debug.js"></script>
+<script src="~/Scripts/knockout.mapping.js"></script>
+<script src="~/Scripts/moment.js"></script>
+<script src="~/Scripts/moment-with-locales.js"></script>
+
+
+<script src="~/Scripts/Pages/Basico/vendor.js"></script>
+<script src="~/Scripts/Pages/Basico/selectize.js"></script>
+<script src="~/Scripts/Pages/Basico/jquery-ui.js"></script>
+<script src="~/Scripts/Pages/Basico/jquery.form.js"></script>
+<script src="~/Scripts/Pages/Basico/jquery.tablesorter.min.js"></script>
+<script src="~/Scripts/Pages/Basico/jquery.tablesorter.widgets.min.js"></script>
+<script src="~/Scripts/Pages/Basico/shell.js"></script>
+
+
+<script src="~/Scripts/fullcalendar.js"></script>
+<link href="~/Content/fullcalendar.min.css" rel="stylesheet" />
+
+<div class="form-horizontal" id="divAppointment">
+    <div class="panel panel-primary">
+        <div class="panel-heading row">
+            @ViewBag.Title. @Html.ActionLink("(Inicio)", "Index", "Home", null, new { @class = "regresar" })
+            <div style="display:inline-block; position:relative; float:right">
+                <div class="btn-group" style="margin-right:2mm">
+                    <a class="btn btn-default btn-sm text-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <i class="far fa-file-excel fa-lg" title="Exportar" data-toggle="tooltip"></i>
+                        <span class="caret" style="border-top-color:black;"></span>
+                    </a>
+                    <ul class="excel-menu dropdown-menu pull-right" role="menu">
+                        <li><a href="@Url.Action("Exportar")" title="Normal" data-toggle="tooltip">Excel</a></li>
+                        <li><a href="@Url.Action("ExportarDetalle")" title="Detallado" data-toggle="tooltip">Excel Detallado</a></li>
+                    </ul>
+                </div>
+                <a href="@Url.Action("Personas")" title="Nuevo" data-toggle="tooltip" class="pull-right btn btn-success btn-sm modal-crud">
+                    <i class="fa fa-plus fa-lg"></i>
+                </a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+                <div class="col-md-2">
+                    <div class="sticky-top mb-3">
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h4 class="card-title">Agendas</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row col-md-12" data-bind="template: {name: 'linkAgendas', foreach: Agendas}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script id="linkAgendas" type="text/html">
+                        <div class="form-group clearfix">
+                            <div class="icheck-primary d-inline">
+                                <input type="radio" name="agendasName" data-bind="attr:{'id':'radioPrimary'+(typeof Id !='function' ? Id:Id())}, event: {change: $root.ViewShedule}">
+                                <label data-bind="text:Descripcion, attr:{'for':'radioPrimary'+(typeof Id !='function' ? Id:Id())}"></label>
+                            </div>
+                        </div>
+                    </script>
+                </div>
+                <div class="col-md-10">
+                    <div class="row" id='calendarAppointment'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="dlgCuenta" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-primary">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 id="titulo_ventana_cuenta" class="modal-title text-default"><label id="idTitle"></label></h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" class="frmNewAgenda" name="frmNewAgenda" action='@Url.Action("Ingreso")'>
+                    @Html.HiddenFor(x => x.AgendasId)
+                    @Html.HiddenFor(x => x.UsuarioId)
+                    @Html.HiddenFor(x => x.AppointmentDate)
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.PersonasId, new { @class = "col-md-3 col-sm-4 text-right control-label" })
+                            <div class="col-md-9">
+                                <input type="hidden" id="PersonasId" name="PersonasId" value="" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.AppointmentLenght, new { @class = "col-md-3 col-sm-4 text-right control-label" })
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(x => x.AppointmentLenght, (SelectList)ViewBag.AppointmentLenght, "--Seleccione--", new { @class = "form-control", style = "max-width: 100% !important" })
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.TipoCitaId, new { @class = "col-md-3 col-sm-4 text-right control-label" })
+                            <div class="col-md-3">
+                                @Html.DropDownListFor(x => x.TipoCitaId, (SelectList)ViewBag.TipoCitaId, "--Seleccione--", new { @class = "form-control", style = "max-width: 100% !important" })
+                            </div>
+                            @Html.LabelFor(x => x.EstadoCitaId, new { @class = "col-md-3 col-sm-4 text-right control-label" })
+                            <div class="col-md-3">
+                                @Html.DropDownListFor(x => x.EstadoCitaId, (SelectList)ViewBag.EstadoCitaId, "--Seleccione--", new { @class = "form-control", style = "max-width: 100% !important" })
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.AppointmentDate, new { @class = "col-md-3 col-sm-4 text-right control-label" })
+                            <div class="col-md-3">
+                                <span id="newAppointDate"></span>
+                            </div>
+                            <label class="col-md-3 col-sm-4 text-right control-label">Hora</label>
+                            <div class="col-md-3">
+                                <span id="newAppointTime"></span>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="col-md-12 form-group text-right hide" id="divEdit">
+                            <a href="" id="btnConsultar" target="_blank" class="btn btn-primary btn-sm">Consultar</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="btnGuardar" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script src="~/Scripts/Pages/Personas/Personas.js"></script>
+    <script type="text/javascript" language="javascript" src="~/Scripts/Pages/Appointment/index.js"></script>
+}

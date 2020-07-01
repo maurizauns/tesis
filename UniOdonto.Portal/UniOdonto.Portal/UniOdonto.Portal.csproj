@@ -1,0 +1,1851 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.AspNetCore.Mvc.Razor.Extensions.2.1.1\build\netstandard2.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.props" Condition="Exists('..\packages\Microsoft.AspNetCore.Mvc.Razor.Extensions.2.1.1\build\netstandard2.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.props')" />
+  <Import Project="..\packages\Microsoft.DiaSymReader.Native.1.7.0\build\Microsoft.DiaSymReader.Native.props" Condition="Exists('..\packages\Microsoft.DiaSymReader.Native.1.7.0\build\Microsoft.DiaSymReader.Native.props')" />
+  <Import Project="..\packages\Microsoft.AspNetCore.Razor.Design.2.1.1\build\netstandard2.0\Microsoft.AspNetCore.Razor.Design.props" Condition="Exists('..\packages\Microsoft.AspNetCore.Razor.Design.2.1.1\build\netstandard2.0\Microsoft.AspNetCore.Razor.Design.props')" />
+  <Import Project="..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.8\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.8\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E1B3B220-12DB-433D-9289-7B6F8A2D58B5}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UniOdonto.Portal</RootNamespace>
+    <AssemblyName>UniOdonto.Portal</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44366</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
+    <DockerLaunchUrl>http://{ServiceIPAddress}</DockerLaunchUrl>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.0.4.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.0.4\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Antiforgery, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Antiforgery.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Antiforgery.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Core, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Core.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authorization, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authorization.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Authorization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authorization.Policy, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authorization.Policy.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Authorization.Policy.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Cors, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Cors.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Cryptography.Internal, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Cryptography.Internal.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Cryptography.Internal.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.DataProtection, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.DataProtection.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.DataProtection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.DataProtection.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.DataProtection.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.DataProtection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Diagnostics.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Diagnostics.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Diagnostics.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Server.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Server.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Html.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Html.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Html.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Extensions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Extensions.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Features.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.JsonPatch, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.JsonPatch.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.JsonPatch.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Localization, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Localization.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.ApiExplorer, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.ApiExplorer.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.ApiExplorer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Core, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Core.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Cors, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Cors.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.DataAnnotations, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.DataAnnotations.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.DataAnnotations.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Formatters.Json, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Formatters.Json.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Formatters.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Localization, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Localization.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Razor, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Razor.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Razor.Extensions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Razor.Extensions.2.1.1\lib\net46\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.RazorPages, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.RazorPages.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.RazorPages.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.TagHelpers, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.TagHelpers.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.TagHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.ViewFeatures, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.ViewFeatures.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.ViewFeatures.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Razor, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Razor.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Razor.Language, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Razor.Language.2.1.1\lib\net46\Microsoft.AspNetCore.Razor.Language.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Razor.Runtime, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Razor.Runtime.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Razor.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.ResponseCaching.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.ResponseCaching.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.ResponseCaching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Routing, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Routing.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Routing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Routing.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Routing.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Routing.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.WebUtilities, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.WebUtilities.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.WebUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis, Version=2.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.Common.2.8.0\lib\netstandard1.3\Microsoft.CodeAnalysis.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp, Version=2.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.2.8.0\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.Razor, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.Razor.2.1.1\lib\net46\Microsoft.CodeAnalysis.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.DotNet.PlatformAbstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.DotNet.PlatformAbstractions.2.1.0\lib\net45\Microsoft.DotNet.PlatformAbstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Memory.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.2.1.1\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyModel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyModel.2.1.0\lib\net451\Microsoft.Extensions.DependencyModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Composite, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Composite.2.1.1\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Composite.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileSystemGlobbing, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileSystemGlobbing.2.1.1\lib\netstandard2.0\Microsoft.Extensions.FileSystemGlobbing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Hosting.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Localization, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Localization.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Localization.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Localization.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Localization.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.ObjectPool, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.ObjectPool.2.1.1\lib\netstandard2.0\Microsoft.Extensions.ObjectPool.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.WebEncoders, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.WebEncoders.2.1.1\lib\netstandard2.0\Microsoft.Extensions.WebEncoders.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Net.Http.Headers, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.Headers.2.1.1\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Registry.4.5.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcCheckBoxList, Version=1.4.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcCheckBoxList.1.4.5\lib\net45\MvcCheckBoxList.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcJqGrid, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcJqGrid.1.0.15\lib\net40\MvcJqGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.Bson.1.0.1\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.AppContext, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.AppContext.4.3.0\lib\net463\System.AppContext.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.3.1\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.FileVersionInfo, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.FileVersionInfo.4.3.0\lib\net46\System.Diagnostics.FileVersionInfo.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.StackTrace, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.StackTrace.4.3.0\lib\net46\System.Diagnostics.StackTrace.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.4.3.0\lib\net46\System.IO.FileSystem.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Linq, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.4.3.0\lib\net463\System.Linq.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Linq.Expressions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Expressions.4.3.0\lib\net463\System.Linq.Expressions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.4.3.0\lib\net462\System.Reflection.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Metadata, Version=1.4.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.Metadata.1.4.2\lib\portable-net45+win8\System.Reflection.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Extensions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Extensions.4.3.0\lib\net462\System.Runtime.Extensions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.4.3.0\lib\net463\System.Runtime.InteropServices.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.4.5.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Xml, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Xml.4.5.0\lib\net461\System.Security.Cryptography.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Permissions.4.5.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.4.5.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.4.3.0\lib\net46\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.1\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Thread, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Thread.4.3.0\lib\net46\System.Threading.Thread.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.7\lib\net45\System.Web.Http.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.ReaderWriter.4.3.0\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.XmlDocument, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.XmlDocument.4.3.0\lib\net46\System.Xml.XmlDocument.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.XPath, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.XPath.4.3.0\lib\net46\System.Xml.XPath.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.XPath.XDocument, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.XPath.XDocument.4.3.0\lib\net46\System.Xml.XPath.XDocument.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.3\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.4.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.4.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.4.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.4.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\ConfiguracionGeneralConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\MaperConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="App_Start\WebVentasConfig.cs" />
+    <Compile Include="Comun\BaseModel.cs" />
+    <Compile Include="Comun\Context.cs" />
+    <Compile Include="Comun\CustomClaimTypes.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AgendasController.cs" />
+    <Compile Include="Controllers\AppointmentController.cs" />
+    <Compile Include="Controllers\BaseApiController.cs" />
+    <Compile Include="Controllers\BaseConfiguracionGeneralController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CantonesController.cs" />
+    <Compile Include="Controllers\ConfiguracionController.cs" />
+    <Compile Include="Controllers\ConsultasController.cs" />
+    <Compile Include="Controllers\EmpresasController.cs" />
+    <Compile Include="Controllers\HistoriaController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HorariosController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MedicamentosController.cs" />
+    <Compile Include="Controllers\OdontogramaController.cs" />
+    <Compile Include="Controllers\PanelesController.cs" />
+    <Compile Include="Controllers\PeriodonciaController.cs" />
+    <Compile Include="Controllers\PermisosRolController.cs" />
+    <Compile Include="Controllers\PersonasController.cs" />
+    <Compile Include="Controllers\ProvinciasController.cs" />
+    <Compile Include="Controllers\TipoIdentificacionController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Extensions\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\CalculoEdad.cs" />
+    <Compile Include="Helpers\CollectionUtils.cs" />
+    <Compile Include="Helpers\DecimalModelBinder.cs" />
+    <Compile Include="Helpers\GridHelperExts.cs" />
+    <Compile Include="Helpers\Moneda.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Appointment\AppointmentViewModel.cs" />
+    <Compile Include="Models\ConfiguracionGeneralViewModel.cs" />
+    <Compile Include="Models\ConfiguracionViewModel.cs" />
+    <Compile Include="Models\Configuracion\CantonesViewModel.cs" />
+    <Compile Include="Models\EmpresaViewModel.cs" />
+    <Compile Include="Models\Filters\FieldFilter.cs" />
+    <Compile Include="Models\Filters\FilterType.cs" />
+    <Compile Include="Models\Filters\IFilter.cs" />
+    <Compile Include="Models\Filters\ModelFilter.cs" />
+    <Compile Include="Models\Historia\ConsultasViewModel.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Odontologia\DientesPerioViewModel.cs" />
+    <Compile Include="Models\Odontologia\DienteViewModel.cs" />
+    <Compile Include="Models\Odontologia\EvolucionesOdontogramaViewModel.cs" />
+    <Compile Include="Models\Odontologia\OdontogramaViewModel.cs" />
+    <Compile Include="Models\Odontologia\PeriodonciaViewModel.cs" />
+    <Compile Include="Models\Operaciones\AgendasViewModel.cs" />
+    <Compile Include="Models\Operaciones\AgendaUsuarioViewModel.cs" />
+    <Compile Include="Models\Operaciones\HorariosViewModel.cs" />
+    <Compile Include="Models\Operaciones\MedicamentosViewModel.cs" />
+    <Compile Include="Models\PanelesViewModel.cs" />
+    <Compile Include="Models\Personas\PersonasViewModel.cs" />
+    <Compile Include="Models\RoleMenuViewModel.cs" />
+    <Compile Include="Models\UsuarioViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\ResourceMessage.Designer.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Admin\AdminLTE.css" />
+    <Content Include="Content\Admin\AdminLTE.min.css" />
+    <Content Include="Content\Admin\skins\skin-black-light.css" />
+    <Content Include="Content\Admin\skins\skin-black-light.min.css" />
+    <Content Include="Content\Admin\skins\skin-black.css" />
+    <Content Include="Content\Admin\skins\skin-black.min.css" />
+    <Content Include="Content\Admin\skins\skin-blue-light.css" />
+    <Content Include="Content\Admin\skins\skin-blue-light.min.css" />
+    <Content Include="Content\Admin\skins\skin-blue.css" />
+    <Content Include="Content\Admin\skins\skin-blue.min.css" />
+    <Content Include="Content\Admin\skins\skin-green-light.css" />
+    <Content Include="Content\Admin\skins\skin-green-light.min.css" />
+    <Content Include="Content\Admin\skins\skin-green.css" />
+    <Content Include="Content\Admin\skins\skin-green.min.css" />
+    <Content Include="Content\Admin\skins\skin-purple-light.css" />
+    <Content Include="Content\Admin\skins\skin-purple-light.min.css" />
+    <Content Include="Content\Admin\skins\skin-purple.css" />
+    <Content Include="Content\Admin\skins\skin-purple.min.css" />
+    <Content Include="Content\Admin\skins\skin-red-light.css" />
+    <Content Include="Content\Admin\skins\skin-red-light.min.css" />
+    <Content Include="Content\Admin\skins\skin-red.css" />
+    <Content Include="Content\Admin\skins\skin-red.min.css" />
+    <Content Include="Content\Admin\skins\skin-yellow-light.css" />
+    <Content Include="Content\Admin\skins\skin-yellow-light.min.css" />
+    <Content Include="Content\Admin\skins\skin-yellow.css" />
+    <Content Include="Content\Admin\skins\skin-yellow.min.css" />
+    <Content Include="Content\Admin\skins\_all-skins.css" />
+    <Content Include="Content\Admin\skins\_all-skins.min.css" />
+    <Content Include="Content\animate.css" />
+    <Content Include="Content\apprise.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\custom.css" />
+    <Content Include="Content\estiloPeriodoncia.css" />
+    <Content Include="Content\flot.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fontawesome\css\all.css" />
+    <Content Include="Content\fontawesome\webfonts\._fa-brands-400.svg" />
+    <Content Include="Content\fontawesome\webfonts\._fa-light-300.svg" />
+    <Content Include="Content\fontawesome\webfonts\._fa-regular-400.svg" />
+    <Content Include="Content\fontawesome\webfonts\._fa-solid-900.svg" />
+    <Content Include="Content\fontawesome\webfonts\fa-brands-400.svg" />
+    <Content Include="Content\fontawesome\webfonts\fa-light-300.svg" />
+    <Content Include="Content\fontawesome\webfonts\fa-regular-400.svg" />
+    <Content Include="Content\fontawesome\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\fullcalendar.min.css" />
+    <Content Include="Content\icheck-bootstrap.min.css" />
+    <Content Include="Content\Images\bannerUniOdonto.jpg" />
+    <Content Include="Content\Images\busy.gif" />
+    <Content Include="Content\Images\chat.png" />
+    <Content Include="Content\Images\delete.png" />
+    <Content Include="Content\Images\edit.png" />
+    <Content Include="Content\Images\efacturec-mapa.png" />
+    <Content Include="Content\Images\efacturec.png" />
+    <Content Include="Content\Images\Fondo.jpg" />
+    <Content Include="Content\Images\fondo.png" />
+    <Content Include="Content\Images\guia.png" />
+    <Content Include="Content\Images\historial.png" />
+    <Content Include="Content\Images\icono.ico" />
+    <Content Include="Content\Images\loading.gif" />
+    <Content Include="Content\Images\logo.ico" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\LogoIcon.ico" />
+    <Content Include="Content\Images\LogoPregunta.png" />
+    <Content Include="Content\Images\logoUniodonto.png" />
+    <Content Include="Content\Images\mail.png" />
+    <Content Include="Content\Images\OdontogramaFinal.svg" />
+    <Content Include="Content\Images\pdf.jpg" />
+    <Content Include="Content\Images\pdf.png" />
+    <Content Include="Content\Images\plus.png" />
+    <Content Include="Content\Images\quitar.png" />
+    <Content Include="Content\Images\registrarXml.jpg" />
+    <Content Include="Content\Images\tablaOdontograma.png" />
+    <Content Include="Content\Images\ticket.png" />
+    <Content Include="Content\Images\xml.png" />
+    <Content Include="Content\img\cuadrado.png" />
+    <Content Include="Content\img\fondo-grafico-inf.png" />
+    <Content Include="Content\img\fondo-grafico.png" />
+    <Content Include="Content\img\lleno.png" />
+    <Content Include="Content\img\mediolleno.png" />
+    <Content Include="Content\img\periodontograma-oblicuas.png" />
+    <Content Include="Content\img\sangrado-supuracion.png" />
+    <Content Include="Content\img\tabla1\implantes\periodontograma-dientes-arriba-tornillo-11.png" />
+    <Content Include="Content\img\tabla1\implantes\periodontograma-dientes-arriba-tornillo-12.png" />
+    <Content Include="Content\img\tabla1\implantes\periodontograma-dientes-arriba-tornillo-13.png" />
+    <Content Include="Content\img\tabla1\implantes\periodontograma-dientes-arriba-tornillo-14.png" />
+    <Content Include="Content\img\tabla1\implantes\periodontograma-dientes-arriba-tornillo-15.png" />
+    <Content Include="Content\img\tabla1\implantes\periodontograma-dientes-arriba-tornillo-16.png" />
+    <Content Include="Content\img\tabla1\implantes\periodontograma-dientes-arriba-tornillo-17.png" />
+    <Content Include="Content\img\tabla1\implantes\periodontograma-dientes-arriba-tornillo-18.png" />
+    <Content Include="Content\img\tabla1\periodontograma-dientes-arriba-11.png" />
+    <Content Include="Content\img\tabla1\periodontograma-dientes-arriba-12.png" />
+    <Content Include="Content\img\tabla1\periodontograma-dientes-arriba-13.png" />
+    <Content Include="Content\img\tabla1\periodontograma-dientes-arriba-14.png" />
+    <Content Include="Content\img\tabla1\periodontograma-dientes-arriba-15.png" />
+    <Content Include="Content\img\tabla1\periodontograma-dientes-arriba-16.png" />
+    <Content Include="Content\img\tabla1\periodontograma-dientes-arriba-17.png" />
+    <Content Include="Content\img\tabla1\periodontograma-dientes-arriba-18.png" />
+    <Content Include="Content\img\tabla1\tachados\periodontograma-dientes-arriba-tachados-11.png" />
+    <Content Include="Content\img\tabla1\tachados\periodontograma-dientes-arriba-tachados-12.png" />
+    <Content Include="Content\img\tabla1\tachados\periodontograma-dientes-arriba-tachados-13.png" />
+    <Content Include="Content\img\tabla1\tachados\periodontograma-dientes-arriba-tachados-14.png" />
+    <Content Include="Content\img\tabla1\tachados\periodontograma-dientes-arriba-tachados-15.png" />
+    <Content Include="Content\img\tabla1\tachados\periodontograma-dientes-arriba-tachados-16.png" />
+    <Content Include="Content\img\tabla1\tachados\periodontograma-dientes-arriba-tachados-17.png" />
+    <Content Include="Content\img\tabla1\tachados\periodontograma-dientes-arriba-tachados-18.png" />
+    <Content Include="Content\img\tabla2\implantes\periodontograma-dientes-arriba-tornillo-21.png" />
+    <Content Include="Content\img\tabla2\implantes\periodontograma-dientes-arriba-tornillo-22.png" />
+    <Content Include="Content\img\tabla2\implantes\periodontograma-dientes-arriba-tornillo-23.png" />
+    <Content Include="Content\img\tabla2\implantes\periodontograma-dientes-arriba-tornillo-24.png" />
+    <Content Include="Content\img\tabla2\implantes\periodontograma-dientes-arriba-tornillo-25.png" />
+    <Content Include="Content\img\tabla2\implantes\periodontograma-dientes-arriba-tornillo-26.png" />
+    <Content Include="Content\img\tabla2\implantes\periodontograma-dientes-arriba-tornillo-27.png" />
+    <Content Include="Content\img\tabla2\implantes\periodontograma-dientes-arriba-tornillo-28.png" />
+    <Content Include="Content\img\tabla2\periodontograma-dientes-arriba-21.png" />
+    <Content Include="Content\img\tabla2\periodontograma-dientes-arriba-22.png" />
+    <Content Include="Content\img\tabla2\periodontograma-dientes-arriba-23.png" />
+    <Content Include="Content\img\tabla2\periodontograma-dientes-arriba-24.png" />
+    <Content Include="Content\img\tabla2\periodontograma-dientes-arriba-25.png" />
+    <Content Include="Content\img\tabla2\periodontograma-dientes-arriba-26.png" />
+    <Content Include="Content\img\tabla2\periodontograma-dientes-arriba-27.png" />
+    <Content Include="Content\img\tabla2\periodontograma-dientes-arriba-28.png" />
+    <Content Include="Content\img\tabla2\tachados\periodontograma-dientes-arriba-tachados-21.png" />
+    <Content Include="Content\img\tabla2\tachados\periodontograma-dientes-arriba-tachados-22.png" />
+    <Content Include="Content\img\tabla2\tachados\periodontograma-dientes-arriba-tachados-23.png" />
+    <Content Include="Content\img\tabla2\tachados\periodontograma-dientes-arriba-tachados-24.png" />
+    <Content Include="Content\img\tabla2\tachados\periodontograma-dientes-arriba-tachados-25.png" />
+    <Content Include="Content\img\tabla2\tachados\periodontograma-dientes-arriba-tachados-26.png" />
+    <Content Include="Content\img\tabla2\tachados\periodontograma-dientes-arriba-tachados-27.png" />
+    <Content Include="Content\img\tabla2\tachados\periodontograma-dientes-arriba-tachados-28.png" />
+    <Content Include="Content\img\tabla3\implantes\periodontograma-dientes-arriba-tornillo-11b.png" />
+    <Content Include="Content\img\tabla3\implantes\periodontograma-dientes-arriba-tornillo-12b.png" />
+    <Content Include="Content\img\tabla3\implantes\periodontograma-dientes-arriba-tornillo-13b.png" />
+    <Content Include="Content\img\tabla3\implantes\periodontograma-dientes-arriba-tornillo-14b.png" />
+    <Content Include="Content\img\tabla3\implantes\periodontograma-dientes-arriba-tornillo-15b.png" />
+    <Content Include="Content\img\tabla3\implantes\periodontograma-dientes-arriba-tornillo-16b.png" />
+    <Content Include="Content\img\tabla3\implantes\periodontograma-dientes-arriba-tornillo-17b.png" />
+    <Content Include="Content\img\tabla3\implantes\periodontograma-dientes-arriba-tornillo-18b.png" />
+    <Content Include="Content\img\tabla3\periodontograma-dientes-arriba-11b.png" />
+    <Content Include="Content\img\tabla3\periodontograma-dientes-arriba-12b.png" />
+    <Content Include="Content\img\tabla3\periodontograma-dientes-arriba-13b.png" />
+    <Content Include="Content\img\tabla3\periodontograma-dientes-arriba-14b.png" />
+    <Content Include="Content\img\tabla3\periodontograma-dientes-arriba-15b.png" />
+    <Content Include="Content\img\tabla3\periodontograma-dientes-arriba-16b.png" />
+    <Content Include="Content\img\tabla3\periodontograma-dientes-arriba-17b.png" />
+    <Content Include="Content\img\tabla3\periodontograma-dientes-arriba-18b.png" />
+    <Content Include="Content\img\tabla3\tachados\periodontograma-dientes-arriba-tachados-11b.png" />
+    <Content Include="Content\img\tabla3\tachados\periodontograma-dientes-arriba-tachados-12b.png" />
+    <Content Include="Content\img\tabla3\tachados\periodontograma-dientes-arriba-tachados-13b.png" />
+    <Content Include="Content\img\tabla3\tachados\periodontograma-dientes-arriba-tachados-14b.png" />
+    <Content Include="Content\img\tabla3\tachados\periodontograma-dientes-arriba-tachados-15b.png" />
+    <Content Include="Content\img\tabla3\tachados\periodontograma-dientes-arriba-tachados-16b.png" />
+    <Content Include="Content\img\tabla3\tachados\periodontograma-dientes-arriba-tachados-17b.png" />
+    <Content Include="Content\img\tabla3\tachados\periodontograma-dientes-arriba-tachados-18b.png" />
+    <Content Include="Content\img\tabla4\implantes\periodontograma-dientes-arriba-tornillo-21b.png" />
+    <Content Include="Content\img\tabla4\implantes\periodontograma-dientes-arriba-tornillo-22b.png" />
+    <Content Include="Content\img\tabla4\implantes\periodontograma-dientes-arriba-tornillo-23b.png" />
+    <Content Include="Content\img\tabla4\implantes\periodontograma-dientes-arriba-tornillo-24b.png" />
+    <Content Include="Content\img\tabla4\implantes\periodontograma-dientes-arriba-tornillo-25b.png" />
+    <Content Include="Content\img\tabla4\implantes\periodontograma-dientes-arriba-tornillo-26b.png" />
+    <Content Include="Content\img\tabla4\implantes\periodontograma-dientes-arriba-tornillo-27b.png" />
+    <Content Include="Content\img\tabla4\implantes\periodontograma-dientes-arriba-tornillo-28b.png" />
+    <Content Include="Content\img\tabla4\periodontograma-dientes-arriba-21b.png" />
+    <Content Include="Content\img\tabla4\periodontograma-dientes-arriba-22b.png" />
+    <Content Include="Content\img\tabla4\periodontograma-dientes-arriba-23b.png" />
+    <Content Include="Content\img\tabla4\periodontograma-dientes-arriba-24b.png" />
+    <Content Include="Content\img\tabla4\periodontograma-dientes-arriba-25b.png" />
+    <Content Include="Content\img\tabla4\periodontograma-dientes-arriba-26b.png" />
+    <Content Include="Content\img\tabla4\periodontograma-dientes-arriba-27b.png" />
+    <Content Include="Content\img\tabla4\periodontograma-dientes-arriba-28b.png" />
+    <Content Include="Content\img\tabla4\tachados\periodontograma-dientes-arriba-tachados-21b.png" />
+    <Content Include="Content\img\tabla4\tachados\periodontograma-dientes-arriba-tachados-22b.png" />
+    <Content Include="Content\img\tabla4\tachados\periodontograma-dientes-arriba-tachados-23b.png" />
+    <Content Include="Content\img\tabla4\tachados\periodontograma-dientes-arriba-tachados-24b.png" />
+    <Content Include="Content\img\tabla4\tachados\periodontograma-dientes-arriba-tachados-25b.png" />
+    <Content Include="Content\img\tabla4\tachados\periodontograma-dientes-arriba-tachados-26b.png" />
+    <Content Include="Content\img\tabla4\tachados\periodontograma-dientes-arriba-tachados-27b.png" />
+    <Content Include="Content\img\tabla4\tachados\periodontograma-dientes-arriba-tachados-28b.png" />
+    <Content Include="Content\img\tabla5\implantes\periodontograma-dientes-abajo-tornillo-41.png" />
+    <Content Include="Content\img\tabla5\implantes\periodontograma-dientes-abajo-tornillo-42.png" />
+    <Content Include="Content\img\tabla5\implantes\periodontograma-dientes-abajo-tornillo-43.png" />
+    <Content Include="Content\img\tabla5\implantes\periodontograma-dientes-abajo-tornillo-44.png" />
+    <Content Include="Content\img\tabla5\implantes\periodontograma-dientes-abajo-tornillo-45.png" />
+    <Content Include="Content\img\tabla5\implantes\periodontograma-dientes-abajo-tornillo-46.png" />
+    <Content Include="Content\img\tabla5\implantes\periodontograma-dientes-abajo-tornillo-47.png" />
+    <Content Include="Content\img\tabla5\implantes\periodontograma-dientes-abajo-tornillo-48.png" />
+    <Content Include="Content\img\tabla5\periodontograma-dientes-abajo-41.png" />
+    <Content Include="Content\img\tabla5\periodontograma-dientes-abajo-42.png" />
+    <Content Include="Content\img\tabla5\periodontograma-dientes-abajo-43.png" />
+    <Content Include="Content\img\tabla5\periodontograma-dientes-abajo-44.png" />
+    <Content Include="Content\img\tabla5\periodontograma-dientes-abajo-45.png" />
+    <Content Include="Content\img\tabla5\periodontograma-dientes-abajo-46.png" />
+    <Content Include="Content\img\tabla5\periodontograma-dientes-abajo-47.png" />
+    <Content Include="Content\img\tabla5\periodontograma-dientes-abajo-48.png" />
+    <Content Include="Content\img\tabla5\tachados\periodontograma-dientes-abajo-tachados-41.png" />
+    <Content Include="Content\img\tabla5\tachados\periodontograma-dientes-abajo-tachados-42.png" />
+    <Content Include="Content\img\tabla5\tachados\periodontograma-dientes-abajo-tachados-43.png" />
+    <Content Include="Content\img\tabla5\tachados\periodontograma-dientes-abajo-tachados-44.png" />
+    <Content Include="Content\img\tabla5\tachados\periodontograma-dientes-abajo-tachados-45.png" />
+    <Content Include="Content\img\tabla5\tachados\periodontograma-dientes-abajo-tachados-46.png" />
+    <Content Include="Content\img\tabla5\tachados\periodontograma-dientes-abajo-tachados-47.png" />
+    <Content Include="Content\img\tabla5\tachados\periodontograma-dientes-abajo-tachados-48.png" />
+    <Content Include="Content\img\tabla6\implantes\periodontograma-dientes-abajo-tornillo-31.png" />
+    <Content Include="Content\img\tabla6\implantes\periodontograma-dientes-abajo-tornillo-32.png" />
+    <Content Include="Content\img\tabla6\implantes\periodontograma-dientes-abajo-tornillo-33.png" />
+    <Content Include="Content\img\tabla6\implantes\periodontograma-dientes-abajo-tornillo-34.png" />
+    <Content Include="Content\img\tabla6\implantes\periodontograma-dientes-abajo-tornillo-35.png" />
+    <Content Include="Content\img\tabla6\implantes\periodontograma-dientes-abajo-tornillo-36.png" />
+    <Content Include="Content\img\tabla6\implantes\periodontograma-dientes-abajo-tornillo-37.png" />
+    <Content Include="Content\img\tabla6\implantes\periodontograma-dientes-abajo-tornillo-38.png" />
+    <Content Include="Content\img\tabla6\periodontograma-dientes-abajo-31.png" />
+    <Content Include="Content\img\tabla6\periodontograma-dientes-abajo-32.png" />
+    <Content Include="Content\img\tabla6\periodontograma-dientes-abajo-33.png" />
+    <Content Include="Content\img\tabla6\periodontograma-dientes-abajo-34.png" />
+    <Content Include="Content\img\tabla6\periodontograma-dientes-abajo-35.png" />
+    <Content Include="Content\img\tabla6\periodontograma-dientes-abajo-36.png" />
+    <Content Include="Content\img\tabla6\periodontograma-dientes-abajo-37.png" />
+    <Content Include="Content\img\tabla6\periodontograma-dientes-abajo-38.png" />
+    <Content Include="Content\img\tabla6\tachados\periodontograma-dientes-abajo-tachados-31.png" />
+    <Content Include="Content\img\tabla6\tachados\periodontograma-dientes-abajo-tachados-32.png" />
+    <Content Include="Content\img\tabla6\tachados\periodontograma-dientes-abajo-tachados-33.png" />
+    <Content Include="Content\img\tabla6\tachados\periodontograma-dientes-abajo-tachados-34.png" />
+    <Content Include="Content\img\tabla6\tachados\periodontograma-dientes-abajo-tachados-35.png" />
+    <Content Include="Content\img\tabla6\tachados\periodontograma-dientes-abajo-tachados-36.png" />
+    <Content Include="Content\img\tabla6\tachados\periodontograma-dientes-abajo-tachados-37.png" />
+    <Content Include="Content\img\tabla6\tachados\periodontograma-dientes-abajo-tachados-38.png" />
+    <Content Include="Content\img\tabla7\implantes\periodontograma-dientes-abajo-tornillo-41b.png" />
+    <Content Include="Content\img\tabla7\implantes\periodontograma-dientes-abajo-tornillo-42b.png" />
+    <Content Include="Content\img\tabla7\implantes\periodontograma-dientes-abajo-tornillo-43b.png" />
+    <Content Include="Content\img\tabla7\implantes\periodontograma-dientes-abajo-tornillo-44b.png" />
+    <Content Include="Content\img\tabla7\implantes\periodontograma-dientes-abajo-tornillo-45b.png" />
+    <Content Include="Content\img\tabla7\implantes\periodontograma-dientes-abajo-tornillo-46b.png" />
+    <Content Include="Content\img\tabla7\implantes\periodontograma-dientes-abajo-tornillo-47b.png" />
+    <Content Include="Content\img\tabla7\implantes\periodontograma-dientes-abajo-tornillo-48b.png" />
+    <Content Include="Content\img\tabla7\periodontograma-dientes-abajo-41b.png" />
+    <Content Include="Content\img\tabla7\periodontograma-dientes-abajo-42b.png" />
+    <Content Include="Content\img\tabla7\periodontograma-dientes-abajo-43b.png" />
+    <Content Include="Content\img\tabla7\periodontograma-dientes-abajo-44b.png" />
+    <Content Include="Content\img\tabla7\periodontograma-dientes-abajo-45b.png" />
+    <Content Include="Content\img\tabla7\periodontograma-dientes-abajo-46b.png" />
+    <Content Include="Content\img\tabla7\periodontograma-dientes-abajo-47b.png" />
+    <Content Include="Content\img\tabla7\periodontograma-dientes-abajo-48b.png" />
+    <Content Include="Content\img\tabla7\tachados\periodontograma-dientes-abajo-tachados-41b.png" />
+    <Content Include="Content\img\tabla7\tachados\periodontograma-dientes-abajo-tachados-42b.png" />
+    <Content Include="Content\img\tabla7\tachados\periodontograma-dientes-abajo-tachados-43b.png" />
+    <Content Include="Content\img\tabla7\tachados\periodontograma-dientes-abajo-tachados-44b.png" />
+    <Content Include="Content\img\tabla7\tachados\periodontograma-dientes-abajo-tachados-45b.png" />
+    <Content Include="Content\img\tabla7\tachados\periodontograma-dientes-abajo-tachados-46b.png" />
+    <Content Include="Content\img\tabla7\tachados\periodontograma-dientes-abajo-tachados-47b.png" />
+    <Content Include="Content\img\tabla7\tachados\periodontograma-dientes-abajo-tachados-48b.png" />
+    <Content Include="Content\img\tabla8\implantes\periodontograma-dientes-abajo-tornillo-31b.png" />
+    <Content Include="Content\img\tabla8\implantes\periodontograma-dientes-abajo-tornillo-32b.png" />
+    <Content Include="Content\img\tabla8\implantes\periodontograma-dientes-abajo-tornillo-33b.png" />
+    <Content Include="Content\img\tabla8\implantes\periodontograma-dientes-abajo-tornillo-34b.png" />
+    <Content Include="Content\img\tabla8\implantes\periodontograma-dientes-abajo-tornillo-35b.png" />
+    <Content Include="Content\img\tabla8\implantes\periodontograma-dientes-abajo-tornillo-36b.png" />
+    <Content Include="Content\img\tabla8\implantes\periodontograma-dientes-abajo-tornillo-37b.png" />
+    <Content Include="Content\img\tabla8\implantes\periodontograma-dientes-abajo-tornillo-38b.png" />
+    <Content Include="Content\img\tabla8\periodontograma-dientes-abajo-31b.png" />
+    <Content Include="Content\img\tabla8\periodontograma-dientes-abajo-32b.png" />
+    <Content Include="Content\img\tabla8\periodontograma-dientes-abajo-33b.png" />
+    <Content Include="Content\img\tabla8\periodontograma-dientes-abajo-34b.png" />
+    <Content Include="Content\img\tabla8\periodontograma-dientes-abajo-35b.png" />
+    <Content Include="Content\img\tabla8\periodontograma-dientes-abajo-36b.png" />
+    <Content Include="Content\img\tabla8\periodontograma-dientes-abajo-37b.png" />
+    <Content Include="Content\img\tabla8\periodontograma-dientes-abajo-38b.png" />
+    <Content Include="Content\img\tabla8\tachados\periodontograma-dientes-abajo-tachados-31b.png" />
+    <Content Include="Content\img\tabla8\tachados\periodontograma-dientes-abajo-tachados-32b.png" />
+    <Content Include="Content\img\tabla8\tachados\periodontograma-dientes-abajo-tachados-33b.png" />
+    <Content Include="Content\img\tabla8\tachados\periodontograma-dientes-abajo-tachados-34b.png" />
+    <Content Include="Content\img\tabla8\tachados\periodontograma-dientes-abajo-tachados-35b.png" />
+    <Content Include="Content\img\tabla8\tachados\periodontograma-dientes-abajo-tachados-36b.png" />
+    <Content Include="Content\img\tabla8\tachados\periodontograma-dientes-abajo-tachados-37b.png" />
+    <Content Include="Content\img\tabla8\tachados\periodontograma-dientes-abajo-tachados-38b.png" />
+    <Content Include="Content\img\vacio.png" />
+    <Content Include="Content\jqGrid.bootstrap.css" />
+    <Content Include="Content\jquery.contextMenu.min.css" />
+    <Content Include="Content\jquery.jqGrid\ui.jqgrid.css" />
+    <Content Include="Content\layout.css" />
+    <Content Include="Content\materialize.css" />
+    <Content Include="Content\materialize.min.css" />
+    <Content Include="Content\MensajeChat.css" />
+    <Content Include="Content\menuPrincipal.css" />
+    <Content Include="Content\nprogress.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Periodontograma_files\boton_imprimir.jpg" />
+    <Content Include="Content\Periodontograma_files\counter.html" />
+    <Content Include="Content\Periodontograma_files\cuadrado.png" />
+    <Content Include="Content\Periodontograma_files\estilo.css" />
+    <Content Include="Content\Periodontograma_files\format+es,default,corechart.I.js" />
+    <Content Include="Content\Periodontograma_files\jquery-1.7.2.min.js" />
+    <Content Include="Content\Periodontograma_files\lleno.png" />
+    <Content Include="Content\Periodontograma_files\logo-sepa-nuevo.png" />
+    <Content Include="Content\Periodontograma_files\mediolleno.png" />
+    <Content Include="Content\Periodontograma_files\otros.js" />
+    <Content Include="Content\Periodontograma_files\pdf.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-31.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-31b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-32.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-32b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-33.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-33b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-34.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-34b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-35.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-35b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-36.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-36b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-37.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-37b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-38.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-38b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-41.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-41b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-42.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-42b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-43.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-43b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-44.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-44b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-45.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-45b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-46.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-46b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-47.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-47b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-48.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tachados-48b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-31.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-31b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-32.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-32b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-33.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-33b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-34.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-34b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-35.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-35b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-36.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-36b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-37.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-37b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-38.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-38b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-41.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-41b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-42.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-42b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-43.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-43b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-44.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-44b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-45.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-45b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-46.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-46b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-47b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-48.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-48b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-abajo-tornillo-7.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-11.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-11b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-12.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-12b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-13.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-13b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-14.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-14b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-15.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-15b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-16.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-16b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-17.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-17b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-18.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-18b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-21.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-21b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-22.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-22b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-23.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-23b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-24.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-24b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-25.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-25b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-26.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-26b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-27.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-27b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-28.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tachados-28b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-11.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-11b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-12.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-12b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-13.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-13b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-14.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-14b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-15.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-15b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-16.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-16b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-17.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-17b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-18.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-18b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-21.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-21b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-22.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-22b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-23.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-23b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-24.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-24b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-25.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-25b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-26.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-26b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-27.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-27b.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-28.png" />
+    <Content Include="Content\Periodontograma_files\periodontograma-dientes-arriba-tornillo-28b.png" />
+    <Content Include="Content\Periodontograma_files\tooltip.css" />
+    <Content Include="Content\Periodontograma_files\vacio.png" />
+    <Content Include="Content\Reports\0106201905170090000200120010010000000156650237718.xml" />
+    <Content Include="Content\Reports\0106201905170090000200120010010000000162182204211.xml" />
+    <Content Include="Content\Reports\0106201905170090000200120010010000000164505099318.xml" />
+    <Content Include="Content\Reports\0106201905170090000200120010010000000167047828711.xml" />
+    <Content Include="Content\Reports\0706201901170090000200120010030000000012960318013.xml" />
+    <Content Include="Content\Reports\0706201901170090000200120010030000000014225846815.xml" />
+    <Content Include="Content\Reports\0706201901170090000200120010030000000014575353315.xml" />
+    <Content Include="Content\Reports\0706201901170090000200120010030000000017022888619.xml" />
+    <Content Include="Content\Reports\0706201901170090000200120010030000000017622904219.xml" />
+    <Content Include="Content\Reports\0706201901170090000200120010030000000018253761219.xml" />
+    <Content Include="Content\Reports\0706201901170090000200120010030000000018402420314.xml" />
+    <Content Include="Content\Reports\0706201901170090000200120010030000000019077067110.xml" />
+    <Content Include="Content\Reports\0706201901170090000200120010030000000019194151017.xml" />
+    <Content Include="Content\selectize.css" />
+    <Content Include="Content\sweetalert2\sweetalert2.all.js" />
+    <Content Include="Content\sweetalert2\sweetalert2.all.min.js" />
+    <Content Include="Content\sweetalert2\sweetalert2.css" />
+    <Content Include="Content\sweetalert2\sweetalert2.js" />
+    <Content Include="Content\sweetalert2\sweetalert2.min.css" />
+    <Content Include="Content\sweetalert2\sweetalert2.min.js" />
+    <Content Include="Content\template\adminlte.min.css" />
+    <Content Include="Content\template\daterangepicker\daterangepicker.css" />
+    <Content Include="Content\template\fontawesome\css\all.css" />
+    <Content Include="Content\template\fontawesome\css\all.min.css" />
+    <Content Include="Content\template\fontawesome\css\brands.css" />
+    <Content Include="Content\template\fontawesome\css\brands.min.css" />
+    <Content Include="Content\template\fontawesome\css\duotone.css" />
+    <Content Include="Content\template\fontawesome\css\duotone.min.css" />
+    <Content Include="Content\template\fontawesome\css\fontawesome.css" />
+    <Content Include="Content\template\fontawesome\css\fontawesome.min.css" />
+    <Content Include="Content\template\fontawesome\css\light.css" />
+    <Content Include="Content\template\fontawesome\css\light.min.css" />
+    <Content Include="Content\template\fontawesome\css\regular.css" />
+    <Content Include="Content\template\fontawesome\css\regular.min.css" />
+    <Content Include="Content\template\fontawesome\css\solid.css" />
+    <Content Include="Content\template\fontawesome\css\solid.min.css" />
+    <Content Include="Content\template\fontawesome\css\svg-with-js.css" />
+    <Content Include="Content\template\fontawesome\css\svg-with-js.min.css" />
+    <Content Include="Content\template\fontawesome\css\v4-shims.css" />
+    <Content Include="Content\template\fontawesome\css\v4-shims.min.css" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-brands-400.svg" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-duotone-900.svg" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-light-300.svg" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-regular-400.svg" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\template\icheck-bootstrap\icheck-bootstrap.min.css" />
+    <Content Include="Content\template\jqvmap\jqvmap.min.css" />
+    <Content Include="Content\template\overlayScrollbars\css\OverlayScrollbars.min.css" />
+    <Content Include="Content\template\summernote\summernote-bs4.css" />
+    <Content Include="Content\template\tempusdominus-bootstrap-4\css\tempusdominus-bootstrap-4.min.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
+    <Content Include="Content\uielement.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\Admin\adminlte.min.js" />
+    <Content Include="Scripts\Admin\demo.js" />
+    <Content Include="Scripts\ai.0.22.9-build00167.js" />
+    <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Scripts\apprise.js" />
+    <Content Include="Scripts\blockUI.min.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\Admin\adminlte.css.map" />
+    <Content Include="Content\Admin\adminlte.min.css.map" />
+    <Content Include="Content\fontawesome\webfonts\._fa-brands-400.eot" />
+    <Content Include="Content\fontawesome\webfonts\._fa-brands-400.ttf" />
+    <Content Include="Content\fontawesome\webfonts\._fa-brands-400.woff" />
+    <Content Include="Content\fontawesome\webfonts\._fa-brands-400.woff2" />
+    <Content Include="Content\fontawesome\webfonts\._fa-light-300.eot" />
+    <Content Include="Content\fontawesome\webfonts\._fa-light-300.ttf" />
+    <Content Include="Content\fontawesome\webfonts\._fa-light-300.woff" />
+    <Content Include="Content\fontawesome\webfonts\._fa-light-300.woff2" />
+    <Content Include="Content\fontawesome\webfonts\._fa-regular-400.eot" />
+    <Content Include="Content\fontawesome\webfonts\._fa-regular-400.ttf" />
+    <Content Include="Content\fontawesome\webfonts\._fa-regular-400.woff" />
+    <Content Include="Content\fontawesome\webfonts\._fa-regular-400.woff2" />
+    <Content Include="Content\fontawesome\webfonts\._fa-solid-900.eot" />
+    <Content Include="Content\fontawesome\webfonts\._fa-solid-900.ttf" />
+    <Content Include="Content\fontawesome\webfonts\._fa-solid-900.woff" />
+    <Content Include="Content\fontawesome\webfonts\._fa-solid-900.woff2" />
+    <Content Include="Content\fontawesome\webfonts\fa-brands-400.eot" />
+    <Content Include="Content\fontawesome\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\fontawesome\webfonts\fa-brands-400.woff" />
+    <Content Include="Content\fontawesome\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\fontawesome\webfonts\fa-light-300.eot" />
+    <Content Include="Content\fontawesome\webfonts\fa-light-300.ttf" />
+    <Content Include="Content\fontawesome\webfonts\fa-light-300.woff" />
+    <Content Include="Content\fontawesome\webfonts\fa-light-300.woff2" />
+    <Content Include="Content\fontawesome\webfonts\fa-regular-400.eot" />
+    <Content Include="Content\fontawesome\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\fontawesome\webfonts\fa-regular-400.woff" />
+    <Content Include="Content\fontawesome\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\fontawesome\webfonts\fa-solid-900.eot" />
+    <Content Include="Content\fontawesome\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\fontawesome\webfonts\fa-solid-900.woff" />
+    <Content Include="Content\fontawesome\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\toastr.less" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-brands-400.eot" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-brands-400.woff" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-duotone-900.eot" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-duotone-900.ttf" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-duotone-900.woff" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-duotone-900.woff2" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-light-300.eot" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-light-300.ttf" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-light-300.woff" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-light-300.woff2" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-regular-400.eot" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-regular-400.woff" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-solid-900.eot" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-solid-900.woff" />
+    <Content Include="Content\template\fontawesome\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\Periodontograma_files\jsapi" />
+    <Content Include="Content\Periodontograma_files\saved_resource" />
+    <Content Include="Content\Periodontograma_files\Thumbs.db" />
+    <Content Include="Content\img\tabla1\implantes\Thumbs.db" />
+    <Content Include="Content\img\tabla1\tachados\Thumbs.db" />
+    <Content Include="Content\img\tabla1\Thumbs.db" />
+    <Content Include="Content\img\tabla2\tachados\Thumbs.db" />
+    <Content Include="Content\img\tabla2\Thumbs.db" />
+    <Content Include="Content\img\tabla3\tachados\Thumbs.db" />
+    <Content Include="Content\img\tabla3\Thumbs.db" />
+    <Content Include="Content\img\tabla4\implantes\Thumbs.db" />
+    <Content Include="Content\img\tabla4\tachados\Thumbs.db" />
+    <Content Include="Content\img\tabla4\Thumbs.db" />
+    <Content Include="Content\img\tabla5\tachados\Thumbs.db" />
+    <Content Include="Content\img\tabla5\Thumbs.db" />
+    <Content Include="Content\img\tabla6\tachados\Thumbs.db" />
+    <Content Include="Content\img\tabla6\Thumbs.db" />
+    <Content Include="Content\img\tabla7\tachados\Thumbs.db" />
+    <Content Include="Content\img\tabla7\Thumbs.db" />
+    <Content Include="Content\img\tabla8\tachados\Thumbs.db" />
+    <Content Include="Content\img\tabla8\Thumbs.db" />
+    <Content Include="Content\img\Thumbs.db" />
+    <None Include="Dockerfile" />
+    <None Include=".dockerignore">
+      <DependentUpon>Dockerfile</DependentUpon>
+    </None>
+    <Content Include="Scripts\fullcalendar.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\iconfont.ttf" />
+    <Content Include="fonts\iconfont.woff" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\custom.js" />
+    <Content Include="Scripts\highcharts\gchart.js" />
+    <Content Include="Scripts\highcharts\highcharts.js" />
+    <Content Include="Scripts\highcharts\jsapi_compiled_corechart_module.js" />
+    <Content Include="Scripts\highcharts\jsapi_compiled_default_module.js" />
+    <Content Include="Scripts\highcharts\jsapi_compiled_format_module.js" />
+    <Content Include="Scripts\highcharts\jsapi_compiled_ui_module.js" />
+    <Content Include="Scripts\highcharts\loader.js" />
+    <Content Include="Scripts\i18n\grid.locale-ar.js" />
+    <Content Include="Scripts\i18n\grid.locale-bg.js" />
+    <Content Include="Scripts\i18n\grid.locale-bg1251.js" />
+    <Content Include="Scripts\i18n\grid.locale-cat.js" />
+    <Content Include="Scripts\i18n\grid.locale-cn.js" />
+    <Content Include="Scripts\i18n\grid.locale-cs.js" />
+    <Content Include="Scripts\i18n\grid.locale-da.js" />
+    <Content Include="Scripts\i18n\grid.locale-de.js" />
+    <Content Include="Scripts\i18n\grid.locale-dk.js" />
+    <Content Include="Scripts\i18n\grid.locale-el.js" />
+    <Content Include="Scripts\i18n\grid.locale-en.js" />
+    <Content Include="Scripts\i18n\grid.locale-es.js" />
+    <Content Include="Scripts\i18n\grid.locale-fa.js" />
+    <Content Include="Scripts\i18n\grid.locale-fi.js" />
+    <Content Include="Scripts\i18n\grid.locale-fr.js" />
+    <Content Include="Scripts\i18n\grid.locale-gl.js" />
+    <Content Include="Scripts\i18n\grid.locale-he.js" />
+    <Content Include="Scripts\i18n\grid.locale-hr.js" />
+    <Content Include="Scripts\i18n\grid.locale-hr1250.js" />
+    <Content Include="Scripts\i18n\grid.locale-hu.js" />
+    <Content Include="Scripts\i18n\grid.locale-id.js" />
+    <Content Include="Scripts\i18n\grid.locale-is.js" />
+    <Content Include="Scripts\i18n\grid.locale-it.js" />
+    <Content Include="Scripts\i18n\grid.locale-ja.js" />
+    <Content Include="Scripts\i18n\grid.locale-kr.js" />
+    <Content Include="Scripts\i18n\grid.locale-lt.js" />
+    <Content Include="Scripts\i18n\grid.locale-mne.js" />
+    <Content Include="Scripts\i18n\grid.locale-nl.js" />
+    <Content Include="Scripts\i18n\grid.locale-no.js" />
+    <Content Include="Scripts\i18n\grid.locale-pl.js" />
+    <Content Include="Scripts\i18n\grid.locale-pt-br.js" />
+    <Content Include="Scripts\i18n\grid.locale-pt.js" />
+    <Content Include="Scripts\i18n\grid.locale-ro.js" />
+    <Content Include="Scripts\i18n\grid.locale-ru.js" />
+    <Content Include="Scripts\i18n\grid.locale-sk.js" />
+    <Content Include="Scripts\i18n\grid.locale-sr-latin.js" />
+    <Content Include="Scripts\i18n\grid.locale-sr.js" />
+    <Content Include="Scripts\i18n\grid.locale-sv.js" />
+    <Content Include="Scripts\i18n\grid.locale-th.js" />
+    <Content Include="Scripts\i18n\grid.locale-tr.js" />
+    <Content Include="Scripts\i18n\grid.locale-tw.js" />
+    <Content Include="Scripts\i18n\grid.locale-ua.js" />
+    <Content Include="Scripts\i18n\grid.locale-vi.js" />
+    <Content Include="Scripts\jqgridTool.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.8.11.js" />
+    <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery.jqGrid.min.js" />
+    <Content Include="Scripts\jquery.jqGrid.src.js" />
+    <Content Include="Scripts\jquery.maskedinput.js" />
+    <Content Include="Scripts\jquery.signalR-2.1.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.1.2.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout.debug.js" />
+    <Content Include="Scripts\knockout.mapping.js" />
+    <Content Include="Scripts\materialize.js" />
+    <Content Include="Scripts\materialize.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\nprogress.js" />
+    <Content Include="Scripts\odontograma.js" />
+    <Content Include="Scripts\odontograma2.js" />
+    <Content Include="Scripts\Pages\Appointment\index.js" />
+    <Content Include="Scripts\Pages\Bancos\Anticipo.js" />
+    <Content Include="Scripts\Pages\Bancos\AnticiposView.js" />
+    <Content Include="Scripts\Pages\Bancos\Bancos.js" />
+    <Content Include="Scripts\Pages\Bancos\BancosView.js" />
+    <Content Include="Scripts\Pages\Bancos\ChequesProtestados.js" />
+    <Content Include="Scripts\Pages\Bancos\ChequesProtestadosView.js" />
+    <Content Include="Scripts\Pages\Bancos\Conciliaciones.js" />
+    <Content Include="Scripts\Pages\Bancos\MovimientoBancos.js" />
+    <Content Include="Scripts\Pages\Bancos\MovimientoBancosReposicion.js" />
+    <Content Include="Scripts\Pages\Bancos\MovimientoBancosReposicionView.js" />
+    <Content Include="Scripts\Pages\Bancos\MovimientoBancosView.js" />
+    <Content Include="Scripts\Pages\Bancos\SecuencialCheques.js" />
+    <Content Include="Scripts\Pages\BaseConfiguracionGeneral.js" />
+    <Content Include="Scripts\Pages\BaseConfiguracionGeneralDB.js" />
+    <Content Include="Scripts\Pages\Basico\bootbox.js" />
+    <Content Include="Scripts\Pages\Basico\core.js" />
+    <Content Include="Scripts\Pages\Basico\jquery-ui.js" />
+    <Content Include="Scripts\Pages\Basico\jquery.contextMenu.js" />
+    <Content Include="Scripts\Pages\Basico\jquery.contextMenu.min.js" />
+    <Content Include="Scripts\Pages\Basico\jquery.form.js" />
+    <Content Include="Scripts\Pages\Basico\jquery.magnific-popup.js" />
+    <Content Include="Scripts\Pages\Basico\jquery.tablesorter.min.js" />
+    <Content Include="Scripts\Pages\Basico\jquery.tablesorter.widgets.min.js" />
+    <Content Include="Scripts\Pages\Basico\masterdetail.js" />
+    <Content Include="Scripts\Pages\Basico\objectfield.js" />
+    <Content Include="Scripts\Pages\Basico\quicksearch.js" />
+    <Content Include="Scripts\Pages\Basico\selectize.js" />
+    <Content Include="Scripts\Pages\Basico\shell.js" />
+    <Content Include="Scripts\Pages\Basico\vendor.js" />
+    <Content Include="Scripts\Pages\Basico\ZeroClipboard.js" />
+    <Content Include="Scripts\Pages\Chat.js" />
+    <Content Include="Scripts\Pages\Configuracion\Cantones.js" />
+    <Content Include="Scripts\Pages\Configuracion\FormaPagoCobro.js" />
+    <Content Include="Scripts\Pages\Configuracion\TarjetasLotes.js" />
+    <Content Include="Scripts\Pages\Configuracion\TipoFormaPagoCobro.js" />
+    <Content Include="Scripts\Pages\Contabilidad\Asientos.js" />
+    <Content Include="Scripts\Pages\Contabilidad\CentroCostos.js" />
+    <Content Include="Scripts\Pages\Contabilidad\Cuenta.js" />
+    <Content Include="Scripts\Pages\Contabilidad\EjercicioContable.js" />
+    <Content Include="Scripts\Pages\Contabilidad\ImpuestoIva.js" />
+    <Content Include="Scripts\Pages\Contabilidad\PlanCuentas.js" />
+    <Content Include="Scripts\Pages\Contabilidad\Retenciones.js" />
+    <Content Include="Scripts\Pages\Contabilidad\TipoCuenta.js" />
+    <Content Include="Scripts\Pages\EmpresaConfig.js" />
+    <Content Include="Scripts\Pages\Empresa\Empresa.js" />
+    <Content Include="Scripts\Pages\Empresa\EmpresaAutorizaciones.js" />
+    <Content Include="Scripts\Pages\Empresa\Login.js" />
+    <Content Include="Scripts\Pages\Empresa\OtrasConfiguraciones.js" />
+    <Content Include="Scripts\Pages\Historia\Consultas.js" />
+    <Content Include="Scripts\Pages\Inventario\bodegas.js" />
+    <Content Include="Scripts\Pages\Inventario\CategoriaProductos.js" />
+    <Content Include="Scripts\Pages\Inventario\CategoriaProductosView.js" />
+    <Content Include="Scripts\Pages\Inventario\Lote.js" />
+    <Content Include="Scripts\Pages\Inventario\Marca.js" />
+    <Content Include="Scripts\Pages\Inventario\Movimientos.js" />
+    <Content Include="Scripts\Pages\Inventario\Productos.js" />
+    <Content Include="Scripts\Pages\Inventario\Reporte.js" />
+    <Content Include="Scripts\Pages\Inventario\TomaFisica.js" />
+    <Content Include="Scripts\Pages\Inventario\Unidad.js" />
+    <Content Include="Scripts\Pages\Odontograma\Odontograma.js" />
+    <Content Include="Scripts\Pages\Odontograma\Periodoncia.js" />
+    <Content Include="Scripts\Pages\Operaciones\Agendas.js" />
+    <Content Include="Scripts\Pages\Operaciones\Medicamentos.js" />
+    <Content Include="Scripts\Pages\Pacientes\Pacientes.js" />
+    <Content Include="Scripts\Pages\Panel.js" />
+    <Content Include="Scripts\Pages\Personas\Autorizacion.js" />
+    <Content Include="Scripts\Pages\Personas\Personas.js" />
+    <Content Include="Scripts\Pages\Personas\Rubro.js" />
+    <Content Include="Scripts\Pages\Reportes\CuentasMayor.js" />
+    <Content Include="Scripts\Pages\Reportes\VentasResumenGerencial.js" />
+    <Content Include="Scripts\Pages\Reportes\VentasResumenSemanal.js" />
+    <Content Include="Scripts\Pages\TarjetaCreditos\LiquidacionTarjetaCreditos.js" />
+    <Content Include="Scripts\Pages\TarjetaCreditos\LiquidacionTarjetaCreditosView.js" />
+    <Content Include="Scripts\Pages\TarjetaCreditos\TarjetaCreditoComercio.js" />
+    <Content Include="Scripts\Pages\Transacciones\CruceDocumentos.js" />
+    <Content Include="Scripts\Pages\Transacciones\CruceDocumentosView.js" />
+    <Content Include="Scripts\Pages\Transacciones\Depositos.js" />
+    <Content Include="Scripts\Pages\Transacciones\Documentos.js" />
+    <Content Include="Scripts\Pages\Transacciones\DocumentosElectronicosView.js" />
+    <Content Include="Scripts\Pages\Transacciones\DocumentosView.js" />
+    <Content Include="Scripts\Pages\Transacciones\Transacciones.js" />
+    <Content Include="Scripts\Pages\Transacciones\TransaccionesView.js" />
+    <Content Include="Scripts\Pages\UsuarioConfig.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\signalr.js" />
+    <Content Include="Scripts\template\adminlte.js" />
+    <Content Include="Scripts\template\bootstrap\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\template\daterangepicker\daterangepicker.js" />
+    <Content Include="Scripts\template\demo.js" />
+    <Content Include="Scripts\template\jquery-ui\jquery-ui.min.js" />
+    <Content Include="Scripts\template\jquery\jquery.min.js" />
+    <Content Include="Scripts\template\moment\moment.min.js" />
+    <Content Include="Scripts\template\overlayScrollbars\js\jquery.overlayScrollbars.min.js" />
+    <Content Include="Scripts\template\pages\dashboard.js" />
+    <Content Include="Scripts\template\sparklines\sparkline.js" />
+    <Content Include="Scripts\template\summernote\summernote-bs4.min.js" />
+    <Content Include="Scripts\template\tempusdominus-bootstrap-4\tempusdominus-bootstrap-4.min.js" />
+    <Content Include="Scripts\tinymce\jquery.tinymce.js" />
+    <Content Include="Scripts\tinymce\langs\en.js" />
+    <Content Include="Scripts\tinymce\license.txt" />
+    <Content Include="Scripts\tinymce\plugins\advhr\css\advhr.css" />
+    <Content Include="Scripts\tinymce\plugins\advhr\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\advhr\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\advhr\js\rule.js" />
+    <Content Include="Scripts\tinymce\plugins\advhr\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\advhr\rule.htm" />
+    <Content Include="Scripts\tinymce\plugins\advimage\css\advimage.css" />
+    <Content Include="Scripts\tinymce\plugins\advimage\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\advimage\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\advimage\image.htm" />
+    <Content Include="Scripts\tinymce\plugins\advimage\img\sample.gif" />
+    <Content Include="Scripts\tinymce\plugins\advimage\js\image.js" />
+    <Content Include="Scripts\tinymce\plugins\advimage\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\advlink\css\advlink.css" />
+    <Content Include="Scripts\tinymce\plugins\advlink\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\advlink\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\advlink\js\advlink.js" />
+    <Content Include="Scripts\tinymce\plugins\advlink\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\advlink\link.htm" />
+    <Content Include="Scripts\tinymce\plugins\advlist\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\advlist\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\autolink\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\autolink\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\autoresize\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\autoresize\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\autosave\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\autosave\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\autosave\langs\en.js" />
+    <Content Include="Scripts\tinymce\plugins\bbcode\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\bbcode\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\contextmenu\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\contextmenu\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\directionality\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\directionality\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\emotions\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\emotions\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\emotions\emotions.htm" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-cool.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-cry.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-embarassed.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-foot-in-mouth.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-frown.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-innocent.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-kiss.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-laughing.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-money-mouth.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-sealed.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-smile.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-surprised.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-tongue-out.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-undecided.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-wink.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-yell.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\js\emotions.js" />
+    <Content Include="Scripts\tinymce\plugins\emotions\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\example\dialog.htm" />
+    <Content Include="Scripts\tinymce\plugins\example\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\example\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\example\img\example.gif" />
+    <Content Include="Scripts\tinymce\plugins\example\js\dialog.js" />
+    <Content Include="Scripts\tinymce\plugins\example\langs\en.js" />
+    <Content Include="Scripts\tinymce\plugins\example\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\example_dependency\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\example_dependency\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\fullpage\css\fullpage.css" />
+    <Content Include="Scripts\tinymce\plugins\fullpage\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\fullpage\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\fullpage\fullpage.htm" />
+    <Content Include="Scripts\tinymce\plugins\fullpage\js\fullpage.js" />
+    <Content Include="Scripts\tinymce\plugins\fullpage\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\fullscreen\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\fullscreen\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\fullscreen\fullscreen.htm" />
+    <Content Include="Scripts\tinymce\plugins\iespell\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\iespell\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\alert.gif" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\button.gif" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\buttons.gif" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\confirm.gif" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\corners.gif" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\horizontal.gif" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\vertical.gif" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\window.css" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\template.htm" />
+    <Content Include="Scripts\tinymce\plugins\insertdatetime\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\insertdatetime\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\layer\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\layer\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\legacyoutput\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\legacyoutput\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\lists\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\lists\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\media\css\media.css" />
+    <Content Include="Scripts\tinymce\plugins\media\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\media\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\media\js\embed.js" />
+    <Content Include="Scripts\tinymce\plugins\media\js\media.js" />
+    <Content Include="Scripts\tinymce\plugins\media\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\media\media.htm" />
+    <Content Include="Scripts\tinymce\plugins\media\moxieplayer.swf" />
+    <Content Include="Scripts\tinymce\plugins\nonbreaking\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\nonbreaking\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\noneditable\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\noneditable\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\pagebreak\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\pagebreak\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\paste\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\paste\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\paste\js\pastetext.js" />
+    <Content Include="Scripts\tinymce\plugins\paste\js\pasteword.js" />
+    <Content Include="Scripts\tinymce\plugins\paste\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\paste\pastetext.htm" />
+    <Content Include="Scripts\tinymce\plugins\paste\pasteword.htm" />
+    <Content Include="Scripts\tinymce\plugins\preview\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\preview\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\preview\example.html" />
+    <Content Include="Scripts\tinymce\plugins\preview\jscripts\embed.js" />
+    <Content Include="Scripts\tinymce\plugins\preview\preview.html" />
+    <Content Include="Scripts\tinymce\plugins\print\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\print\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\save\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\save\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\searchreplace\css\searchreplace.css" />
+    <Content Include="Scripts\tinymce\plugins\searchreplace\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\searchreplace\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\searchreplace\js\searchreplace.js" />
+    <Content Include="Scripts\tinymce\plugins\searchreplace\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\searchreplace\searchreplace.htm" />
+    <Content Include="Scripts\tinymce\plugins\spellchecker\css\content.css" />
+    <Content Include="Scripts\tinymce\plugins\spellchecker\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\spellchecker\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\spellchecker\img\wline.gif" />
+    <Content Include="Scripts\tinymce\plugins\style\css\props.css" />
+    <Content Include="Scripts\tinymce\plugins\style\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\style\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\style\js\props.js" />
+    <Content Include="Scripts\tinymce\plugins\style\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\style\props.htm" />
+    <Content Include="Scripts\tinymce\plugins\tabfocus\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\tabfocus\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\table\cell.htm" />
+    <Content Include="Scripts\tinymce\plugins\table\css\cell.css" />
+    <Content Include="Scripts\tinymce\plugins\table\css\row.css" />
+    <Content Include="Scripts\tinymce\plugins\table\css\table.css" />
+    <Content Include="Scripts\tinymce\plugins\table\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\table\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\table\js\cell.js" />
+    <Content Include="Scripts\tinymce\plugins\table\js\merge_cells.js" />
+    <Content Include="Scripts\tinymce\plugins\table\js\row.js" />
+    <Content Include="Scripts\tinymce\plugins\table\js\table.js" />
+    <Content Include="Scripts\tinymce\plugins\table\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\table\merge_cells.htm" />
+    <Content Include="Scripts\tinymce\plugins\table\row.htm" />
+    <Content Include="Scripts\tinymce\plugins\table\table.htm" />
+    <Content Include="Scripts\tinymce\plugins\template\blank.htm" />
+    <Content Include="Scripts\tinymce\plugins\template\css\template.css" />
+    <Content Include="Scripts\tinymce\plugins\template\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\template\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\template\js\template.js" />
+    <Content Include="Scripts\tinymce\plugins\template\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\template\template.htm" />
+    <Content Include="Scripts\tinymce\plugins\visualchars\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\visualchars\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\wordcount\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\wordcount\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\abbr.htm" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\acronym.htm" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\attributes.htm" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\cite.htm" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\css\attributes.css" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\css\popup.css" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\del.htm" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\ins.htm" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\js\abbr.js" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\js\acronym.js" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\js\attributes.js" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\js\cite.js" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\js\del.js" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\js\element_common.js" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\js\ins.js" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\about.htm" />
+    <Content Include="Scripts\tinymce\themes\advanced\anchor.htm" />
+    <Content Include="Scripts\tinymce\themes\advanced\charmap.htm" />
+    <Content Include="Scripts\tinymce\themes\advanced\color_picker.htm" />
+    <Content Include="Scripts\tinymce\themes\advanced\editor_template.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\editor_template_src.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\image.htm" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\colorpicker.jpg" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\flash.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\icons.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\iframe.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\pagebreak.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\quicktime.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\realmedia.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\shockwave.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\trans.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\video.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\windowsmedia.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\js\about.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\js\anchor.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\js\charmap.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\js\color_picker.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\js\image.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\js\link.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\js\source_editor.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\langs\en.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\link.htm" />
+    <Content Include="Scripts\tinymce\themes\advanced\shortcuts.htm" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\default\content.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\default\dialog.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\default\img\buttons.png" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\default\img\items.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\default\img\menu_arrow.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\default\img\menu_check.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\default\img\progress.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\default\img\tabs.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\default\ui.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\highcontrast\content.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\highcontrast\dialog.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\highcontrast\ui.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\o2k7\content.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\o2k7\dialog.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\o2k7\img\button_bg.png" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\o2k7\img\button_bg_black.png" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\o2k7\img\button_bg_silver.png" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\o2k7\ui.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\o2k7\ui_black.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\o2k7\ui_silver.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\source_editor.htm" />
+    <Content Include="Scripts\tinymce\themes\simple\editor_template.js" />
+    <Content Include="Scripts\tinymce\themes\simple\editor_template_src.js" />
+    <Content Include="Scripts\tinymce\themes\simple\img\icons.gif" />
+    <Content Include="Scripts\tinymce\themes\simple\langs\en.js" />
+    <Content Include="Scripts\tinymce\themes\simple\skins\default\content.css" />
+    <Content Include="Scripts\tinymce\themes\simple\skins\default\ui.css" />
+    <Content Include="Scripts\tinymce\themes\simple\skins\o2k7\content.css" />
+    <Content Include="Scripts\tinymce\themes\simple\skins\o2k7\img\button_bg.png" />
+    <Content Include="Scripts\tinymce\themes\simple\skins\o2k7\ui.css" />
+    <Content Include="Scripts\tinymce\tiny_mce.js" />
+    <Content Include="Scripts\tinymce\tiny_mce_popup.js" />
+    <Content Include="Scripts\tinymce\tiny_mce_src.js" />
+    <Content Include="Scripts\tinymce\utils\editable_selects.js" />
+    <Content Include="Scripts\tinymce\utils\form_utils.js" />
+    <Content Include="Scripts\tinymce\utils\mctabs.js" />
+    <Content Include="Scripts\tinymce\utils\validate.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\util.js" />
+    <None Include="Scripts\_references.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\ConfiguracionGeneral\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\tinymce_jquery_full.cshtml" />
+    <Content Include="Views\Shared\_EmpresaConfiguracionLayout.cshtml" />
+    <Content Include="Views\Shared\_filtersPartial.cshtml" />
+    <Content Include="Views\Shared\_Master.cshtml" />
+    <Content Include="Views\Shared\_MenuPartial.cshtml" />
+    <Content Include="Views\Configuracion\Index.cshtml" />
+    <Content Include="Views\PermisosRol\Index.cshtml" />
+    <Content Include="Views\Empresas\ClavesContingencia.cshtml" />
+    <Content Include="Views\Empresas\ConfiguracionGeneral.cshtml" />
+    <Content Include="Views\Empresas\EmailCliente.cshtml" />
+    <Content Include="Views\Empresas\Importar.cshtml" />
+    <Content Include="Views\Empresas\Index.cshtml" />
+    <Content Include="Views\Empresas\NotificacionesExternas.cshtml" />
+    <Content Include="Views\Empresas\Smtp.cshtml" />
+    <Content Include="Views\Usuarios\CambiaClave.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Cantones\Index.cshtml" />
+    <Content Include="Views\Cantones\ListaCantones.cshtml" />
+    <Content Include="Views\Personas\Index.cshtml" />
+    <Content Include="Views\Personas\ListaPersonas.cshtml" />
+    <Content Include="Views\Personas\Personas.cshtml" />
+    <Content Include="Views\Provincias\Index.cshtml" />
+    <Content Include="Views\Agendas\Index.cshtml" />
+    <Content Include="Views\Medicamentos\Index.cshtml" />
+    <Content Include="Views\Historia\Index.cshtml" />
+    <Content Include="Views\Consultas\Index.cshtml" />
+    <Content Include="Views\Consultas\Consultas.cshtml" />
+    <Content Include="Views\Odontograma\Odontograma.cshtml" />
+    <Content Include="Views\Periodoncia\Periodoncia.cshtml" />
+    <Content Include="Views\Appointment\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FirmasUtilities\FirmasUtilities.csproj">
+      <Project>{0bf34b97-4548-4920-8694-15ac4c3a0de2}</Project>
+      <Name>FirmasUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UniOdonto.BO\UniOdonto.BO.csproj">
+      <Project>{6ff8905c-5802-47e3-b465-4c6bee725441}</Project>
+      <Name>UniOdonto.BO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UniOdonto.Comun\UniOdonto.Comun.csproj">
+      <Project>{b53c4515-067d-404f-9493-771b0235288a}</Project>
+      <Name>UniOdonto.Comun</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UniOdonto.DAL\UniOdonto.DAL.csproj">
+      <Project>{a1cf3a9e-628f-4a99-bdfe-460ce9a3d94d}</Project>
+      <Name>UniOdonto.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ResourceMessage.resx" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>54694</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44366/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.8\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.8\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.8\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.8\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.AspNetCore.Razor.Design.2.1.1\build\netstandard2.0\Microsoft.AspNetCore.Razor.Design.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.AspNetCore.Razor.Design.2.1.1\build\netstandard2.0\Microsoft.AspNetCore.Razor.Design.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.DiaSymReader.Native.1.7.0\build\Microsoft.DiaSymReader.Native.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.DiaSymReader.Native.1.7.0\build\Microsoft.DiaSymReader.Native.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.AspNetCore.Mvc.Razor.Extensions.2.1.1\build\netstandard2.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.AspNetCore.Mvc.Razor.Extensions.2.1.1\build\netstandard2.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.AspNetCore.Mvc.Razor.Extensions.2.1.1\build\netstandard2.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.AspNetCore.Mvc.Razor.Extensions.2.1.1\build\netstandard2.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.8\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.8\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets')" />
+  <Import Project="..\packages\Microsoft.AspNetCore.Mvc.Razor.Extensions.2.1.1\build\netstandard2.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.targets" Condition="Exists('..\packages\Microsoft.AspNetCore.Mvc.Razor.Extensions.2.1.1\build\netstandard2.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

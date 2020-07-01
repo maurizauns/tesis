@@ -1,0 +1,105 @@
+﻿@using UniOdonto.Models.Filters
+@using MvcJqGrid
+@using MvcJqGrid.Enums
+@using RP.Website.Helpers
+
+@model UniOdonto.Models.EmpresaNotificaionViewModel
+
+@{
+    ViewBag.Title = "Notificaciones Externas";
+    Layout = "~/Views/Shared/_EmpresaConfiguracionLayout.cshtml";
+    ViewBag.Panel = "NotificacionesExternas";
+}
+
+<div role="tabpanel" class="tab-pane active">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <div class="col-md-offset-0 col-md-11">
+                <h4>Notificar aplicación externa cuando el documento haya sido:</h4>
+            </div>
+            <div class="col-md-offset-1 col-md-10 checkbox">
+                <label>
+                    @Html.CheckBoxFor(m=>m.Generado)
+                    @Html.LabelFor(m => m.Generado)
+                </label>
+            </div>
+            <div class="col-md-offset-1 col-md-10 checkbox">
+                <label>
+                    @Html.CheckBoxFor(m => m.Firmado)
+                    @Html.LabelFor(m => m.Firmado)
+                </label>
+            </div>
+            <div class="col-md-offset-1 col-md-10 checkbox">
+                <label>
+                    @Html.CheckBoxFor(m => m.NoFirmado)
+                    @Html.LabelFor(m => m.NoFirmado)
+                </label>
+            </div>
+            <div class="col-md-offset-1 col-md-10 checkbox">
+                <label>
+                    @Html.CheckBoxFor(m => m.Recibido)
+                    @Html.LabelFor(m => m.Recibido)
+                </label>
+            </div>
+            <div class="col-md-offset-1 col-md-10 checkbox">
+                <label>
+                    @Html.CheckBoxFor(m => m.Devuelto)
+                    @Html.LabelFor(m => m.Devuelto)
+                </label>
+            </div>
+            <div class="col-md-offset-1 col-md-10 checkbox">
+                <label>
+                    @Html.CheckBoxFor(m => m.TimeoutRecepcion)
+                    @Html.LabelFor(m => m.TimeoutRecepcion)
+                </label>
+            </div>
+            <div class="col-md-offset-1 col-md-10 checkbox">
+                <label>
+                    @Html.CheckBoxFor(m => m.Contingencia)
+                    @Html.LabelFor(m => m.Contingencia)
+                </label>
+            </div>
+            <div class="col-md-offset-1 col-md-10 checkbox">
+                <label>
+                    @Html.CheckBoxFor(m => m.Autorizado)
+                    @Html.LabelFor(m => m.Autorizado)
+                </label>
+            </div>
+            <div class="col-md-offset-1 col-md-10 checkbox">
+                <label>
+                    @Html.CheckBoxFor(m => m.NoAutorizado)
+                    @Html.LabelFor(m => m.NoAutorizado)
+                </label>
+            </div>
+            <div class="col-md-offset-1 col-md-10 checkbox">
+                <label>
+                    @Html.CheckBoxFor(m => m.TimeoutAutorizacion)
+                    @Html.LabelFor(m => m.TimeoutAutorizacion)
+                </label>
+            </div>
+            <div class="col-md-offset-1 col-md-10 checkbox">
+                <label>
+                    @Html.CheckBoxFor(m => m.Pendiente)
+                    @Html.LabelFor(m => m.Pendiente)
+                </label>
+            </div>
+            <div class="col-md-offset-1 col-md-10 checkbox">
+                <label>
+                    @Html.CheckBoxFor(m => m.NoProcesados)
+                    @Html.LabelFor(m => m.NoProcesados)
+                </label>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" })
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+</div>

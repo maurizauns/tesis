@@ -1,0 +1,84 @@
+﻿@using UniOdonto.Models.Filters
+@using MvcJqGrid
+@using MvcJqGrid.Enums
+@using RP.Website.Helpers
+
+@model UniOdonto.Models.CantonesViewModel
+@{
+    ViewBag.Title = "Ciudades";
+    Layout = "~/Views/Shared/_Master.cshtml";
+}
+
+<style>
+    .modal-body {
+        background-color: #ffffff !important;
+    }
+</style>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        @ViewBag.Title @Html.ActionLink("(Inicio)", "Index", "Home", null, new { @class = "regresar" })
+        <div style="display:inline-block; position:relative; float:right">
+            <button type="button" class="pull-right btn btn-primary btn-sm modal-crud" style="margin-top: -1mm" data-toggle="modal" data-target="#provincia-modal">
+                <i class="fa fa-plus fa-lg" data-toggle="tooltip" title="Nuevo"></i>
+            </button>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                @{
+                    Html.RenderPartial("_filtersPartial", new ModelFilter { FormId = "search_form", GridId = "provincia-grid", FieldFilters = ViewBag.Filters });
+                }
+                @(Html.MyjqGrid("provincia-grid", UniOdonto.Comun.Context.PageSize)
+                    .AddColumn(new Column("Codigo").SetLabel("Código").SetSortable(true).SetAlign(Align.Center))
+                    .AddColumn(new Column("Descripcion").SetLabel("Descripción").SetSortable(true).SetAlign(Align.Center))
+                    .AddColumn(new Column("Provincias.Descripcion").SetLabel("Provincias").SetSortable(true).SetAlign(Align.Center))
+                    .AddColumn(new Column("Actions").SetFixedWidth(true).SetWidth(80).SetLabel("</br>").SetSortable(false))
+                    .SetUrl(Url.Action("GetList")))
+                <div class="clearfix">
+                    @Html.PaginationBtn("provincia-grid", "pull-right")
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="provincia-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-primary">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title" id="myModalLabel">@ViewBag.Title</h4>
+            </div>
+            <form role="form" class="modal-Crud" action='@Url.Action("Save")' data-modal="provincia-modal" data-grid="provincia-grid">
+                <div class="modal-body">
+                    @Html.HiddenFor(x => x.Id)
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.ProvinciasId)
+                        @Html.DropDownListFor(x => x.ProvinciasId, (SelectList)ViewBag.PaisId, "seleccione", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ProvinciasId, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(x => x.Codigo)
+                        @Html.TextBoxFor(x => x.Codigo, new { @class = "form-control", placeholder = "Código" })
+                        @Html.ValidationMessageFor(model => model.Codigo, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Descripcion)
+                        @Html.TextBoxFor(x => x.Descripcion, new { @class = "form-control", placeholder = "Descripción" })
+                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript" language="javascript" src="~/Scripts/Pages/Provincia.js"></script>
+}

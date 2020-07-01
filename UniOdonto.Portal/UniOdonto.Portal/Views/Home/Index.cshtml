@@ -1,0 +1,231 @@
+﻿@using UniOdonto.BO
+@{
+    ViewBag.Title = "Inicio";
+    var paneleService = new PaneleService();
+    var paneles = paneleService.GetAll().ToList();
+    paneleService.Dispose();
+}
+@using UniOdonto.Models.Filters
+@using MvcJqGrid
+@using MvcJqGrid.Enums
+@using RP.Website.Helpers
+<script src="~/Scripts/Pages/Personas/Personas.js"></script>
+<div class="container-fluid">
+    <!-- Info boxes -->
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-person-carry"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Pacientes</span>
+                    <span class="info-box-number">
+                        @ViewBag.Personas
+                        @*<small>%</small>*@
+                    </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        @*<div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-book-medical"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Consultas Odontológicas</span>
+                        <span class="info-box-number">@ViewBag.Consultas</span>
+                    </div>
+                </div>
+            </div>*@
+
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-tooth"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Medicamentos</span>
+                    <span class="info-box-number">@ViewBag.Medicamentos</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-id-card-alt"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Agendas</span>
+                    <span class="info-box-number">@ViewBag.Agendas</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-users"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Usuarios</span>
+                    <span class="info-box-number">@ViewBag.Usuarios</span>
+                </div>
+            </div>
+        </div>
+        @*<div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-cyan elevation-1"><i class="fas fa-teeth"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Periodontogramas</span>
+                        <span class="info-box-number">@ViewBag.Periodoncia</span>
+                    </div>
+                </div>
+            </div>*@
+        @*<div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-gradient-teal elevation-1"><i class="fas fa-teeth-open"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Odontogramas</span>
+                        <span class="info-box-number">@ViewBag.Odontogramas</span>
+                    </div>
+                </div>
+            </div>*@
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-info card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-book"></i>
+                        Agendas <small> Citas </small>
+                    </h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @{
+                                Html.RenderPartial("_filtersPartial", new ModelFilter { FormId = "search_form", GridId = "agendas-grid", FieldFilters = ViewBag.Filters });
+                            }
+                            @(Html.MyjqGrid("agendas-grid", UniOdonto.Comun.Context.PageSize)
+                                .AddColumn(new Column("NumeroPaciente").SetLabel("H.C").SetWidth(30).SetSortable(true).SetAlign(Align.Center))
+                                .AddColumn(new Column("Personas.Identificacion").SetLabel("Identificacin").SetWidth(30).SetSortable(true).SetAlign(Align.Center))
+                                .AddColumn(new Column("Personas.Nombre").SetLabel("Nombre Completo").SetWidth(80).SetSortable(true).SetAlign(Align.Center))
+                                .AddColumn(new Column("Personas.FechaNacimiento").SetLabel("Fecha de Nacimiento").SetWidth(20).SetSortable(true).SetAlign(Align.Center))
+                                .AddColumn(new Column("Personas.FechaNacimiento").SetLabel("Edad").SetWidth(25).SetSortable(true).SetAlign(Align.Center))
+                                .AddColumn(new Column("TipoCita.Descripcion").SetLabel("Tipo Cita").SetWidth(50).SetSortable(true).SetAlign(Align.Center))
+                                .AddColumn(new Column("TipoCita.Descripcion").SetLabel("Estado Cita").SetWidth(50).SetSortable(true).SetAlign(Align.Center))
+                                .AddColumn(new Column("TipoCita").SetLabel("Última Consulta").SetWidth(25).SetSortable(false).SetAlign(Align.Left))
+                                .AddColumn(new Column("AppointmentDate").SetLabel("Hora Cita").SetWidth(25).SetSortable(false).SetAlign(Align.Left))
+                                .AddColumn(new Column("Actions").SetFixedWidth(true).SetWidth(120).SetLabel("</br>").SetSortable(false).SetAlign(Align.Center))
+                                .SetUrl(Url.Action("GetList")))
+
+                            <div class="clearfix" style="text-align:center">
+                                @Html.PaginationBtn("agendas-grid", "pull-right")
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- ./card-body -->
+                <div class="card-footer">
+                    @{
+                        int citasAnterioresAnuales = ViewBag.CitasAnteriorAnual;
+                        int citasActualesAnual = ViewBag.CitasActualesAnual;
+
+                        float porcentajeGanancia = float.Parse((((float.Parse(citasActualesAnual.ToString()) - float.Parse(citasAnterioresAnuales.ToString())) / float.Parse(citasActualesAnual.ToString())) * 100).ToString("N2"));
+
+                        int citasMesAnterior = ViewBag.CitasMesAnterior;
+                        int citasMesActual = ViewBag.CitasMesActual;
+
+                        float porcentajeGananciaMensual = float.Parse((((float.Parse(citasMesActual.ToString()) - float.Parse(citasMesAnterior.ToString())) / float.Parse(citasMesActual.ToString())) * 100).ToString("N2"));
+
+                        int citasAnteriorDias = ViewBag.CitasAnteriorDias;
+                        int xitasActualesDias = ViewBag.CitasActualesDias;
+
+                        float porcentajeGananciaDiarios = float.Parse((((float.Parse(xitasActualesDias.ToString()) - float.Parse(citasAnteriorDias.ToString())) / float.Parse(xitasActualesDias.ToString())) * 100).ToString("N2"));
+
+
+
+                    }
+                    <div class="row">
+                        <div class="col-sm-3 col-6">
+                            <div class="description-block border-right">
+                                @if (citasAnterioresAnuales < citasActualesAnual)
+                                {
+                                    <span class="description-percentage text-success"> <i class="fas fa-caret-up"></i> @porcentajeGanancia%  </span>
+                                }
+                                else if (citasAnterioresAnuales > citasActualesAnual)
+                                {
+                                    <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> @porcentajeGanancia%</span>
+                                }
+                                else
+                                {
+                                    <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> @porcentajeGanancia%</span>
+                                }
+                                <h5 class="description-header">@citasActualesAnual</h5>
+                                <span class="description-text">TOTAL CITAS ANUALES</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-6">
+                            <div class="description-block border-right">
+                                @if (citasMesAnterior < citasMesActual)
+                                {
+                                    <span class="description-percentage text-success"> <i class="fas fa-caret-up"></i> @porcentajeGananciaMensual%  </span>
+                                }
+                                else if (citasMesAnterior > citasMesActual)
+                                {
+                                    <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> @porcentajeGananciaMensual%</span>
+                                }
+                                else
+                                {
+                                    <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> @porcentajeGananciaMensual%</span>
+                                }
+                                <h5 class="description-header">@citasMesActual</h5>
+                                <span class="description-text">TOTAL CITAS MENSUALES</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-6">
+                            <div class="description-block border-right">
+                                @if (citasAnteriorDias < xitasActualesDias)
+                                {
+                                    <span class="description-percentage text-success"> <i class="fas fa-caret-up"></i> @porcentajeGananciaDiarios%  </span>
+                                }
+                                else if (citasAnteriorDias > xitasActualesDias)
+                                {
+                                    <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> @porcentajeGananciaDiarios%</span>
+                                }
+                                else
+                                {
+                                    <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> @porcentajeGananciaDiarios%</span>
+                                }
+                                <h5 class="description-header">@xitasActualesDias</h5>
+                                <span class="description-text">TOTAL CITAS DIARIAS</span>
+                            </div>
+                            <!-- /.description-block -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-3 col-6">
+                            <div class="description-block">
+                                <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span>
+                                <h5 class="description-header">1200</h5>
+                                <span class="description-text">GOAL COMPLETIONS</span>
+                            </div>
+                            <!-- /.description-block -->
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.card-footer -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+
+</div>

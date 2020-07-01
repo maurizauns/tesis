@@ -1,0 +1,224 @@
+﻿@model UniOdonto.Models.PersonasViewModel
+@{
+    ViewBag.Title = "Personas";
+}
+
+@section Scripts {
+
+    <script type="text/javascript" language="javascript" src="~/Scripts/Pages/Personas/Personas.js"></script>
+    <script type="text/javascript" language="javascript">
+        urlCantones = "@Url.Action("GetValues", "Cantones")";
+        var documento_nuevo = "@ViewBag.DocumentoNuevo";
+    </script>
+}
+<form role="form" class="frmPersonas" name="frmPersonas" action='@Url.Action("SavePersonas")'>
+    <div class="form-horizontal">
+        <div class="panel panel-primary">
+            <div class="panel-heading row">
+                @ViewBag.Title. @Html.ActionLink("(Inicio)", "Index", "Home", null, new { @class = "regresar" })  @Html.ActionLink("(Personas)", "Index", "Personas", null, new { @class = "regresar" })
+                <div style="display:inline-block; position:relative; float:right">
+                    <a href="@Url.Action("Personas")" title="Nuevo" data-toggle="tooltip" class="pull-right btn btn-success btn-sm" >
+                        <i class="fa fa-plus fa-lg"></i>
+                    </a>
+                    <button type="submit" id="GuardarId" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Guardar" style="margin-right:2mm"><i class="fa fa-save fa-lg"></i></button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-12">
+
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(x => x.Id)
+                    <div role="tabpanel">
+                        <ul id="tab" class="nav nav-tabs" role="tablist">
+                            <li class="active"><a href="#datosGenerales" aria-controls="home" role="tab" data-toggle="tab">Datos Generales</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="datosGenerales">
+                                <div class="form-horizontal">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Datos Generales</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <div class="col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            @Html.LabelFor(x => x.NumeroPaciente, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                @Html.TextBoxFor(x => x.NumeroPaciente, new { @class = "form-control input-sm", placeholder = "Numero Paciente", style = "max-width: 100% !important", autocomplete = "off", onchange = "validarDocumento()" })
+                                                                @Html.ValidationMessageFor(model => model.NumeroPaciente, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            @Html.LabelFor(x => x.TipoIdentificacionId, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                @Html.DropDownListFor(x => x.TipoIdentificacionId, (SelectList)ViewBag.TipoIdentificaciones, null, new { @class = "form-control", style = "max-width: 100% !important" })
+                                                            </div>
+                                                            @Html.LabelFor(x => x.Identificacion, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                @Html.TextBoxFor(x => x.Identificacion, new { @class = "form-control input-sm", placeholder = "Identificacion", style = "max-width: 100% !important", autocomplete = "off", onchange = "validarDocumento()" })
+                                                                @Html.ValidationMessageFor(model => model.Identificacion, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            @Html.LabelFor(x => x.PrimerNombre, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                @Html.TextBoxFor(x => x.PrimerNombre, new { @class = "form-control input-sm", placeholder = "Primer Nombre", style = "max-width: 100% !important", autocomplete = "off" })
+                                                                @Html.ValidationMessageFor(model => model.PrimerNombre, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            @Html.LabelFor(x => x.SegundoNombre, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                @Html.TextBoxFor(x => x.SegundoNombre, new { @class = "form-control input-sm", placeholder = "Segundo Nombre", style = "max-width: 100% !important", autocomplete = "off" })
+                                                                @Html.ValidationMessageFor(model => model.SegundoNombre, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            @Html.LabelFor(x => x.PrimerApellido, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                @Html.TextBoxFor(x => x.PrimerApellido, new { @class = "form-control input-sm", placeholder = "Primer Apellido", style = "max-width: 100% !important", autocomplete = "off" })
+                                                                @Html.ValidationMessageFor(model => model.PrimerApellido, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            @Html.LabelFor(x => x.SegundoApellido, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                @Html.TextBoxFor(x => x.SegundoApellido, new { @class = "form-control input-sm", placeholder = "Segundo Apellido", style = "max-width: 100% !important", autocomplete = "off" })
+                                                                @Html.ValidationMessageFor(model => model.SegundoApellido, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            @Html.LabelFor(x => x.NombreComercial, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                @Html.TextBoxFor(x => x.NombreComercial, new { @class = "form-control input-sm", placeholder = "Nombre Comercial", style = "max-width: 100% !important", autocomplete = "off" })
+                                                                @Html.ValidationMessageFor(model => model.NombreComercial, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            @Html.LabelFor(x => x.FechaNacimiento, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                @Html.TextBoxFor(x => x.FechaNacimiento, new { @class = "form-control calendar", placeholder = "Fecha Emision" })
+                                                                @Html.ValidationMessageFor(model => model.FechaNacimiento, "", new { @class = "text-danger" })
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="form-group">
+                                                            @Html.LabelFor(x => x.Telefonos, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                @Html.TextBoxFor(x => x.Telefonos, new { @class = "form-control input-sm", placeholder = "Telefonos", style = "max-width: 100% !important", autocomplete = "off" })
+                                                                @Html.ValidationMessageFor(model => model.Telefonos, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            @Html.LabelFor(x => x.Direccion, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                @Html.TextBoxFor(x => x.Direccion, new { @class = "form-control input-sm", placeholder = "Direccion", style = "max-width: 100% !important", autocomplete = "off" })
+                                                                @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            @Html.LabelFor(x => x.ProvinciasId, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                @Html.DropDownListFor(x => x.ProvinciasId, (SelectList)ViewBag.ProvinciassId, "--Seleccione--", new { @class = "form-control", style = "max-width: 100% !important" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            @Html.LabelFor(x => x.CantonesId, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                @Html.DropDownListFor(x => x.CantonesId, (SelectList)ViewBag.CantonessId, "--Seleccione--", new { @class = "form-control", style = "max-width: 100% !important" })
+                                                            </div>
+                                                            @Html.LabelFor(x => x.Extranjero, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                <div class="label-check">
+                                                                    <div class="checkbox">
+                                                                        <input type="checkbox" name="Extranjero" id="Extranjero" checked="@Model.Extranjero">
+                                                                        <label for="Extranjero"></label>
+                                                                    </div>
+                                                                </div>
+                                                                @Html.ValidationMessageFor(model => model.Extranjero, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            @Html.LabelFor(x => x.Discapacidad, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                <div class="label-check">
+                                                                    <div class="checkbox">
+                                                                        <input type="checkbox" name="Discapacidad" id="Discapacidad" checked="@Model.Discapacidad">
+                                                                        <label for="Discapacidad"></label>
+                                                                    </div>
+                                                                </div>
+                                                                @Html.ValidationMessageFor(model => model.Discapacidad, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            @Html.LabelFor(x => x.TipoSangreId, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                @Html.DropDownListFor(x => x.TipoSangreId, (SelectList)ViewBag.TipoSangre, "--Seleccione--", new { @class = "form-control", style = "max-width: 100% !important" })
+                                                            </div>
+                                                            @Html.LabelFor(x => x.EstadoCivilId, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                @Html.DropDownListFor(x => x.EstadoCivilId, (SelectList)ViewBag.EstadoCivil, "--Seleccione--", new { @class = "form-control", style = "max-width: 100% !important" })
+                                                            </div>
+                                                            @Html.LabelFor(x => x.TipoPacienteId, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                @Html.DropDownListFor(x => x.TipoPacienteId, (SelectList)ViewBag.TipoPaciente, "--Seleccione--", new { @class = "form-control", style = "max-width: 100% !important" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            @Html.LabelFor(x => x.TipoParienteId, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                @Html.DropDownListFor(x => x.TipoParienteId, (SelectList)ViewBag.TipoPariente, "--Seleccione--", new { @class = "form-control", style = "max-width: 100% !important" })
+                                                            </div>
+                                                            @Html.LabelFor(x => x.SeguroMedicoId, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                @Html.DropDownListFor(x => x.SeguroMedicoId, (SelectList)ViewBag.SeguroMedico, "--Seleccione--", new { @class = "form-control", style = "max-width: 100% !important" })
+                                                            </div>
+                                                            @Html.LabelFor(x => x.OcupacionId, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                @Html.DropDownListFor(x => x.OcupacionId, (SelectList)ViewBag.Ocupacion, "--Seleccione--", new { @class = "form-control", style = "max-width: 100% !important" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            @Html.LabelFor(x => x.Email, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-6">
+                                                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Email", autocomplete = "off", style = "max-width: 100% !important" })
+                                                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                                                <div class="alert alert-info">
+                                                                    Para colocar más de 1 email separar por comas<strong>  ','</strong> o Enter. Max(4)
+                                                                </div>
+                                                            </div>
+                                                            @Html.LabelFor(x => x.SexoId, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                                            <div class="col-md-2">
+                                                                @Html.DropDownListFor(x => x.SexoId, (SelectList)ViewBag.SexoIds, "--Seleccione--", new { @class = "form-control", style = "max-width: 100% !important" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Rol de persona en la empresa</h3>
+                                            </div>
+                                            <div class="panel-collapse">
+                                                <div class="form-group">
+                                                    <div class="col-md-12 col-sm-12">
+                                                        <div class="fancy-collapse-panel">
+                                                            <div class="panel-body" id="accordion" role="tablist" aria-multiselectable="true">
+                                                                <div class="panel panel-primary">
+                                                                    <div class="panel-heading">
+                                                                        &nbsp;
+                                                                        <div class="col-md-2">
+                                                                            @Html.LabelFor(x => x.EsPaciente)
+                                                                            <div class="label-check">
+                                                                                <div class="ui-checkboxradio-radio-label">
+                                                                                    <input type="checkbox" name="EsVendedor" id="EsVendedor" checked="@Model.EsPaciente">
+                                                                                    <label for="EsVendedor"></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            @Html.ValidationMessageFor(model => model.EsPaciente, "", new { @class = "text-danger" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

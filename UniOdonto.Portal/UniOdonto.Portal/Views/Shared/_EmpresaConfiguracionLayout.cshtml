@@ -1,0 +1,40 @@
+﻿@using System.Web.UI.WebControls
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Panel = ViewBag.Panel ?? "";
+}
+@section head {
+    @RenderSection("head", required: false)
+}
+<div class="form-horizontal">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Configuracion Empresa - @ViewBag.ruc. @Html.ActionLink("(Regresar)", "Index", "Empresas", null, new { @class = "regresar" })
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div role="tabpanel">
+                        <ul id="tab" class="nav nav-tabs" role="tablist">
+                            <li @(ViewBag.Panel.ToString() == "ConfiguracionGeneral" ? "class=active" : "")>@Html.ActionLink("Configuración General", "ConfiguracionGeneral", "Empresas", new { ViewBag.id }, null)</li>
+                            <li @(ViewBag.Panel.ToString() == "Smtp" ? "class=active" : "")>@Html.ActionLink("Servidor Smtp", "Smtp", "Empresas", new { ViewBag.id }, null)</li>
+                            <li @(ViewBag.Panel.ToString() == "EmailCliente" ? "class=active" : "")>@Html.ActionLink("Email del Cliente", "EmailCliente", "Empresas", new { id = ViewBag.id }, null)</li>
+                        </ul>
+                        <div class="tab-content">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@RenderSection("afterpanel", required: false)
+@section scripts {
+    <script type="text/javascript" language="javascript" src="~/Scripts/Pages/Empresa/Empresa.js"></script>
+    @RenderSection("scripts", required: false)
+}

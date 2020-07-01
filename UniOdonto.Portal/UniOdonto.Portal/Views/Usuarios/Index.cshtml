@@ -1,0 +1,131 @@
+﻿@using UniOdonto.Models.Filters
+@using MvcJqGrid
+@using MvcJqGrid.Enums
+@using RP.Website.Helpers
+
+@model UniOdonto.Models.UsuarioViewModel
+
+@{
+    ViewBag.Title = "Usuarios";
+}
+<div class="form-horizontal">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            @ViewBag.Title. @Html.ActionLink("(Inicio)", "Index", "Home", null, new { @class = "regresar" })
+            <div style="display:inline-block; position:relative; float:right">
+                <button type="button" class="pull-right btn btn-success btn-xs" data-toggle="modal" data-target="#usuarios-modal">
+                    <i class="fa fa-plus fa-lg"></i>
+                </button>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    @{
+                       Html.RenderPartial("_filtersPartial", new ModelFilter { FormId = "search_form", GridId = "usuarios-grid", FieldFilters = ViewBag.Filters });
+                    }
+                    @(Html.MyjqGrid("usuarios-grid", UniOdonto.Comun.Context.PageSize)
+                            .AddColumn(new Column("TipoIdentificacion").SetLabel("Tipo Identificacion").SetSortable(true).SetAlign(Align.Center))
+                            .AddColumn(new Column("Identificacion").SetLabel("Identificacion").SetSortable(true).SetAlign(Align.Center))
+                            .AddColumn(new Column("NombresCompletos").SetLabel("Nombre").SetSortable(true).SetAlign(Align.Center))
+                            .AddColumn(new Column("Email").SetLabel("Email").SetSortable(true).SetAlign(Align.Center))
+                            .AddColumn(new Column("Actions").SetFixedWidth(true).SetWidth(120).SetLabel("</br>").SetSortable(false))
+                    .SetUrl(Url.Action("GetList")))
+                    <div class="clearfix">
+                        @Html.PaginationBtn("usuarios-grid", "pull-right")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="usuarios-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-primary">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title" id="myModalLabel">@ViewBag.Title</h4>
+            </div>
+            <form role="form" class="modal-Crud" action='@Url.Action("SaveUsuario")' data-modal="usuarios-modal" data-grid="usuarios-grid">
+                <div class="modal-body">
+                    @Html.HiddenFor(x => x.Id)
+
+                    <div class="form-group ">
+                        @Html.LabelFor(x => x.EmpresaId)
+                        @Html.DropDownList("EmpresaId", null, new { @class = "form-control", style = "max-width: 100% !important" })
+                        @Html.ValidationMessageFor(model => model.EmpresaId, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group ">
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(x => x.TipoIdentificacion)
+                                <select name="TipoIdentificacion" id="TipoIdentificacion" class="form-control">
+                                    <option value="C">Cédula</option>
+                                    <option value="R">Ruc</option>
+                                    <option value="P">Pasaporte</option>
+                                    <option value="O">Otro</option>
+                                </select>
+                                @Html.ValidationMessageFor(model => model.TipoIdentificacion, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(x => x.Identificacion)
+                                @Html.TextBoxFor(x => x.Identificacion, new { @class = "form-control", placeholder = "Identificación", autocomplete = "off" })
+                                @Html.ValidationMessageFor(model => model.Identificacion, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(x => x.NombresCompletos)
+                                @Html.TextBoxFor(x => x.NombresCompletos, new { @class = "form-control", placeholder = "Nombre Completos", autocomplete = "off" })
+                                @Html.ValidationMessageFor(model => model.NombresCompletos, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(x => x.Email)
+                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Email", autocomplete = "off" })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.HiddenFor(x => x.Establecimientos)<br />
+                                @Html.LabelFor(x => x.Establecimientos)<br />
+                                <div class="row" style="margin-bottom: 5px">
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="txtEstablecimiento" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div id="dibAgregarEstablecimiento" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="divEstablecimientos" class="row">
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(x => x.ApplicationRoleName)
+                                @Html.DropDownList("ApplicationRoleName", null, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript" language="javascript" src="~/Scripts/Pages/UsuarioConfig.js"></script>
+}
