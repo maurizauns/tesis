@@ -19,7 +19,8 @@ using System.Data.Entity;
 using System.Web.Services;
 using System.Web.Script.Services;
 using PagedList;
-
+using System.Globalization;
+using UniOdonto.Portal.Helpers;
 
 namespace UniOdonto.Controllers
 {
@@ -107,6 +108,7 @@ namespace UniOdonto.Controllers
                 HttpUtility.HtmlEncode(item.TipoIdentificacion.Descripcion),
                 HttpUtility.HtmlEncode(item.Identificacion),
                 HttpUtility.HtmlEncode(item.FechaNacimiento.Value.ToString(Comun.Context.FormatoFecha)),
+                HttpUtility.HtmlEncode(string.Format("{0} años",CalculoEdad.Edad(item.FechaNacimiento.Value))),
                 HttpUtility.HtmlEncode(item.TipoSangre.Descripcion??""),
                 HttpUtility.HtmlEncode(string.Format("{0} - {1}",item.Provincias?.Descripcion,item.Cantones?.Descripcion)),
                 HttpUtility.HtmlEncode(item.SeguroMedico.Descripcion??""),
@@ -122,7 +124,7 @@ namespace UniOdonto.Controllers
 
         public IHtmlString ConfiguracionAction(object id = null)
         {
-            var button = string.Format(@"<li class=""""><a title=""Historia Clinica"" data-toggle=""tooltip"" class=""btn btn-primary btn-xs"" href=""{0}""><i class=""glyphicon glyphicon-cog""></i></a></li>",
+            var button = string.Format(@"<li class=""""><a target=""_blank"" title=""Historia Clínica"" data-toggle=""tooltip"" class=""btn btn-info btn-xs"" href=""{0}""><i class=""fas fa-comment-alt-medical""></i></a></li>",
                             Url.Action("Index", "Historia", new { id }));
 
 
@@ -137,7 +139,7 @@ namespace UniOdonto.Controllers
                 {
                     new FieldFilter
                     {
-                        Description = "Personas",
+                        Description = "Pacientes",
                         Name = "persona",
                         Type = FilterType.DataModal,
                         Placeholder = "Ruc/CI/Pasaporte Cliente",
@@ -146,13 +148,13 @@ namespace UniOdonto.Controllers
                     },
                     new FieldFilter
                     {
-                        Description = "Identificacion",
+                        Description = "Identificación",
                         Name = "identificacion",
                         Type = FilterType.Textbox
                     },
                      new FieldFilter
                     {
-                        Description = "Tipo Identificacion",
+                        Description = "Tipo Identificación",
                         Name = "tipoIdentificacion",
                         Type = FilterType.Select,
                         UrlData = Url.Action("GetValuesTipoDocumento","TipoIdentificacion",new { Tipo = "DocIde"})
@@ -243,6 +245,8 @@ namespace UniOdonto.Controllers
                 producto.Ocupacion = viewModel.OcupacionId != null ? tipoIdentificacion.Where(x => x.Id == viewModel.OcupacionId).FirstOrDefault() : null;
                 producto.Provincias = viewModel.ProvinciasId != null ? ProvinciaService.Where(x => x.Id == viewModel.ProvinciasId).FirstOrDefault() : null;
                 producto.Cantones = viewModel.CantonesId != null ? CantoneService.Where(x => x.Id == viewModel.CantonesId).FirstOrDefault() : null;
+                producto.TipoIdentificacion = viewModel.TipoIdentificacionId != null ? tipoIdentificacion.Where(x => x.Id == viewModel.TipoIdentificacionId).FirstOrDefault() : null;
+                //viewModel.FechaNacimiento = DateTime.ParseExact(viewModel.FechaNacimiento, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString();
             }
 
             return Mapper.Map(viewModel, producto);
@@ -426,7 +430,35 @@ namespace UniOdonto.Controllers
             return PartialView(planCuentaDescripcionDTO.ToPagedList(pageNumber, pageSize));
         }
 
+        public async Task<ActionResult> Exportar()
+        {
+            var generalQuery = await EntityService.GetAllAsync();
 
+            if (!User.IsInRole("Administrador"))
+            {
+                generalQuery.Where(x => x.EmpresaId == EmpresasID);
+            }
+            generalQuery = OnBeginFilter(generalQuery);
+
+            var defaultFilters = GetDefaultFilters();
+
+            if (defaultFilters != null && defaultFilters.Any())
+            {
+                var rules = defaultFilters.Select(f => new Rule()
+                {
+                    data = f.DefaultValue,
+                    field = f.Name
+                });
+
+                generalQuery = ApplyFilters(generalQuery, rules.ToArray());
+            }
+            generalQuery = generalQuery.Where(x => x.EmpresaId == EmpresasID);
+            if (GridSettings != null && GridSettings.Where != null)
+            {
+                generalQuery = ApplyFilters(generalQuery, GridSettings.Where.rules);
+            }
+            return new ExportPersonasResult(generalQuery);
+        }
 
         protected override void Dispose(bool disposing)
         {

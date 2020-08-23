@@ -2,12 +2,14 @@
 using MvcJqGrid;
 using RP.Website.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using UniOdonto.BO;
 using UniOdonto.DAL.Entidad;
 using UniOdonto.Models;
+using UniOdonto.Models.Filters;
 
 namespace UniOdonto.Controllers
 {
@@ -32,22 +34,10 @@ namespace UniOdonto.Controllers
                 {
                     generalQuery = generalQuery.Where(x => x.Generico.Trim().ToUpper().Contains(term));
                 }
-                //else if (String.Equals(item.field, "persona", StringComparison.OrdinalIgnoreCase))
-                //{
-                //    var tipoIdentificacion = Guid.Parse(item.data);
-                //    generalQuery = generalQuery.Where(x => x.Id == tipoIdentificacion);
-                //}
-                //else if (String.Equals(item.field, "tipoIdentificacion", StringComparison.OrdinalIgnoreCase))
-                //{
-                //    var tipoIdentificacion = Guid.Parse(item.data);
-                //    generalQuery = generalQuery.Where(x => x.TipoIdentificacionId == tipoIdentificacion);
-                //}
-                //else if (String.Equals(item.field, "empresa", StringComparison.OrdinalIgnoreCase))
-                //{
-                //    var empresaId = Guid.Parse(item.data);
-                //    generalQuery = generalQuery.Where(x => x.EmpresaId == empresaId);
-                //}
-
+                else if (String.Equals(item.field, "comercial", StringComparison.OrdinalIgnoreCase))
+                {
+                    generalQuery = generalQuery.Where(x => x.Comercial.Trim().ToUpper().Contains(term));
+                }
             }
             return generalQuery;
         }
@@ -67,6 +57,36 @@ namespace UniOdonto.Controllers
                         .Add(GridHelperExts.DeleteAction(Url.Action("Delete"), "medicamentos-grid", item.Id))
                         .End())
             };
+        }
+
+        public override IEnumerable<FieldFilter> Filters
+        {
+            get
+            {
+                var filters = new List<FieldFilter>
+                {
+                    new FieldFilter
+                    {
+                        Description = "Genérico",
+                        Name = "generico",
+                        Type = FilterType.Textbox
+                    },
+                    new FieldFilter
+                    {
+                        Description = "Comercial",
+                        Name = "comercial",
+                        Type = FilterType.Textbox
+                    },
+                     new FieldFilter
+                    {
+                        Description = "Empresa",
+                        Name = "empresa",
+                        Type = FilterType.Select,
+                        UrlData = Url.Action("GetValues","Empresas")
+                    }
+                };
+                return filters;
+            }
         }
         protected override MedicamentosViewModel MapperEntityToModel(Medicamentos entity)
         {

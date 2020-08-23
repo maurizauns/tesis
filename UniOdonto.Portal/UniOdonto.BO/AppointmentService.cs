@@ -1,4 +1,6 @@
 ﻿using RP.DAL.Repository;
+using System;
+using System.Linq;
 using UniOdonto.DAL.Entidad;
 
 namespace UniOdonto.BO
@@ -12,6 +14,11 @@ namespace UniOdonto.BO
         public AppointmentService(IUnitOfWork unitOfWork)
             : base(unitOfWork)
         {
+        }
+
+        public Appointment GetByIdInclude(Guid personasId)
+        {
+            return GetAll().FirstOrDefault(f => f.Id == personasId);
         }
     }
 }

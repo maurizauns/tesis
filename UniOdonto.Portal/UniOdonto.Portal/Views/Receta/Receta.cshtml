@@ -1,0 +1,118 @@
+﻿@using UniOdonto.Models.Filters
+@using MvcJqGrid
+@using MvcJqGrid.Enums
+@using RP.Website.Helpers
+
+@model UniOdonto.Models.RecetaViewModel
+
+<div class="form-horizontal">
+    <div class="panel panel-primary">
+        <div class="panel-heading row">
+            @ViewBag.Title. @Html.ActionLink("(Inicio)", "Index", "Home", null, new { @class = "regresar" })
+            <div style="display:inline-block; position:relative; float:right">
+                <a href="#" data-bind="click:Nuevo" title="Nuevo" data-toggle="tooltip" class="pull-right btn btn-success btn-sm">
+                    <i class="fa fa-plus fa-lg"></i>
+                </a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+                <div class="col-md-10">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <b>Recetas</b>
+                        </div>
+                        <div class="panel-body">
+                            <div data-bind="visible: IsEmpty()">
+                                <div class="alert alert-primary" role="alert">
+                                    <i class="fa fa-file"></i>  No Existen Recetas realizadas
+                                </div>
+                            </div>
+                            <div data-bind="visible: !IsEmpty()" class="form-group">
+                                <div class="col-md-12 col-sm-12 row">
+                                    <form role="form" class="frmConsultas" name="frmConsultas" action='@Url.Action("save")'>
+                                        <div class="form-horizontal">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="Id" id="Id" value="" data-bind="value:Id" />
+                                            <input type="hidden" name="PersonasId" id="PersonasId" value="" data-bind="value:PersonasId" />
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => x.Fecha, new { @class = "col-md-1 col-sm-4 text-right control-label" })
+                                                <div class="col-md-2">
+                                                    @Html.TextBoxFor(x => x.Fecha, new { @class = "form-control calendar", placeholder = "Fecha Emision", data_bind = "value:Fecha, enable:IsNew()" })
+                                                    @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+                                                </div>
+                                                @Html.LabelFor(x => x.ProximaCita, new { @class = "col-md-1 col-sm-4 text-right control-label" })
+                                                <div class="col-md-2">
+                                                    @Html.TextBoxFor(x => x.ProximaCita, new { @class = "form-control input-sm", placeholder = "Próxima cita", style = "max-width: 100% !important", autocomplete = "off", data_bind = "value:ProximaCita, enable:IsNew()" })
+                                                    @Html.ValidationMessageFor(model => model.ProximaCita, "", new { @class = "text-danger" })
+                                                </div>
+                                                @Html.LabelFor(x => x.Ciudad, new { @class = "col-md-1 col-sm-4 text-right control-label" })
+                                                <div class="col-md-2">
+                                                    @Html.TextBoxFor(x => x.Ciudad, new { @class = "form-control input-sm", placeholder = "Ciudad", style = "max-width: 100% !important", autocomplete = "off", data_bind = "value:Ciudad, enable:IsNew()" })
+                                                    @Html.ValidationMessageFor(model => model.Ciudad, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => x.Indicaciones, new { @class = "col-md-1 col-sm-3 text-right control-label" })
+                                                <div class="col-md-11">
+                                                    @Html.TextAreaFor(x => x.Indicaciones, new { @class = "form-control input-sm ajusteclase", style = "max-width: 100% !important; overflow: hidden; height: auto;", data_bind = "value:Indicaciones, enable:IsNew()", @onkeyup = "textAreaAdjust(this)" })
+                                                    @Html.ValidationMessageFor(model => model.Indicaciones, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => x.Diagnostico, new { @class = "col-md-1 col-sm-3 text-right control-label" })
+                                                <div class="col-md-11">
+                                                    @Html.TextAreaFor(x => x.Diagnostico, new { @class = "form-control input-sm ajusteclase", style = "max-width: 100% !important; overflow: hidden; height: auto;", data_bind = "value:Diagnostico, enable:IsNew()", @onkeyup = "textAreaAdjust(this)" })
+                                                    @Html.ValidationMessageFor(model => model.Diagnostico, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => x.Recomendaciones, new { @class = "col-md-1 col-sm-1 text-right control-label" })
+                                                <div class="col-md-11">
+                                                    @Html.TextAreaFor(x => x.Recomendaciones, new { @class = "form-control input-sm ajusteclase", style = "max-width: 100% !important; overflow: hidden; height: auto;", data_bind = "value:Recomendaciones, enable:IsNew()", @onkeyup = "textAreaAdjust(this)" })
+                                                    @Html.ValidationMessageFor(model => model.Recomendaciones, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group text-right">
+                                            <button type="button" id="Print" data-bind="click:Print, visible:!IsNew()" class="btn btn-default btn-sm" data-toggle="tooltip" title="Imprimir" style="margin-right:2mm"><i class="fas fa-print fa-lg"></i> Imprimir</button>
+                                            <button type="button" id="GuardarId" class="btn btn-primary btn-sm" data-toggle="tooltip" data-bind="click:Guardar, visible:IsNew()" title="Guardar" style="margin-right:2mm"><i class="fas fa-save fa-lg"></i> Guardar</button>
+                                            <button type="button" id="GuardarId" class="btn btn-primary btn-sm" data-toggle="tooltip" data-bind="click:Editar, visible:!IsNew()" title="Editar" style="margin-right:2mm"><i class="fas fa-edit fa-lg"></i> Editar</button>
+                                            <button type="button" id="GuardarId" class="btn btn-danger btn-sm" data-toggle="tooltip" data-bind="click:Cancelar, visible:IsNew()" title="Editar" style="margin-right:2mm"><i class="fas fa-ban fa-lg"></i> Cancelar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h5 class="card-title">Historial</h5>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body" style="display: block;">
+                                    <ul class="timeline" data-bind="template: {name: 'listaConsutlas', foreach: consultasDto}">  </ul>
+                                    <script id="listaConsutlas" type="text/html">
+                                        <li>
+                                            <a href="#" style="padding-left: 25px;" data-bind="click: $root.View"> <span data-bind="text: Fecha()"></span></a>
+                                        </li>
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/Pages/Documentos/Receta.js"></script>

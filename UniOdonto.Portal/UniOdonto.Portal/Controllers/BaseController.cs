@@ -132,6 +132,7 @@ namespace UniOdonto.Controllers
 
             return await Task.Run(() => Json(MapperEntityToModel(entity), JsonRequestBehavior.AllowGet));
         }
+
         public virtual async Task<JsonResult> Delete(TKey id)
         {
             try

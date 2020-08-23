@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using jsreport.Client;
 using MvcJqGrid;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -220,6 +222,48 @@ namespace UniOdonto.Controllers
             }
 
             return Json(Dientes, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<ActionResult> Print(string curva2, Guid id)
+        {
+            var consulta = EntityService.GetById(id);
+            PeriodonciaViewModel consultaDto = Mapper.Map<PeriodonciaViewModel>(consulta);
+            ReportingService _reportingService = new ReportingService("https://simecmexico.jsreportonline.net/", "p.almeida@sistemawebmedico.com", "Simec2015");
+            var report = await _reportingService
+               .RenderAsync("Sye6zQHtJw", new
+               {
+                   Consulta = consultaDto,
+                   Imagen = curva2
+               });
+
+            var name = Guid.NewGuid().ToString();
+            MemoryStream ms = new MemoryStream();
+            report.Content.CopyTo(ms);
+            FileStream file = new FileStream(Server.MapPath("~/Content/Reports/" + name + ".pdf"), FileMode.Create, FileAccess.Write);
+            ms.WriteTo(file);
+            file.Close();
+            ms.Close();
+            return Json(new { File = name }, JsonRequestBehavior.AllowGet);
+        }
+
+        public class DeleteFileAttribute : ActionFilterAttribute
+        {
+            public override void OnActionExecuted(ActionExecutedContext filterContext)
+            {
+                var file = filterContext.Controller.ValueProvider.GetValue("id").AttemptedValue;
+                string fullPath = filterContext.Controller.ControllerContext.HttpContext.Server.MapPath("~/Content/Reports/" + file + ".pdf");
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                }
+            }
+        }
+
+        [DeleteFile]
+        public FileContentResult DownloadPdf(string id)
+        {
+            byte[] fileBytes = System.IO.File.ReadAllBytes(Server.MapPath("~/Content/Reports/" + id + ".pdf"));
+            return File(fileBytes, "application/pdf");
         }
     }
 }

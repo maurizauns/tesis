@@ -54,6 +54,24 @@
     <Reference Include="AutoMapper, Version=4.0.4.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.4.0.4\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="ClosedXML, Version=0.95.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.95.3\lib\net46\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.10.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.10\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="jsreport.Client, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jsreport.Client.1.0.4\lib\net45\jsreport.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="jsreport.Shared, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jsreport.Shared.2.0.1\lib\net45\jsreport.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="jsreport.Types, Version=2.2.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jsreport.Types.2.2.7\lib\net45\jsreport.Types.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNetCore.Antiforgery, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Antiforgery.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Antiforgery.dll</HintPath>
     </Reference>
@@ -238,6 +256,15 @@
     <Reference Include="Microsoft.Net.Http.Headers, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.Headers.2.1.1\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Registry.4.5.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
     </Reference>
@@ -313,6 +340,9 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
     <Reference Include="System.Linq, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Linq.4.3.0\lib\net463\System.Linq.dll</HintPath>
       <Private>True</Private>
@@ -327,8 +357,19 @@
       <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.2\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -447,8 +488,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http">
-    </Reference>
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -509,6 +548,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
@@ -571,11 +611,17 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\WebVentasConfig.cs" />
     <Compile Include="Comun\BaseModel.cs" />
+    <Compile Include="Comun\CeldaExcel.cs" />
     <Compile Include="Comun\Context.cs" />
     <Compile Include="Comun\CustomClaimTypes.cs" />
+    <Compile Include="Comun\ExportAppointmentResult.cs" />
+    <Compile Include="Comun\ExportPersonasResult.cs" />
+    <Compile Include="Comun\FilaExcel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AgendasController.cs" />
+    <Compile Include="Controllers\AntecedentesController.cs" />
     <Compile Include="Controllers\AppointmentController.cs" />
+    <Compile Include="Controllers\ArchivosAdjuntosController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\BaseConfiguracionGeneralController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -594,6 +640,8 @@
     <Compile Include="Controllers\PermisosRolController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\ProvinciasController.cs" />
+    <Compile Include="Controllers\RecetaController.cs" />
+    <Compile Include="Controllers\SubTipoIdentificacionController.cs" />
     <Compile Include="Controllers\TipoIdentificacionController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Extensions\CustomAuthorizeAttribute.cs" />
@@ -610,6 +658,10 @@
     <Compile Include="Models\ConfiguracionGeneralViewModel.cs" />
     <Compile Include="Models\ConfiguracionViewModel.cs" />
     <Compile Include="Models\Configuracion\CantonesViewModel.cs" />
+    <Compile Include="Models\Configuracion\SubTipoIdentificacionViewModel.cs" />
+    <Compile Include="Models\Documentos\ArchivosAdjuntosDetViewModel.cs" />
+    <Compile Include="Models\Documentos\ArchivosAdjuntosViewModel.cs" />
+    <Compile Include="Models\Documentos\RecetaViewModel.cs" />
     <Compile Include="Models\EmpresaViewModel.cs" />
     <Compile Include="Models\Filters\FieldFilter.cs" />
     <Compile Include="Models\Filters\FilterType.cs" />
@@ -627,6 +679,8 @@
     <Compile Include="Models\Operaciones\HorariosViewModel.cs" />
     <Compile Include="Models\Operaciones\MedicamentosViewModel.cs" />
     <Compile Include="Models\PanelesViewModel.cs" />
+    <Compile Include="Models\Personas\AntecedentesViewModel.cs" />
+    <Compile Include="Models\Personas\PersonasDto.cs" />
     <Compile Include="Models\Personas\PersonasViewModel.cs" />
     <Compile Include="Models\RoleMenuViewModel.cs" />
     <Compile Include="Models\UsuarioViewModel.cs" />
@@ -918,6 +972,48 @@
     <Content Include="Content\jquery.contextMenu.min.css" />
     <Content Include="Content\jquery.jqGrid\ui.jqgrid.css" />
     <Content Include="Content\layout.css" />
+    <Content Include="Content\lightgallery\contenido.css" />
+    <Content Include="Content\lightgallery\dist\css\lg-fb-comment-box.css" />
+    <Content Include="Content\lightgallery\dist\css\lg-fb-comment-box.min.css" />
+    <Content Include="Content\lightgallery\dist\css\lg-transitions.css" />
+    <Content Include="Content\lightgallery\dist\css\lg-transitions.min.css" />
+    <Content Include="Content\lightgallery\dist\css\lightgallery.css" />
+    <Content Include="Content\lightgallery\dist\css\lightgallery.min.css" />
+    <Content Include="Content\lightgallery\dist\fonts\lg.svg" />
+    <Content Include="Content\lightgallery\dist\img\loading.gif" />
+    <Content Include="Content\lightgallery\dist\img\video-play.png" />
+    <Content Include="Content\lightgallery\dist\img\vimeo-play.png" />
+    <Content Include="Content\lightgallery\dist\img\youtube-play.png" />
+    <Content Include="Content\lightgallery\dist\js\lightgallery.js" />
+    <Content Include="Content\lightgallery\dist\js\lightgallery.min.js" />
+    <Content Include="Content\lightgallery\js\lg-autoplay.js" />
+    <Content Include="Content\lightgallery\js\lg-autoplay.min.js" />
+    <Content Include="Content\lightgallery\js\lg-fullscreen.js" />
+    <Content Include="Content\lightgallery\js\lg-fullscreen.min.js" />
+    <Content Include="Content\lightgallery\js\lg-hash.js" />
+    <Content Include="Content\lightgallery\js\lg-hash.min.js" />
+    <Content Include="Content\lightgallery\js\lg-pager.js" />
+    <Content Include="Content\lightgallery\js\lg-pager.min.js" />
+    <Content Include="Content\lightgallery\js\lg-share.js" />
+    <Content Include="Content\lightgallery\js\lg-share.min.js" />
+    <Content Include="Content\lightgallery\js\lg-thumbnail.js" />
+    <Content Include="Content\lightgallery\js\lg-thumbnail.min.js" />
+    <Content Include="Content\lightgallery\js\lg-video.js" />
+    <Content Include="Content\lightgallery\js\lg-video.min.js" />
+    <Content Include="Content\lightgallery\js\lg-zoom.js" />
+    <Content Include="Content\lightgallery\js\lg-zoom.min.js" />
+    <Content Include="Content\lightgallery\js\lightgallery.js" />
+    <Content Include="Content\lightgallery\js\lightgallery.min.js" />
+    <Content Include="Content\lightgallery\src\css\lg-fb-comment-box.css" />
+    <Content Include="Content\lightgallery\src\css\lg-transitions.css" />
+    <Content Include="Content\lightgallery\src\css\lightgallery.css" />
+    <Content Include="Content\lightgallery\src\fonts\lg.svg" />
+    <Content Include="Content\lightgallery\src\img\loading.gif" />
+    <Content Include="Content\lightgallery\src\img\video-play.png" />
+    <Content Include="Content\lightgallery\src\img\vimeo-play.png" />
+    <Content Include="Content\lightgallery\src\img\youtube-play.png" />
+    <Content Include="Content\lightgallery\src\js\lg-utils.js" />
+    <Content Include="Content\lightgallery\src\js\lightgallery.js" />
     <Content Include="Content\materialize.css" />
     <Content Include="Content\materialize.min.css" />
     <Content Include="Content\MensajeChat.css" />
@@ -1240,10 +1336,40 @@
     <Content Include="Content\img\tabla8\tachados\Thumbs.db" />
     <Content Include="Content\img\tabla8\Thumbs.db" />
     <Content Include="Content\img\Thumbs.db" />
+    <Content Include="Content\lightgallery\dist\css\lg-fb-comment-box.css.map" />
+    <Content Include="Content\lightgallery\dist\css\lg-transitions.css.map" />
+    <Content Include="Content\lightgallery\dist\css\lightgallery.css.map" />
+    <Content Include="Content\lightgallery\dist\fonts\lg.eot" />
+    <Content Include="Content\lightgallery\dist\fonts\lg.ttf" />
+    <Content Include="Content\lightgallery\dist\fonts\lg.woff" />
+    <Content Include="Content\lightgallery\src\fonts\lg.eot" />
+    <Content Include="Content\lightgallery\src\fonts\lg.ttf" />
+    <Content Include="Content\lightgallery\src\fonts\lg.woff" />
+    <Content Include="Content\lightgallery\src\js\.jscsrc" />
+    <Content Include="Content\lightgallery\src\sass\lg-animations.scss" />
+    <Content Include="Content\lightgallery\src\sass\lg-autoplay.scss" />
+    <Content Include="Content\lightgallery\src\sass\lg-fb-comment-box.scss" />
+    <Content Include="Content\lightgallery\src\sass\lg-fonts.scss" />
+    <Content Include="Content\lightgallery\src\sass\lg-fullscreen.scss" />
+    <Content Include="Content\lightgallery\src\sass\lg-mixins.scss" />
+    <Content Include="Content\lightgallery\src\sass\lg-pager.scss" />
+    <Content Include="Content\lightgallery\src\sass\lg-share.scss" />
+    <Content Include="Content\lightgallery\src\sass\lg-theme-default.scss" />
+    <Content Include="Content\lightgallery\src\sass\lg-thumbnail.scss" />
+    <Content Include="Content\lightgallery\src\sass\lg-transitions.scss" />
+    <Content Include="Content\lightgallery\src\sass\lg-variables.scss" />
+    <Content Include="Content\lightgallery\src\sass\lg-video.scss" />
+    <Content Include="Content\lightgallery\src\sass\lg-zoom.scss" />
+    <Content Include="Content\lightgallery\src\sass\lightgallery.scss" />
+    <Content Include="Content\lightgallery\src\sass\prepros.cfg" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>
     </None>
+    <Content Include="Scripts\dropzone\dropzone.css" />
+    <Content Include="Scripts\dropzone\dropzone.js" />
+    <Content Include="Scripts\dropzone\dropzone2.css" />
+    <Content Include="Scripts\dropzone\dropzone2.js" />
     <Content Include="Scripts\fullcalendar.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -1327,6 +1453,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout.debug.js" />
     <Content Include="Scripts\knockout.mapping.js" />
+    <Content Include="Scripts\KnokoutHandlers.js" />
     <Content Include="Scripts\materialize.js" />
     <Content Include="Scripts\materialize.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -1372,6 +1499,7 @@
     <Content Include="Scripts\Pages\Configuracion\FormaPagoCobro.js" />
     <Content Include="Scripts\Pages\Configuracion\TarjetasLotes.js" />
     <Content Include="Scripts\Pages\Configuracion\TipoFormaPagoCobro.js" />
+    <Content Include="Scripts\Pages\Configuracion\TipoIdentificacion.js" />
     <Content Include="Scripts\Pages\Contabilidad\Asientos.js" />
     <Content Include="Scripts\Pages\Contabilidad\CentroCostos.js" />
     <Content Include="Scripts\Pages\Contabilidad\Cuenta.js" />
@@ -1380,6 +1508,8 @@
     <Content Include="Scripts\Pages\Contabilidad\PlanCuentas.js" />
     <Content Include="Scripts\Pages\Contabilidad\Retenciones.js" />
     <Content Include="Scripts\Pages\Contabilidad\TipoCuenta.js" />
+    <Content Include="Scripts\Pages\Documentos\ArchivosAdjuntos.js" />
+    <Content Include="Scripts\Pages\Documentos\Receta.js" />
     <Content Include="Scripts\Pages\EmpresaConfig.js" />
     <Content Include="Scripts\Pages\Empresa\Empresa.js" />
     <Content Include="Scripts\Pages\Empresa\EmpresaAutorizaciones.js" />
@@ -1402,6 +1532,7 @@
     <Content Include="Scripts\Pages\Operaciones\Medicamentos.js" />
     <Content Include="Scripts\Pages\Pacientes\Pacientes.js" />
     <Content Include="Scripts\Pages\Panel.js" />
+    <Content Include="Scripts\Pages\Personas\Antecedentes.js" />
     <Content Include="Scripts\Pages\Personas\Autorizacion.js" />
     <Content Include="Scripts\Pages\Personas\Personas.js" />
     <Content Include="Scripts\Pages\Personas\Rubro.js" />
@@ -1758,9 +1889,16 @@
     <Content Include="Views\Odontograma\Odontograma.cshtml" />
     <Content Include="Views\Periodoncia\Periodoncia.cshtml" />
     <Content Include="Views\Appointment\Index.cshtml" />
+    <Content Include="Views\ArchivosAdjuntos\ArchivosAdjuntos.cshtml" />
+    <Content Include="Views\ArchivosAdjuntos\Archivos.cshtml" />
+    <Content Include="Views\TipoIdentificacion\Index.cshtml" />
+    <Content Include="Views\Receta\Receta.cshtml" />
+    <Content Include="Views\Antecedentes\Antecedentes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\ArchivosAdjuntos\" />
+    <Folder Include="Views\SubTipoIdentificacion\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -1842,6 +1980,11 @@
   </Target>
   <Import Project="..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.8\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.8\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets')" />
   <Import Project="..\packages\Microsoft.AspNetCore.Mvc.Razor.Extensions.2.1.1\build\netstandard2.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.targets" Condition="Exists('..\packages\Microsoft.AspNetCore.Mvc.Razor.Extensions.2.1.1\build\netstandard2.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.targets')" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

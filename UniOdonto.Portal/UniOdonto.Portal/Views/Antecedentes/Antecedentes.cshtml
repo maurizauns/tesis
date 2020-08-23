@@ -1,0 +1,181 @@
+﻿@model UniOdonto.Models.AntecedentesViewModel
+
+
+<form role="form" class="frmPersonas" name="frmPersonas" action='@Url.Action("SaveAntecedentes")'>
+    <div class="form-horizontal">
+        <div class="panel panel-primary">
+            <div class="panel-heading row">
+                @ViewBag.Title. @Html.ActionLink("(Inicio)", "Index", "Home", null, new { @class = "regresar" })
+                <div style="display:inline-block; position:relative; float:right">
+                    <button type="button" id="GuardarId" onclick="guardar()" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Guardar" style="margin-right:2mm"><i class="fa fa-save fa-lg"></i></button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-12">
+
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(x => Model.Id)
+                    @Html.HiddenFor(x => x.PersonasId)
+                    <input type="hidden" name="name" value="@Model.DetalleFamiliares" id="DetalleFamiliaresInitial" />
+                    <input type="hidden" name="name" value="@Model.DetallePersonales" id="DetallePersonalesInitial" />
+                    <input type="hidden" name="name" value="@Model.Habitos" id="DetalleHabitosInitial" />
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Antecedentes Familiares</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(x => x.SinPatologiaFamiliares, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                            <div class="col-md-2">
+                                                <div class="label-check">
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" name="SinPatologiaFamiliares" id="SinPatologiaFamiliares" checked="@Model.SinPatologiaFamiliares">
+                                                        <label for="SinPatologiaFamiliares"></label>
+                                                    </div>
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.SinPatologiaFamiliares, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group" data-bind="foreach: detalleFamiliares">
+                                            <label class="col-md-2 col-sm-4 text-right control-label" data-bind="text: name,attr: { for: id}"></label>
+                                            <div class="col-md-1">
+                                                <div class="label-check">
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" class="inputSinFamiliares" data-bind="attr: { name: id, id: id }">
+                                                        <label data-bind="attr: { for: id}"></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(x => x.ComentarioFamiliares, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                            <div class="col-md-10">
+                                                @Html.TextAreaFor(x => x.ComentarioFamiliares, new { @class = "form-control", placeholder = "Comentario Familiares", style = "max-width: 100% !important", rows = "3" })
+                                                @Html.ValidationMessageFor(model => model.ComentarioFamiliares, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Antecedentes Personales</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(x => x.SinPatologiaPersonales, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                            <div class="col-md-2">
+                                                <div class="label-check">
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" name="SinPatologiaPersonales" id="SinPatologiaPersonales" checked="@Model.SinPatologiaPersonales">
+                                                        <label for="SinPatologiaPersonales"></label>
+                                                    </div>
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.SinPatologiaPersonales, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group" data-bind="foreach: detallePersonales">
+                                            <label class="col-md-2 col-sm-4 text-right control-label" data-bind="text: name,attr: { for: 'personales_' +  id}"></label>
+                                            <div class="col-md-1">
+                                                <div class="label-check">
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" class="inputSinPersonales" data-bind="attr: { name: 'personales_'+ id, id:'personales_'+ id }">
+                                                        <label data-bind="attr: { for: 'personales_'+ id}"></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(x => x.OtrosPersonales, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                            <div class="col-md-10">
+                                                @Html.TextAreaFor(x => x.OtrosPersonales, new { @class = "form-control", placeholder = "Otros antecedentes patológicos", style = "max-width: 100% !important", rows = "3" })
+                                                @Html.ValidationMessageFor(model => model.OtrosPersonales, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(x => x.Medicamentos, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                            <div class="col-md-10">
+                                                @Html.TextAreaFor(x => x.Medicamentos, new { @class = "form-control", placeholder = "Medicamentos", style = "max-width: 100% !important", rows = "3" })
+                                                @Html.ValidationMessageFor(model => model.Medicamentos, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(x => x.Alergias, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                            <div class="col-md-10">
+                                                @Html.TextAreaFor(x => x.Alergias, new { @class = "form-control", placeholder = "Alergias", style = "max-width: 100% !important", rows = "3" })
+                                                @Html.ValidationMessageFor(model => model.Alergias, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(x => x.Habitos, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                            <div class="col-md-10">
+                                                <div class="form-group" data-bind="foreach: detalleHabitos">
+                                                    <label class="col-md-2 col-sm-4 text-right control-label" data-bind="text: name,attr: { for: 'habitos_' +  id}"></label>
+                                                    <div class="col-md-1">
+                                                        <div class="label-check">
+                                                            <div class="checkbox">
+                                                                <input type="checkbox" class="inputSinPersonales" data-bind="attr: { name: 'habitos_'+ id, id:'habitos_'+ id }">
+                                                                <label data-bind="attr: { for: 'habitos_'+ id}"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(x => x.Cirugias, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                            <div class="col-md-10">
+                                                @Html.TextAreaFor(x => x.Cirugias, new { @class = "form-control", placeholder = Model.Cirugias, style = "max-width: 100% !important", rows = "3" })
+                                                @Html.ValidationMessageFor(model => model.Cirugias, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(x => x.Perinatales, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                            <div class="col-md-10">
+                                                @Html.TextAreaFor(x => x.Perinatales, new { @class = "form-control", placeholder = Model.Perinatales, style = "max-width: 100% !important", rows = "3" })
+                                                @Html.ValidationMessageFor(model => model.Perinatales, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(x => x.ComentarioPersonales, new { @class = "col-md-2 col-sm-4 text-right control-label" })
+                                            <div class="col-md-10">
+                                                @Html.TextAreaFor(x => x.ComentarioPersonales, new { @class = "form-control", placeholder = "Comentario Personales", style = "max-width: 100% !important", rows = "3" })
+                                                @Html.ValidationMessageFor(model => model.ComentarioPersonales, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    data = $("#DetalleFamiliaresInitial").val();
+    dataP = $("#DetallePersonalesInitial").val();
+    dataH = $("#DetalleHabitosInitial").val();
+    
+    var obj = "";
+    var objP = "";
+    var objH = "";
+    if (data !== "") {
+        obj = jQuery.parseJSON(data);
+    }
+    if (dataP !== "") {
+        objP = jQuery.parseJSON(dataP);
+    }
+    if (dataH !== "") {
+        objH = jQuery.parseJSON(dataH);
+    }
+</script>
+<script type="text/javascript" language="javascript" src="~/Scripts/Pages/Personas/Antecedentes.js"></script>

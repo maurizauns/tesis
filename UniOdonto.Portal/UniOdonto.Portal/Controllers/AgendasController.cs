@@ -80,7 +80,7 @@ namespace UniOdonto.Controllers
             var agenda = new Agendas();
             if (viewModel.Id != null && viewModel.Id != Guid.Empty)
             {
-                agenda = EntityService.GetById(viewModel.Id.Value);
+                agenda = EntityService.FirstOrDefault(x=>x.Id == viewModel.Id.Value);
             }
             return Mapper.Map(viewModel, agenda);
         }

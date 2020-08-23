@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using jsreport.Client;
 using MvcJqGrid;
 using System;
 using System.Collections.Generic;
@@ -13,14 +14,19 @@ using UniOdonto.Models;
 
 namespace UniOdonto.Controllers
 {
+    [Authorize]
     public class ConsultasController : BaseController<Guid, Consultas, ConsultasViewModel>
     {
+        private readonly PersonaService personaService;
+        private readonly EmpresaService empresaService;
         public ConsultasController()
         {
             Title = "Cosultas";
+            personaService = new PersonaService();
+            empresaService = new EmpresaService();
             EntityService = new ConsultaService();
         }
-        
+
 
         protected override IQueryable<Consultas> ApplyFilters(IQueryable<Consultas> generalQuery, Rule[] filters)
         {
@@ -43,6 +49,7 @@ namespace UniOdonto.Controllers
             if (viewModel.Id != null && viewModel.Id != Guid.Empty)
             {
                 agenda = EntityService.GetById(viewModel.Id.Value);
+                agenda.Personas = viewModel.PersonasId != null ? personaService.FirstOrDefault(x => x.Id == viewModel.PersonasId) : null;
             }
             return Mapper.Map(viewModel, agenda);
         }
@@ -55,9 +62,24 @@ namespace UniOdonto.Controllers
         [HttpGet]
         public async Task<JsonResult> GetData(Guid id)
         {
-            var consultas = await EntityService.GetAll().Where(x=>x.PersonasId == id).ToListAsync();
+            var consultas = await EntityService.GetAll().OrderByDescending(x => x.Fecha).Where(x => x.PersonasId == id).OrderByDescending(x => x.FechaCreacion).ToListAsync();
             var consultasDto = Mapper.Map<List<ConsultasViewModel>>(consultas);
-            return Json(new { consultasDto} , JsonRequestBehavior.AllowGet);
+            return Json(new { consultasDto }, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<ActionResult> Print(Guid id)
+        {
+            var consulta = EntityService.GetById(id);
+            ConsultasViewModel consultaDto = Mapper.Map<ConsultasViewModel>(consulta);
+            ReportingService _reportingService = new ReportingService("https://simecmexico.jsreportonline.net/", "p.almeida@sistemawebmedico.com", "Simec2015");
+            var report = await _reportingService
+               .RenderAsync("SklbI2aUJv", new
+               {
+                   Consulta = consultaDto,
+               });
+
+            FileStreamResult result = new FileStreamResult(report.Content, report.ContentType.MediaType);
+            return result;
         }
     }
 }

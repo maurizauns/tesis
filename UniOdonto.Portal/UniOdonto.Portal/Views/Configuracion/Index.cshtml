@@ -15,209 +15,57 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
-                <div role="tabpanel">
-                    <ul id="tab" class="nav nav-tabs" role="tablist">
-                        <li class="active"><a href="#configuracion-general" aria-controls="home" role="tab" data-toggle="tab">Parámetros del Sistema</a></li>
-                        <li><a href="#tablas-maestras" aria-controls="home" role="tab" data-toggle="tab">Configuración</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="configuracion-general">
-                            @using (Html.BeginForm("Save", "Configuracion"))
-            {
-                                @Html.AntiForgeryToken()
-
-                                <div class="form-horizontal">
-                                    <hr />
-                                    @Html.ValidationSummary(true)
-                                    @Html.HiddenFor(model => model.Id)
-
-                                    <div class="col-md-12">
-
-                                        <div class="col-md-4">
-                                            @Html.LabelFor(model => model.RutaAplicacion, new { @class = "control-label" })
-                                            @Html.TextBoxFor(model => model.RutaAplicacion, new { @class = "form-control", style = "max-width: 100% !important", data_toggle = "tooltip", title = "Ruta de la Aplicacion" })
-                                            @Html.ValidationMessageFor(model => model.RutaAplicacion)
-                                            @*<div class="col-md-12">
-                                                    <span aria-hidden="true" data-toggle="tooltip" title="Ruta de la Aplicacion" class="glyphicon glyphicon-question-sign text-orange">
-                                                    </span>
-                                                    Ruta de la Aplicacion
-                                                </div>*@
-                                        </div>
-                                        <div class="col-md-4">
-                                            @Html.LabelFor(model => model.RegitrosPorPagina, new { @class = "control-label" })
-                                            @Html.TextBoxFor(model => model.RegitrosPorPagina, new { @class = "form-control", style = "max-width: 100% !important", data_toggle = "tooltip", title = " Numero de Registros Por Pagina" })
-                                            @Html.ValidationMessageFor(model => model.RegitrosPorPagina)
-                                            @*<div class="col-md-12">
-                                                    <span aria-hidden="true" class="glyphicon glyphicon-question-sign text-orange">
-                                                    </span>
-                                                    Numero de Registros Por Pagina
-                                                </div>*@
-                                        </div>
-                                        <div class="col-md-4">
-                                            @Html.LabelFor(model => model.FormatoFecha, new { @class = "control-label" })
-                                            @Html.TextBoxFor(model => model.FormatoFecha, new { @class = "form-control", style = "max-width: 100% !important" })
-                                            @Html.ValidationMessageFor(model => model.FormatoFecha)
-                                        </div>
-
-                                        @*<div class="col-md-4">
-                                            @Html.LabelFor(model => model.RutaXmls, new { @class = "control-label" })
-                                            @Html.TextBoxFor(model => model.RutaXmls, new { @class = "form-control", style = "max-width: 100% !important", data_toggle = "tooltip", title = "Ruta de Xmls para ser procesados." })
-                                            @Html.ValidationMessageFor(model => model.RutaXmls)
-                                         
-                                        </div>
-                                        <div class="col-md-4">
-                                            @Html.LabelFor(model => model.UrlPublicacionExterna, new { @class = "control-label" })
-                                            @Html.TextBoxFor(model => model.UrlPublicacionExterna, new { @class = "form-control", style = "max-width: 100% !important", data_toggle = "tooltip", title = " Url Externa donde la aplicacion esta publicada." })
-                                            @Html.ValidationMessageFor(model => model.UrlPublicacionExterna)
-                                           
-                                        </div>*@
-
-                                    </div>
-
-                                    @*<div class="col-md-6">
-                                        <div class="panel panel-primary">
-                                            <div class="panel-heading">
-                                                SW de Pruebas
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="col-md-12">
-                                                    @Html.LabelFor(model => model.UrlRecepcionPruebas, new { @class = "control-label" })
-                                                    @Html.TextBoxFor(model => model.UrlRecepcionPruebas, new { @class = "form-control", style = "max-width: 100% !important", data_toggle = "tooltip", title = "Url WebServices de recepcion del SRI." })
-                                                    @Html.ValidationMessageFor(model => model.UrlRecepcionPruebas)
-                                                 
-                                                </div>
-                                                <div class="col-md-12">
-                                                    @Html.LabelFor(model => model.UrlAutorizacionPruebas, new { @class = "control-label" })
-                                                    @Html.TextBoxFor(model => model.UrlAutorizacionPruebas, new { @class = "form-control", style = "max-width: 100% !important", data_toggle = "tooltip", title = "Url WebServices de autorizacion del SRI." })
-                                                    @Html.ValidationMessageFor(model => model.UrlAutorizacionPruebas)
-                                                 
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>*@
-                                    @*<div class="col-md-6">
-                                        <div class="panel panel-primary">
-                                            <div class="panel-heading">
-                                                WS de Producción
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="col-md-12">
-                                                    @Html.LabelFor(model => model.UrlRecepcionProduccion, new { @class = "control-label" })
-                                                    @Html.TextBoxFor(model => model.UrlRecepcionProduccion, new { @class = "form-control", style = "max-width: 100% !important", data_toggle = "tooltip", title = "Url WebServices de recepcion del SRI." })
-                                                    @Html.ValidationMessageFor(model => model.UrlRecepcionProduccion)
-                                                  
-                                                </div>
-                                                <div class="col-md-12">
-                                                    @Html.LabelFor(model => model.UrlAutorizacionProduccion, new { @class = "control-label" })
-                                                    @Html.TextBoxFor(model => model.UrlAutorizacionProduccion, new { @class = "form-control", style = "max-width: 100% !important", data_toggle = "tooltip", title = "Url WebServices de autorizacion del SRI." })
-                                                    @Html.ValidationMessageFor(model => model.UrlAutorizacionProduccion)
-                                                  
-                                                </div>
-                                                <div class="col-md-12">
-                                                    @Html.LabelFor(model => model.Proxy, new { @class = "control-label" })
-                                                    @Html.TextBoxFor(model => model.Proxy, new { @class = "form-control", style = "max-width: 100% !important" })
-                                                    @Html.ValidationMessageFor(model => model.Proxy)
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>*@
-                                <br />
-                                    <div class="col-md-12">
-                                        <div class="col-md-12">
-                                            <input type="submit" value="Guardar" class="btn btn-primary pull-right" />
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            }
+                <div class="form-horizontal">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Configuración
                         </div>
-                        <div role="tabpanel" class="tab-pane" id="tablas-maestras">
-                            <div class="list-group">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                @Html.ActionLink("Permisos por Rol", "Index", "PermisosRol", null, new { @class = "list-group-item tabla-maestra" })
+                                @Html.ActionLink("Provincias", "Index", "Provincias", null, new { @class = "list-group-item tabla-maestra" })
+                                @Html.ActionLink("Cantones", "Index", "Cantones", null, new { @class = "list-group-item tabla-maestra" })
+                                @Html.ActionLink("Configuración General", "Index", "TipoIdentificacion", null, new { @class = "list-group-item tabla-maestra" })
+                            </div>
+                            <div>
+                                @using (Html.BeginForm("Save", "Configuracion"))
+                                {
+                                    @Html.AntiForgeryToken()
 
-                                <div class="form-horizontal">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            Empresa
-                                        </div>
-                                        <div class="panel-body">
-                                            <div class="form-group">
-                                                @Html.ActionLink("Permisos por Rol", "Index", "PermisosRol", null, new { @class = "list-group-item tabla-maestra" })
-                                                @*@Html.ActionLink("Ruta Xmls", "Index", "DocumentoPath", null, new { @class = "list-group-item tabla-maestra" })*@
-                                                @Html.ActionLink("Provincias", "Index", "Provincias", null, new { @class = "list-group-item tabla-maestra" })
-                                                @Html.ActionLink("Cantones", "Index", "Cantones", null, new { @class = "list-group-item tabla-maestra" })
+                                    <div class="form-horizontal">
+                                        <hr />
+                                        @Html.ValidationSummary(true)
+                                        @Html.HiddenFor(model => model.Id)
+
+                                        <div class="col-md-12">
+
+                                            <div class="col-md-4">
+                                                @Html.LabelFor(model => model.RutaAplicacion, new { @class = "control-label" })
+                                                @Html.TextBoxFor(model => model.RutaAplicacion, new { @class = "form-control", style = "max-width: 100% !important", data_toggle = "tooltip", title = "Ruta de la Aplicacion" })
+                                                @Html.ValidationMessageFor(model => model.RutaAplicacion)
+                                            </div>
+                                            <div class="col-md-4">
+                                                @Html.LabelFor(model => model.RegitrosPorPagina, new { @class = "control-label" })
+                                                @Html.TextBoxFor(model => model.RegitrosPorPagina, new { @class = "form-control", style = "max-width: 100% !important", data_toggle = "tooltip", title = " Numero de Registros Por Pagina" })
+                                                @Html.ValidationMessageFor(model => model.RegitrosPorPagina)
+                                            </div>
+                                            <div class="col-md-4">
+                                                @Html.LabelFor(model => model.FormatoFecha, new { @class = "control-label" })
+                                                @Html.TextBoxFor(model => model.FormatoFecha, new { @class = "form-control", style = "max-width: 100% !important" })
+                                                @Html.ValidationMessageFor(model => model.FormatoFecha)
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                @*<div class="form-horizontal">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            Contabilidad
-                                        </div>
-                                        <div class="panel-body">
-                                            <div class="form-group">
-                                                @Html.ActionLink("Tipo Cuenta Contable", "Index", "TipoCuentas", null, new { @class = "list-group-item tabla-maestra" })
+
+                                        <br />
+                                        <div class="col-md-12">
+                                            <div class="col-md-12">
+                                                <input type="submit" value="Guardar" class="btn btn-primary pull-right" />
                                             </div>
                                         </div>
+
+
                                     </div>
-                                </div>
-                                <div class="form-horizontal">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            SRI
-                                        </div>
-                                        <div class="panel-body">
-                                            <div class="form-group">
-                                                @Html.ActionLink("Forma Pago", "Index", "FormaPagoSRI", null, new { @class = "list-group-item tabla-maestra" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-horizontal">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            Inventario
-                                        </div>
-                                        <div class="panel-body">
-                                            <div class="form-group">
-                                                @Html.ActionLink("Unidad", "Index", "Unidad", null, new { @class = "list-group-item tabla-maestra" })
-                                                @Html.ActionLink("Marca", "Index", "Marca", null, new { @class = "list-group-item tabla-maestra" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-horizontal">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            Transacciones
-                                        </div>
-                                        <div class="panel-body">
-                                            <div class="form-group">
-                                                @Html.ActionLink("Tipo Transacciones", "Index", "TipoTransacciones", null, new { @class = "list-group-item tabla-maestra" })
-                                                @Html.ActionLink("Forma Pago / Cobro", "Index", "FormaPagoCobro", null, new { @class = "list-group-item tabla-maestra" })
-                                                @Html.ActionLink("Tipo Forma Pago / Cobro", "Index", "TipoFormaPagoCobro", null, new { @class = "list-group-item tabla-maestra" })
-                                                @Html.ActionLink("Red Cobros", "Index", "RedCobros", null, new { @class = "list-group-item tabla-maestra" })
-                                                @Html.ActionLink("Tarjetas Lotes", "Index", "TarjetasLotes", null, new { @class = "list-group-item tabla-maestra" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-horizontal">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            Bancos
-                                        </div>
-                                        <div class="panel-body">
-                                            <div class="form-group">
-                                                @Html.ActionLink("Formato Cheque", "Index", "FormatoCheques", null, new { @class = "list-group-item tabla-maestra" })
-                                                @Html.ActionLink("Tipo de Cuenta Bancaria", "Index", "TipoCuentaBancaria", null, new { @class = "list-group-item tabla-maestra" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>*@
+                                }
                             </div>
                         </div>
                     </div>
@@ -236,7 +84,7 @@
                 <h4 class="modal-title" id="myModalLabel">Modal title</h4>
             </div>
             <div class="modal-body">
-                <iframe id="tablas-maestras-iframe" style="width: 100%; height:400px" frameborder="0"></iframe>
+                <iframe id="tablas-maestras-iframe" style="width: 100%; height:500px" frameborder="0"></iframe>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>

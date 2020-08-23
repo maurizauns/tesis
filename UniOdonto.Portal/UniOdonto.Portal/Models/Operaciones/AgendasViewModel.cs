@@ -8,10 +8,10 @@ namespace UniOdonto.Models
 {
     public class AgendasViewModel: BaseModel
     {
-        public virtual TipoIdentificacionViewModel DuracionCita { get; set; }
-        public virtual UsuarioViewModel Propietario { get; set; }
-        public virtual List<AgendaUsuarioViewModel> AgendaUsuario { get; set; }
-        public virtual List<HorariosViewModel> Horarios { get; set; }
+        public TipoIdentificacionViewModel DuracionCita { get; set; }
+        public UsuarioViewModel Propietario { get; set; }
+        public List<AgendaUsuarioViewModel> AgendaUsuario { get; set; }
+        public List<HorariosViewModel> Horarios { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Coódigo")]

@@ -51,5 +51,9 @@ namespace UniOdonto.DAL
         public DbSet<Periodoncia> Periodoncia { get; set; }
         public DbSet<DientesPerio> DientesPerio { get; set; }
         public DbSet<Appointment> Appointment { get; set; }
+        public DbSet<ArchivosAdjuntos> ArchivosAdjuntos { get; set; }
+        public DbSet<ArchivosAdjuntosDet> ArchivosAdjuntosDet { get; set; }
+        public DbSet<Receta> Receta { get; set; }
+        public DbSet<Antecedentes> Antecedentes { get; set; }
     }
 }

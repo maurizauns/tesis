@@ -1,0 +1,85 @@
+
+-18/07/2020 14:33:50
+msj1=El buzón de correo no está disponible. La respuesta del servidor fue: SMTP AUTH is required for message submission on port 587
+msj2=Error al enviar el correo
+StackTrace:    en System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en UniOdonto.Comun.Helper.EnviarCorreo(String de, String para, String conCopia, String conCopiaOculta, String asunto, String mensaje, String servidorCorreo, String usuario, String clave, Int32 puerto, Boolean habilitaSsl, String[] rutaAdjuntos, String& respuesta) en C:\Users\luisp\source\repos\UniOdonto\UniOdonto.Portal\UniOdonto.Comun\Helper.cs:línea 201
+___
+
+-18/07/2020 14:38:40
+msj1=El buzón de correo no está disponible. La respuesta del servidor fue: SMTP AUTH is required for message submission on port 587
+msj2=Error al enviar el correo
+StackTrace:    en System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en UniOdonto.Comun.Helper.EnviarCorreo(String de, String para, String conCopia, String conCopiaOculta, String asunto, String mensaje, String servidorCorreo, String usuario, String clave, Int32 puerto, Boolean habilitaSsl, String[] rutaAdjuntos, String& respuesta) en C:\Users\luisp\source\repos\UniOdonto\UniOdonto.Portal\UniOdonto.Comun\Helper.cs:línea 201
+___
+
+-18/07/2020 14:39:32
+msj1=El buzón de correo no está disponible. La respuesta del servidor fue: SMTP AUTH is required for message submission on port 587
+msj2=Error al enviar el correo
+StackTrace:    en System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en UniOdonto.Comun.Helper.EnviarCorreo(String de, String para, String conCopia, String conCopiaOculta, String asunto, String mensaje, String servidorCorreo, String usuario, String clave, Int32 puerto, Boolean habilitaSsl, String[] rutaAdjuntos, String& respuesta) en C:\Users\luisp\source\repos\UniOdonto\UniOdonto.Portal\UniOdonto.Comun\Helper.cs:línea 201
+___
+
+-18/07/2020 14:42:17
+msj1=El buzón de correo no está disponible. La respuesta del servidor fue: SMTP AUTH is required for message submission on port 587
+msj2=Error al enviar el correo
+StackTrace:    en System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en UniOdonto.Comun.Helper.EnviarCorreo(String de, String para, String conCopia, String conCopiaOculta, String asunto, String mensaje, String servidorCorreo, String usuario, String clave, Int32 puerto, Boolean habilitaSsl, String[] rutaAdjuntos, String& respuesta) en C:\Users\luisp\source\repos\UniOdonto\UniOdonto.Portal\UniOdonto.Comun\Helper.cs:línea 201
+___
+
+-18/07/2020 14:45:06
+msj1=El buzón de correo no está disponible. La respuesta del servidor fue: SMTP AUTH is required for message submission on port 587
+msj2=Error al enviar el correo
+StackTrace:    en System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en UniOdonto.Comun.Helper.EnviarCorreo(String de, String para, String conCopia, String conCopiaOculta, String asunto, String mensaje, String servidorCorreo, String usuario, String clave, Int32 puerto, Boolean habilitaSsl, String[] rutaAdjuntos, String& respuesta) en C:\Users\luisp\source\repos\UniOdonto\UniOdonto.Portal\UniOdonto.Comun\Helper.cs:línea 201
+___
+
+-18/07/2020 14:51:59
+msj1=La cadena especificada no tiene la forma obligatoria para una dirección de correo electrónico.
+msj2=Error al enviar el correo
+StackTrace:    en System.Net.Mail.MailAddressParser.ReadCfwsAndThrowIfIncomplete(String data, Int32 index)
+   en System.Net.Mail.MailAddressParser.ParseDomain(String data, Int32& index)
+   en System.Net.Mail.MailAddressParser.ParseAddress(String data, Boolean expectMultipleAddresses, Int32& index)
+   en System.Net.Mail.MailAddressParser.ParseAddress(String data)
+   en System.Net.Mail.MailAddress..ctor(String address, String displayName, Encoding displayNameEncoding)
+   en System.Net.Mail.MailAddress..ctor(String address)
+   en UniOdonto.Comun.Helper.EnviarCorreo(String de, String para, String conCopia, String conCopiaOculta, String asunto, String mensaje, String servidorCorreo, String usuario, String clave, Int32 puerto, Boolean habilitaSsl, String[] rutaAdjuntos, String& respuesta) en C:\Users\luisp\source\repos\UniOdonto\UniOdonto.Portal\UniOdonto.Comun\Helper.cs:línea 157
+___
+
+-18/07/2020 14:53:08
+msj1=La cadena especificada no tiene la forma obligatoria para una dirección de correo electrónico.
+msj2=Error al enviar el correo
+StackTrace:    en System.Net.Mail.MailAddressParser.ReadCfwsAndThrowIfIncomplete(String data, Int32 index)
+   en System.Net.Mail.MailAddressParser.ParseDomain(String data, Int32& index)
+   en System.Net.Mail.MailAddressParser.ParseAddress(String data, Boolean expectMultipleAddresses, Int32& index)
+   en System.Net.Mail.MailAddressParser.ParseAddress(String data)
+   en System.Net.Mail.MailAddress..ctor(String address, String displayName, Encoding displayNameEncoding)
+   en System.Net.Mail.MailAddress..ctor(String address)
+   en UniOdonto.Comun.Helper.EnviarCorreo(String de, String para, String conCopia, String conCopiaOculta, String asunto, String mensaje, String servidorCorreo, String usuario, String clave, Int32 puerto, Boolean habilitaSsl, String[] rutaAdjuntos, String& respuesta) en C:\Users\luisp\source\repos\UniOdonto\UniOdonto.Portal\UniOdonto.Comun\Helper.cs:línea 157
+___
+
+-18/07/2020 14:55:06
+msj1=Error al enviar correo.
+msj2=Error al enviar el correo
+StackTrace:    en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en UniOdonto.Comun.Helper.EnviarCorreo(String de, String para, String conCopia, String conCopiaOculta, String asunto, String mensaje, String servidorCorreo, String usuario, String clave, Int32 puerto, Boolean habilitaSsl, String[] rutaAdjuntos, String& respuesta) en C:\Users\luisp\source\repos\UniOdonto\UniOdonto.Portal\UniOdonto.Comun\Helper.cs:línea 201
+___
+
+-18/07/2020 14:57:20
+msj1=Error al enviar correo.
+msj2=Error al enviar el correo
+StackTrace:    en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en UniOdonto.Comun.Helper.EnviarCorreo(String de, String para, String conCopia, String conCopiaOculta, String asunto, String mensaje, String servidorCorreo, String usuario, String clave, Int32 puerto, Boolean habilitaSsl, String[] rutaAdjuntos, String& respuesta) en C:\Users\luisp\source\repos\UniOdonto\UniOdonto.Portal\UniOdonto.Comun\Helper.cs:línea 201
+___
+
+-18/07/2020 15:02:15
+msj1=Error al enviar correo.
+msj2=Error al enviar el correo
+StackTrace:    en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en UniOdonto.Comun.Helper.EnviarCorreo(String de, String para, String conCopia, String conCopiaOculta, String asunto, String mensaje, String servidorCorreo, String usuario, String clave, Int32 puerto, Boolean habilitaSsl, String[] rutaAdjuntos, String& respuesta) en C:\Users\luisp\source\repos\UniOdonto\UniOdonto.Portal\UniOdonto.Comun\Helper.cs:línea 201
+___

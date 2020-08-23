@@ -11,21 +11,21 @@
             <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
-                    Dashboard
+                    Inicio
                     <i class="right fas fa-angle-left"></i>
                 </p>
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="./index.html" class="nav-link active">
+                    <a href="~/" class="nav-link active">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Dashboard v1</p>
+                        <p>Citas del día</p>
                     </a>
                 </li>
             </ul>
         </li>
         <li class="nav-header">Menu</li>
-        @foreach (var menu in menus)
+        @foreach (var menu in menus.Where(x => x.TipoMenu == "Principal"))
         {
             if (menu.MenuItems.Count > 0)
             {
@@ -42,7 +42,7 @@
                         {
                             <li class="nav-item">
                                 <a href="@Url.Action("Index",menuItem.Url)" class="nav-link" title="@menuItem.Descripcion">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="nav-icon fas @(string.IsNullOrWhiteSpace(menu.icon) ? "fa fa-circle" : menuItem.icon) @(string.IsNullOrWhiteSpace(menuItem.iconColor) ? "text-primary" : menuItem.iconColor)"></i>
                                     <p>@menuItem.Descripcion</p>
                                 </a>
                             </li>

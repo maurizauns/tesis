@@ -213,6 +213,7 @@ function open_help_box(date, date_, time) {
     //$(".support_message").each(function () {
     //    $(this).text('');
     //});
+
     $('#dlgCuenta').modal();
     $('#newAppointDate').html(date_);
     $('#newAppointTime').html(time);
@@ -286,17 +287,19 @@ function ShowFucnPopup(AppointmentID) {
         success: function (result) {
             let date = moment(result.AppointmentDate, 'DD/MM/YYYY HH:mm:ss').format('YYYY-MM-DD HH:mm:ss');
             $('#dlgCuenta').modal();
-            $('#newAppointDate').html(moment(date).format("DD/MM/YYYY"));  
+            $('#newAppointDate').html(moment(date).format("DD/MM/YYYY"));
             $('#newAppointTime').html(moment(date).format("HH:mm"));
+            $('#Id').val(result.Id);
             $('#AgendasId').val(result.AgendasId);
             $('#UsuarioId').val(result.UsuarioId);
-            $('#AppointmentDate').val(result.AppointmentDate + " " + result.AppointmentDate);
+            $('#AppointmentDate').val(result.AppointmentDate);
             var personaAgenda = Personas.getByIdAgenda(result.PersonasId, false);
             tipoCuenta.setObj(personaAgenda);
             $('#AppointmentLenght').val(result.AppointmentLenght);
             $('#TipoCitaId').val(result.TipoCitaId);
             $('#EstadoCitaId').val(result.EstadoCitaId);
-            $("#btnConsultar").attr("href", "/Historia/Index/" + result.Id);
+            $("#btnConsultar").attr("href", "/Historia/Index/" + result.PersonasId);
+            $('#btnCancelar').attr('onclick', 'cancelarCita("' + result.Id + '")');
             $("#divEdit").removeClass("hide").addClass("show");
             $("#idTitle").html("Detalle de Cita");
         },
@@ -305,4 +308,37 @@ function ShowFucnPopup(AppointmentID) {
         }
     });
     return false;
+}
+
+function cancelarCita(id) {
+    $.ajax({
+        type: "DELETE",
+        url: "Appointment/DeleteAppointment",
+        data: {
+            id: id
+        },
+        dataType: 'json',
+        beforeSend: function () {
+            $('#dlgmsgcuenta').modal();
+        },
+        success: function (d) {
+            debugger
+            if (d.success == true) {
+                $('#calendarAppointment').fullCalendar('destroy');
+                vma.LoadFullCalendar();
+                $('#calendarAppointment').fullCalendar("addEventSource", '/Appointment/GetClinicEvents?PropietarioId=' + vma.UsuarioID() + "&AgendaId=" + vma.AgendaID());
+                document.forms.frmNewAgenda.reset();
+                $('#dlgCuenta').modal('hide');
+            } else {
+                error(d.message.length == 0 ? "Ocurrió un error. Por favor vuelva a interntarlo" : d.message);
+            }
+        },
+        complete: function () {
+            $('#dlgmsgcuenta').modal('hide');
+        },
+        error: function (e) {
+            $('#dlgmsgcuenta').modal('hide');
+            error("Ocurrió un error. Por favor vuelva a interntarlo");
+        },
+    });
 }

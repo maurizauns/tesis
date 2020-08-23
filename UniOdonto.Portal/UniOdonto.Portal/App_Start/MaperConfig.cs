@@ -35,6 +35,9 @@ namespace UniOdonto
             Mapper.CreateMap<Personas, PersonasViewModel>();
             Mapper.CreateMap<PersonasViewModel, Personas>();
 
+            Mapper.CreateMap<Personas, PersonasDto>();
+            Mapper.CreateMap<PersonasDto, Personas>();
+
             Mapper.CreateMap<TipoIdentificacion, TipoIdentificacionViewModel>();
             Mapper.CreateMap<TipoIdentificacion, TipoIdentificacionViewModel>().ReverseMap();
 
@@ -79,6 +82,24 @@ namespace UniOdonto
 
             Mapper.CreateMap<Usuario, UsuarioViewModel>();
             Mapper.CreateMap<Usuario, UsuarioViewModel>().ReverseMap();
+
+            Mapper.CreateMap<ArchivosAdjuntos, ArchivosAdjuntosViewModel>();
+            Mapper.CreateMap<ArchivosAdjuntos, ArchivosAdjuntosViewModel>().ReverseMap();
+
+            Mapper.CreateMap<ArchivosAdjuntosDet, ArchivosAdjuntosDetViewModel>();
+            Mapper.CreateMap<ArchivosAdjuntosDet, ArchivosAdjuntosDetViewModel>().ReverseMap();
+
+            Mapper.CreateMap<TipoIdentificacion, TipoIdentificacionViewModel>();
+            Mapper.CreateMap<TipoIdentificacion, TipoIdentificacionViewModel>().ReverseMap();
+
+            Mapper.CreateMap<SubTipoIdentificacion, SubTipoIdentificacionViewModel>();
+            Mapper.CreateMap<SubTipoIdentificacion, SubTipoIdentificacionViewModel>().ReverseMap();
+
+            Mapper.CreateMap<Receta, RecetaViewModel>();
+            Mapper.CreateMap<Receta, RecetaViewModel>().ReverseMap();
+
+            Mapper.CreateMap<Antecedentes, AntecedentesViewModel>();
+            Mapper.CreateMap<Antecedentes, AntecedentesViewModel>().ReverseMap();
         }
     }
 }

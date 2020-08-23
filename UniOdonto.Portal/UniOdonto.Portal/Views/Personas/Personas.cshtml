@@ -46,7 +46,7 @@
                                                         <div class="form-group">
                                                             @Html.LabelFor(x => x.NumeroPaciente, new { @class = "col-md-2 col-sm-4 text-right control-label" })
                                                             <div class="col-md-2">
-                                                                @Html.TextBoxFor(x => x.NumeroPaciente, new { @class = "form-control input-sm", placeholder = "Numero Paciente", style = "max-width: 100% !important", autocomplete = "off", onchange = "validarDocumento()" })
+                                                                @Html.TextBoxFor(x => x.NumeroPaciente, new { @class = "form-control input-sm", placeholder = "Numero Paciente", style = "max-width: 100% !important", autocomplete = "off"})
                                                                 @Html.ValidationMessageFor(model => model.NumeroPaciente, "", new { @class = "text-danger" })
                                                             </div>
                                                             @Html.LabelFor(x => x.TipoIdentificacionId, new { @class = "col-md-2 col-sm-4 text-right control-label" })

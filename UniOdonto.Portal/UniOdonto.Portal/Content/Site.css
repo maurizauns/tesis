@@ -240,7 +240,7 @@ hr {
     color: #fff;
     padding: 9px 15px;
     border-bottom: 1px solid #eee;
-    background-color: #428bca;
+    background-color: #17a2b8;
     -webkit-border-top-left-radius: 5px;
     -webkit-border-top-right-radius: 5px;
     -moz-border-radius-topleft: 5px;
@@ -1067,7 +1067,8 @@ custom-select.is-invalid, .form-control.is-invalid, .was-validated .custom-selec
     }
 
 .panel .panel-body h5 {
-    color: #777;
+    /*color: #777;*/
+    color: #fff;
     font-weight: bold;
 }
 
@@ -2107,3 +2108,56 @@ ul.timeline {
 .fc-time-grid-event {
     /*color: #fff !important;*/
 }
+
+
+.outline-files {
+    background-attachment: scroll !important;
+    background-clip: border-box !important;
+    background-color: rgb(255, 255, 255) !important;
+    background-image: none !important;
+    background-origin: padding-box !important;
+    background-size: auto !important;
+    border-bottom-color: rgb(0, 135, 247) !important;
+    border-bottom-left-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+    border-bottom-style: dashed !important;
+    border-bottom-width: 2px !important;
+    border-image-outset: 0px !important;
+    border-image-repeat: stretch !important;
+    border-image-slice: 100% !important;
+    border-image-source: none !important;
+    border-image-width: 1 !important;
+    border-left-color: rgb(0, 135, 247) !important;
+    border-left-style: dashed !important;
+    border-left-width: 2px !important;
+    border-right-color: rgb(0, 135, 247) !important;
+    border-right-style: dashed !important;
+    border-right-width: 2px !important;
+    border-top-color: rgb(0, 135, 247) !important;
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
+    border-top-style: dashed !important;
+    border-top-width: 2px !important;
+    box-sizing: border-box !important;
+    color: rgb(100, 108, 127) !important;
+    cursor: pointer !important;
+    display: block !important;
+    font-family: Roboto, 'Open Sans', sans-serif !important;
+    font-size: 20px !important;
+    font-stretch: normal !important;
+    font-style: normal !important;
+    font-variant: normal !important;
+    font-weight: 300 !important;
+    line-height: 28px !important;
+    margin-bottom: 20px !important;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    margin-top: 20px !important;
+    min-height: 150px !important;
+    padding-bottom: 54px !important;
+    padding-left: 54px !important;
+    padding-right: 54px !important;
+    padding-top: 54px !important;
+    vertical-align: baseline !important;
+}
+

@@ -1,181 +1,303 @@
-﻿<script src="~/Scripts/knockout.debug.js"></script>
+﻿@model UniOdonto.Models.PersonasDto
+@using UniOdonto.BO
+@using Microsoft.AspNet.Identity
+@{
+    var menus = MenuService.GetMenuByIdUser(User.Identity.GetUserId());
+}
+<script src="~/Scripts/knockout.debug.js"></script>
 <script src="~/Scripts/knockout.mapping.js"></script>
 
-@{ 
-    ViewBag.Title = "Historia Clínica";
+<link href="~/Scripts/dropzone/dropzone.css" rel="stylesheet" />
+<script src="~/Scripts/dropzone/dropzone.js"></script>
+<script type="text/javascript">Dropzone.autoDiscover = false;</script>
+<script src="~/Scripts/KnokoutHandlers.js"></script>
+@{
+    ViewBag.Title = Model.NombreCompleto;
 }
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Historia Clínica</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: -10px;">
+    @*<a class="navbar-brand" href="#">Historia Clínica</a>*@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon">.</span>
     </button>
     <div class="collapse navbar-collapse" id="menu">
         <ul class="navbar-nav mr-auto">
             @*<li class="nav-item active">
-                <a class="nav-link" href="#" data-bind="click: Consulta">Consulta <span class="sr-only">(current)</span></a>
-            </li>*@
+                    <a class="nav-link" href="#" data-bind="click: Consulta">Consulta <span class="sr-only">(current)</span></a>
+                </li>*@
             @*<li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>*@
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Odontología General
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#" data-bind="click: Consulta">Consulta</a>
-                    @*<div class="dropdown-divider"></div>*@
-                    <a class="dropdown-item" href="#" data-bind="click: Odontograma">Odontograma</a>
-                    <a class="dropdown-item" href="#" data-bind="click: Periodoncia">Periodoncia</a>
-                </div>
-            </li>
+                    <a class="nav-link" href="#">Link</a>
+                </li>*@
+
+            @foreach (var menu in menus.Where(x => x.TipoMenu == "HistoriaClinica"))
+            {
+                if (menu.MenuItems.Count > 0)
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="nav-icon fas @(string.IsNullOrWhiteSpace(menu.icon) ? "fa fa-circle" : menu.icon) @(string.IsNullOrWhiteSpace(menu.iconColor) ? "text-primary" : menu.iconColor)"></i>
+                            @menu.Descripcion
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @foreach (var menuItem in menu.MenuItems)
+                            {
+                                <a class="dropdown-item" href="#" data-bind="click: @menuItem.Url">
+                                    <i class="nav-icon fas @(string.IsNullOrWhiteSpace(menu.icon) ? "fa fa-circle" : menuItem.icon) @(string.IsNullOrWhiteSpace(menuItem.iconColor) ? "text-primary" : menuItem.iconColor)"></i>
+                                    @menuItem.Descripcion
+                                </a>
+                            }
+                        </div>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a href="#" data-bind="click: @menu.Url"class="nav-link">
+                            <i class="nav-icon fas @(string.IsNullOrWhiteSpace(menu.icon) ? "fa fa-circle" : menu.icon) @(string.IsNullOrWhiteSpace(menu.iconColor) ? "text-primary" : menu.iconColor)"></i>
+                            @menu.Descripcion
+                        </a>
+                    </li>
+                }
+            }
+
             @*<li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>*@
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>*@
         </ul>
-        <div class="my-2 my-lg-0">
-            Luis Mauricio Padilla Correa
-        </div>
     </div>
 </nav>
-<div class="row" id="contenidoHistoria">
-    
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">Monthly Recap Report</h5>
+<div class="col-md-12" id="contenidoHistoria">
 
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
-                                <i class="fas fa-wrench"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                <a href="#" class="dropdown-item">Action</a>
-                                <a href="#" class="dropdown-item">Another action</a>
-                                <a href="#" class="dropdown-item">Something else here</a>
-                                <a class="dropdown-divider"></a>
-                                <a href="#" class="dropdown-item">Separated link</a>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <p class="text-center">
-                                <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
-                            </p>
+    <div class="col-md-12">
 
-                            <div class="chart">
-                                <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                                <!-- Sales Chart Canvas -->
-                                <canvas id="salesChart" height="180" style="height: 180px; display: block; width: 836px;" width="836" class="chartjs-render-monitor"></canvas>
-                            </div>
-                            <!-- /.chart-responsive -->
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-md-4">
-                            <p class="text-center">
-                                <strong>Goal Completion</strong>
-                            </p>
+        <!-- /.card -->
+    </div>
+    <!-- /.col -->
 
-                            <div class="progress-group">
-                                Add Products to Cart
-                                <span class="float-right"><b>160</b>/200</span>
-                                <div class="progress progress-sm">
-                                    <div class="progress-bar bg-primary" style="width: 80%"></div>
-                                </div>
-                            </div>
-                            <!-- /.progress-group -->
-
-                            <div class="progress-group">
-                                Complete Purchase
-                                <span class="float-right"><b>310</b>/400</span>
-                                <div class="progress progress-sm">
-                                    <div class="progress-bar bg-danger" style="width: 75%"></div>
-                                </div>
-                            </div>
-
-                            <!-- /.progress-group -->
-                            <div class="progress-group">
-                                <span class="progress-text">Visit Premium Page</span>
-                                <span class="float-right"><b>480</b>/800</span>
-                                <div class="progress progress-sm">
-                                    <div class="progress-bar bg-success" style="width: 60%"></div>
-                                </div>
-                            </div>
-
-                            <!-- /.progress-group -->
-                            <div class="progress-group">
-                                Send Inquiries
-                                <span class="float-right"><b>250</b>/500</span>
-                                <div class="progress progress-sm">
-                                    <div class="progress-bar bg-warning" style="width: 50%"></div>
-                                </div>
-                            </div>
-                            <!-- /.progress-group -->
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <!-- ./card-body -->
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="col-sm-3 col-6">
-                            <div class="description-block border-right">
-                                <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 17%</span>
-                                <h5 class="description-header">$35,210.43</h5>
-                                <span class="description-text">TOTAL REVENUE</span>
-                            </div>
-                            <!-- /.description-block -->
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-sm-3 col-6">
-                            <div class="description-block border-right">
-                                <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 0%</span>
-                                <h5 class="description-header">$10,390.90</h5>
-                                <span class="description-text">TOTAL COST</span>
-                            </div>
-                            <!-- /.description-block -->
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-sm-3 col-6">
-                            <div class="description-block border-right">
-                                <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span>
-                                <h5 class="description-header">$24,813.53</h5>
-                                <span class="description-text">TOTAL PROFIT</span>
-                            </div>
-                            <!-- /.description-block -->
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-sm-3 col-6">
-                            <div class="description-block">
-                                <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span>
-                                <h5 class="description-header">1200</h5>
-                                <span class="description-text">GOAL COMPLETIONS</span>
-                            </div>
-                            <!-- /.description-block -->
-                        </div>
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <!-- /.card-footer -->
-            </div>
-            <!-- /.card -->
-        </div>
-        <!-- /.col -->
-    
 </div>
+<aside class="control-sidebar control-sidebar-light-lightblue" style="top: 57px; height: 700px; display: none; width: 580px !important;">
+    <div class="p-3 control-sidebar-content os-host os-theme-light os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-overflow os-host-overflow-y os-host-transition" style="height: 700px;">
+        <div class="os-resize-observer-host observed">
+            <div class="os-resize-observer" style="left: 0px; right: auto;"></div>
+        </div>
+        <div class="os-size-auto-observer observed" style="height: calc(100% + 1px); float: left;">
+            <div class="os-resize-observer"></div>
+        </div>
+        <div class="os-content-glue" style="margin: -16px; width: 249px; height: 699px;"></div>
+        <div class="os-padding">
+            <div class="os-viewport os-viewport-native-scrollbars-invisible" style="overflow-y: scroll;">
+                <div class="os-content" style="padding: 16px; height: 100%; width: 100%;">
+                    <h5>Información del Paciente</h5>
+                    @*<hr class="mb-2">
+                        <p><b>@Model.TipoIdentificacion.Descripcion:</b>  @Model.Identificacion</p>*@
+                    <div class="col-md-12">
+
+                        <!-- Profile Image -->
+                        <div class="card card-primary card-outline">
+                            <div class="card-body box-profile">
+                                <div class="text-center">
+                                    <img class="profile-user-img img-fluid img-circle" src="~/Content/Images/logoUniodonto.png" alt="User profile picture">
+                                </div>
+
+                                <h3 class="profile-username text-center">@Model.NombreCompleto</h3>
+                                <p class="text-muted text-center">@Model.TipoIdentificacion.Descripcion: @Model.Identificacion</p>
+                                <ul class="list-group list-group-unbordered mb-3">
+                                    <li class="list-group-item">
+                                        <b>Consultas</b> <a class="float-right">2</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Sobre Mi</h3>
+                            </div>
+                            <div class="card-body">
+                                @if (!string.IsNullOrEmpty(Model.NumeroPaciente))
+                                {
+                                    <div class="col-md-6">
+                                        <strong><i class="fas fa-address-card mr-1"></i> Número de HC:</strong>
+                                        <p class="text-muted">
+                                            @Model.NumeroPaciente
+                                        </p>
+                                        <hr>
+                                    </div>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.NumeroPaciente))
+                                {
+                                    <div class="col-md-6">
+                                        <strong><i class="fas fa-mail-bulk mr-1"></i> Email:</strong>
+                                        <p class="text-muted">
+                                            @Model.Email
+                                        </p>
+                                        <hr>
+                                    </div>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.FechaNacimiento))
+                                {
+                                    <div class="col-md-6">
+                                        <strong><i class="fas fa-birthday-cake mr-1"></i> Fecha de Nacimiento:</strong>
+                                        <p class="text-muted">
+                                            @Model.FechaNacimiento
+                                        </p>
+                                        <hr>
+                                    </div>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.Telefonos))
+                                {
+                                    <div class="col-md-6">
+                                        <strong><i class="fas fa-phone-square mr-1"></i> Telefonos:</strong>
+                                        <p class="text-muted">
+                                            @Model.Telefonos
+                                        </p>
+                                        <hr>
+                                    </div>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.Direccion))
+                                {
+                                    <div class="col-md-6">
+                                        <strong><i class="fas fa-location-arrow mr-1"></i> Dirección:</strong>
+                                        <p class="text-muted">
+                                            @Model.Direccion
+                                        </p>
+                                        <hr>
+                                    </div>
+                                }
+                                @if (Model.ProvinciasId.HasValue)
+                                {
+                                    <div class="col-md-6">
+                                        <strong><i class="fas fa-globe-stand mr-1"></i> Provincia:</strong>
+                                        <p class="text-muted">
+                                            @Model.Provincias.Descripcion
+                                        </p>
+                                        <hr>
+                                    </div>
+
+                                }
+                                @if (Model.CantonesId.HasValue)
+                                {
+                                    <div class="col-md-6">
+                                        <strong><i class="fas fa-map-marked-alt mr-1"></i> Cantón:</strong>
+                                        <p class="text-muted">
+                                            @Model.Cantones.Descripcion
+                                        </p>
+                                        <hr>
+                                    </div>
+
+                                }
+                                @if (Model.TipoSangreId.HasValue)
+                                {
+                                    <div class="col-md-6">
+                                        <strong><i class="fas fa-typewriter mr-1"></i> Tipo de Sangre:</strong>
+                                        <p class="text-muted">
+                                            @Model.TipoSangre.Descripcion
+                                        </p>
+                                        <hr>
+                                    </div>
+                                }
+                                @if (Model.EstadoCivilId.HasValue)
+                                {
+                                    <div class="col-md-6">
+                                        <strong><i class="fas fa-person-carry mr-1"></i> Estado Civil:</strong>
+                                        <p class="text-muted">
+                                            @Model.EstadoCivil.Descripcion
+                                        </p>
+                                        <hr>
+                                    </div>
+                                }
+                                @if (Model.TipoPacienteId.HasValue)
+                                {
+                                    <div class="col-md-6">
+                                        <strong><i class="fas fa-user-alt-slash mr-1"></i> Tipo de Paciente:</strong>
+                                        <p class="text-muted">
+                                            @Model.TipoPaciente.Descripcion
+                                        </p>
+                                        <hr>
+                                    </div>
+                                }
+                                @if (Model.TipoParienteId.HasValue)
+                                {
+                                    <div class="col-md-6">
+                                        <strong><i class="fas fa-handshake-alt mr-1"></i> Parentesco:</strong>
+                                        <p class="text-muted">
+                                            @Model.TipoPariente.Descripcion
+                                        </p>
+                                        <hr>
+                                    </div>
+                                }
+                                @if (Model.SeguroMedicoId.HasValue)
+                                {
+                                    <div class="col-md-6">
+                                        <strong><i class="fas fa-file-signature mr-1"></i> Seguro Médico:</strong>
+                                        <p class="text-muted">
+                                            @Model.SeguroMedico.Descripcion
+                                        </p>
+                                        <hr>
+                                    </div>
+                                }
+                                @if (Model.OcupacionId.HasValue)
+                                {
+                                    <div class="col-md-6">
+                                        <strong><i class="fas fa-briefcase mr-1"></i> Ocupación:</strong>
+                                        <p class="text-muted">
+                                            @Model.Ocupacion.Descripcion
+                                        </p>
+                                        <hr>
+                                    </div>
+                                }
+                                @if (Model.SexoId.HasValue)
+                                {
+                                    <div class="col-md-6">
+                                        <strong><i class="fas fa-genderless mr-1"></i> Sexo:</strong>
+                                        <p class="text-muted">
+                                            @Model.Sexo.Descripcion
+                                        </p>
+                                        <hr>
+                                    </div>
+                                }
 
 
+                                <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
+                                <p class="text-muted">Malibu, California</p>
+
+                                <hr>
+
+                                <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
+
+                                <p class="text-muted">
+                                    <span class="tag tag-danger">UI Design</span>
+                                    <span class="tag tag-success">Coding</span>
+                                    <span class="tag tag-info">Javascript</span>
+                                    <span class="tag tag-warning">PHP</span>
+                                    <span class="tag tag-primary">Node.js</span>
+                                </p>
+
+                                <hr>
+
+                                <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
+
+                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="os-scrollbar os-scrollbar-horizontal os-scrollbar-unusable os-scrollbar-auto-hidden">
+            <div class="os-scrollbar-track">
+                <div class="os-scrollbar-handle" style="transform: translate(0px, 0px); width: 100%;"></div>
+            </div>
+        </div>
+        <div class="os-scrollbar os-scrollbar-vertical os-scrollbar-auto-hidden">
+            <div class="os-scrollbar-track">
+                <div class="os-scrollbar-handle" style="transform: translate(0px, 308px); height: 55.7325%;"></div>
+            </div>
+        </div>
+        <div class="os-scrollbar-corner"></div>
+    </div>
+</aside>
+<div id="sidebar-overlay"></div>
 <script>
     let PersonaID = '@ViewBag.id';
     var vmh = {};
@@ -199,6 +321,29 @@
                 $("#contenidoHistoria").load("/Periodoncia/Periodoncia");
                 $("#contenidoHistoria").show();
             };
+
+            vmh.ArchivosAdjuntos = function () {
+                $("#contenidoHistoria").load("/ArchivosAdjuntos/ArchivosAdjuntos");
+                $("#contenidoHistoria").show();
+            };
+
+            vmh.Receta = function () {
+                $("#contenidoHistoria").load("/Receta/Receta");
+                $("#contenidoHistoria").show();
+            };
+
+            vmh.Antecedentes = function () {
+                $("#contenidoHistoria").load("/Antecedentes/Antecedentes?id=" + PersonaID);
+                $("#contenidoHistoria").show();
+            };
+
+            vmh.ajuste = function () {
+                setTimeout(function () {
+                    $('.ajusteclase').each(function (index) {
+                        textAreaAdjust(this);
+                    });
+                }, 300);
+            }
 
             ko.applyBindings(vmh, $("#contenidoHistoria")[0]);
             ko.applyBindings(vmh, $("#menu")[0]);
@@ -236,5 +381,15 @@
     function forEach(array, action) {
         for (var i = 0; i < array.length; i++)
             action(array[i]);
+    }
+
+    function foreach(array, action) {
+        for (var i = 0; i < array.length; i++)
+            action(array[i]);
+    }
+
+    function textAreaAdjust(o) {
+        o.style.height = "1px";
+        o.style.height = (o.scrollHeight) + "px";
     }
 </script>

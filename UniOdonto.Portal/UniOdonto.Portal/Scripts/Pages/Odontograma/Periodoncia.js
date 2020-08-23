@@ -56,6 +56,32 @@ function KnockoutPeriodoncia(Periodoncias) {
         });
     };
 
+    vmPeriodoncia.Print = function () {
+        var element = $("#PrintID");
+        var getCanvas;
+        html2canvas(element, {
+            onrendered: function (canvas) {
+                getCanvas = canvas;
+                var imgageData = getCanvas.toDataURL("image/png");
+                var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: '/Periodoncia/Print',
+                    data: JSON.stringify({
+                        curva2: newData,
+                        id: vmPeriodoncia.Id()
+                    }),
+                    success: function (result) {
+                        window.open("/Periodoncia/DownloadPdf?id=" + result.File, '_blank');
+                    },
+                    error: function (data, textStatus, jqXHR) {
+                    }
+                });
+            }
+        });
+    };
+
     vmPeriodoncia.UpdateData = function () {
         $.post("/Periodoncia/UpdatePeriodoncia", {
             _Periodoncia: {
@@ -222,15 +248,8 @@ function KnockoutPeriodoncia(Periodoncias) {
                 vmPeriodoncia.Tratamiento(x.Tratamiento);
                 vmPeriodoncia.AccionesClinicas(x.AccionesClinicas);
                 vmPeriodoncia.Style(x.style);
-                var now = moment().format();
-
-                var momentDate = moment(vmPeriodoncia.Fecha(), "DD/MM/YYYY hh:mm a").format();
-
-                if (moment(now).diff(moment(momentDate), 'days') < 1) {
                     vmPeriodoncia.BtnEditar(true);
-                } else {
-                    vmPeriodoncia.BtnEditar(false);
-                }
+                
 
 
 

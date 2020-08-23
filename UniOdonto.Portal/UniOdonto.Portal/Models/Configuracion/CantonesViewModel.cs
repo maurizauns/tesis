@@ -17,6 +17,8 @@ namespace UniOdonto.Models
         [Required(ErrorMessage = "Seleccione Provincia.")]
         [Display(Name = "Provincia")]
         public Guid? ProvinciasId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public ProvinciasViewModel Provincias { get; set; }
 
         public string NombreAutocomplete

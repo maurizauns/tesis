@@ -259,7 +259,6 @@ Personas.prototype.setAttributes = function (data) {
 }
 
 Personas.getById = function (id, async, callback, oThis) {
-    debugger
     $.ajax({
         type: "GET",
         url: urlprefix + "/Personas/GetPersonas?Id=" + id,
@@ -554,7 +553,7 @@ function agregarFechas(objeto_maestro_detalle, tipo) {
 function validarDocumento() {
      numero = document.getElementById('Identificacion').value;
      var tipoIdentificacion = $('#TipoIdentificacionId option:selected').text();
-     if (tipoIdentificacion != 'Ruc' && tipoIdentificacion != 'Cedula') {
+    if (tipoIdentificacion != 'Ruc' && tipoIdentificacion != 'Cédula') {
          $("#Identificacion").removeClass("form-control-warning is-invalid");
          return;
      }

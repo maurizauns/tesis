@@ -100,6 +100,19 @@
                     </h3>
 
                     <div class="card-tools">
+                        <div style="display:inline-block; position:relative;">
+                            <div class="btn-group" style="margin-right:2mm">
+                                <a class="btn btn-default btn-sm text-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="far fa-file-excel fa-lg" title="Exportar" data-toggle="tooltip"></i>
+                                    @*<span class="caret" style="border-top-color:black;"></span>*@
+                                </a>
+                                <ul class="excel-menu dropdown-menu pull-right" role="menu">
+                                    <li><a href="@Url.Action("Exportar","Appointment")" title="Normal" data-toggle="tooltip">Excel Todas</a></li>
+                                    <li><a href="#" onclick="exportarData()" title="Normal" data-toggle="tooltip">Excel Filtro</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
                             <i class="fas fa-minus"></i>
                         </button>
@@ -114,9 +127,9 @@
                             }
                             @(Html.MyjqGrid("agendas-grid", UniOdonto.Comun.Context.PageSize)
                                 .AddColumn(new Column("NumeroPaciente").SetLabel("H.C").SetWidth(30).SetSortable(true).SetAlign(Align.Center))
-                                .AddColumn(new Column("Personas.Identificacion").SetLabel("Identificacin").SetWidth(30).SetSortable(true).SetAlign(Align.Center))
+                                .AddColumn(new Column("Personas.Identificacion").SetLabel("Identificación").SetWidth(30).SetSortable(true).SetAlign(Align.Center))
                                 .AddColumn(new Column("Personas.Nombre").SetLabel("Nombre Completo").SetWidth(80).SetSortable(true).SetAlign(Align.Center))
-                                .AddColumn(new Column("Personas.FechaNacimiento").SetLabel("Fecha de Nacimiento").SetWidth(20).SetSortable(true).SetAlign(Align.Center))
+                                .AddColumn(new Column("Personas.FechaNacimiento").SetLabel("Fecha de Nacimiento").SetWidth(32).SetSortable(true).SetAlign(Align.Center))
                                 .AddColumn(new Column("Personas.FechaNacimiento").SetLabel("Edad").SetWidth(25).SetSortable(true).SetAlign(Align.Center))
                                 .AddColumn(new Column("TipoCita.Descripcion").SetLabel("Tipo Cita").SetWidth(50).SetSortable(true).SetAlign(Align.Center))
                                 .AddColumn(new Column("TipoCita.Descripcion").SetLabel("Estado Cita").SetWidth(50).SetSortable(true).SetAlign(Align.Center))
@@ -176,15 +189,15 @@
                             <div class="description-block border-right">
                                 @if (citasMesAnterior < citasMesActual)
                                 {
-                                    <span class="description-percentage text-success"> <i class="fas fa-caret-up"></i> @porcentajeGananciaMensual%  </span>
+                                    <span class="description-percentage text-success"> <i class="fas fa-caret-up"></i> @*@porcentajeGananciaMensual*@10%  </span>
                                 }
                                 else if (citasMesAnterior > citasMesActual)
                                 {
-                                    <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> @porcentajeGananciaMensual%</span>
+                                    <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> @*@porcentajeGananciaMensual*@10%</span>
                                 }
                                 else
                                 {
-                                    <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> @porcentajeGananciaMensual%</span>
+                                    <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> @*@porcentajeGananciaMensual*@10%</span>
                                 }
                                 <h5 class="description-header">@citasMesActual</h5>
                                 <span class="description-text">TOTAL CITAS MENSUALES</span>
@@ -194,32 +207,28 @@
                             <div class="description-block border-right">
                                 @if (citasAnteriorDias < xitasActualesDias)
                                 {
-                                    <span class="description-percentage text-success"> <i class="fas fa-caret-up"></i> @porcentajeGananciaDiarios%  </span>
+                                    <span class="description-percentage text-success"> <i class="fas fa-caret-up"></i> @*@porcentajeGananciaDiarios*@25%  </span>
                                 }
                                 else if (citasAnteriorDias > xitasActualesDias)
                                 {
-                                    <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> @porcentajeGananciaDiarios%</span>
+                                    <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> @*@porcentajeGananciaDiarios*@25%</span>
                                 }
                                 else
                                 {
-                                    <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> @porcentajeGananciaDiarios%</span>
+                                    <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> @*@porcentajeGananciaDiarios*@25%</span>
                                 }
                                 <h5 class="description-header">@xitasActualesDias</h5>
                                 <span class="description-text">TOTAL CITAS DIARIAS</span>
                             </div>
-                            <!-- /.description-block -->
                         </div>
-                        <!-- /.col -->
                         <div class="col-sm-3 col-6">
                             <div class="description-block">
                                 <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span>
                                 <h5 class="description-header">1200</h5>
                                 <span class="description-text">GOAL COMPLETIONS</span>
                             </div>
-                            <!-- /.description-block -->
                         </div>
                     </div>
-                    <!-- /.row -->
                 </div>
                 <!-- /.card-footer -->
             </div>
@@ -229,3 +238,32 @@
     </div>
 
 </div>
+
+<script>
+    function exportarData() {
+        var $form = $("#search_form"),
+            data = getCrudFields($form),
+            url = 'Appointment/Exportar';
+        debugger
+        if (url && url != '') {
+            $.ajax({
+                type: "Get",
+                url: url,
+                data: data,
+                dataType: 'json',
+                beforeSend: function () {
+                    $('#dlgmsgcuenta').modal();
+                },
+                success: function (d) {
+                    debugger
+                },
+                complete: function () {
+                    debugger
+                },
+                error: function (e) {
+                    debugger
+                },
+            });
+        }
+    }
+</script>

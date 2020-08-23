@@ -1,0 +1,103 @@
+﻿<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.3.3/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+@using UniOdonto.Models.Filters
+@using MvcJqGrid
+@using MvcJqGrid.Enums
+@using RP.Website.Helpers
+
+@model UniOdonto.Models.TipoIdentificacionViewModel
+@{
+    ViewBag.Title = "Tipo Identificación";
+    Layout = "~/Views/Shared/_Master.cshtml";
+}
+
+<style>
+    .modal-body {
+        background-color: #ffffff !important;
+    }
+</style>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        @ViewBag.Title @Html.ActionLink("(Inicio)", "Index", "Home", null, new { @class = "regresar" })
+        <div style="display:inline-block; position:relative; float:right">
+            <button type="button" class="pull-right btn btn-primary btn-sm modal-crud" style="margin-top: -1mm" data-toggle="modal" data-target="#provincia-modal">
+                <i class="fa fa-plus fa-lg" data-toggle="tooltip" title="Nuevo"></i>
+            </button>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                @{
+                    Html.RenderPartial("_filtersPartial", new ModelFilter { FormId = "search_form", GridId = "provincia-grid", FieldFilters = ViewBag.Filters });
+                }
+                @(Html.MyjqGrid("provincia-grid", UniOdonto.Comun.Context.PageSize)
+                    .AddColumn(new Column("Codigo").SetLabel("Código").SetSortable(true).SetAlign(Align.Center))
+                    .AddColumn(new Column("Descripcion").SetLabel("Descripción").SetSortable(true).SetAlign(Align.Center))
+                    .AddColumn(new Column("Provincias.Descripcion").SetLabel("Provincias").SetSortable(true).SetAlign(Align.Center))
+                    .AddColumn(new Column("Actions").SetFixedWidth(true).SetWidth(80).SetLabel("</br>").SetSortable(false))
+                    .SetUrl(Url.Action("GetList")))
+                <div class="clearfix">
+                    @Html.PaginationBtn("provincia-grid", "pull-right")
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="provincia-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-primary">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title" id="myModalLabel">@ViewBag.Title</h4>
+            </div>
+            <form role="form" class="modal-Crud" action='@Url.Action("Save")' data-modal="provincia-modal" data-grid="provincia-grid">
+                <div class="modal-body">
+                    @Html.HiddenFor(x => x.Id)
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.SubTipoIdentificacionId)
+                        @Html.DropDownListFor(x => x.SubTipoIdentificacionId, (SelectList)ViewBag.subTipoIdentificacionId, "seleccione", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SubTipoIdentificacionId, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(x => x.Codigo)
+                        @Html.TextBoxFor(x => x.Codigo, new { @class = "form-control", placeholder = "Código" })
+                        @Html.ValidationMessageFor(model => model.Codigo, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Descripcion)
+                        @Html.TextBoxFor(x => x.Descripcion, new { @class = "form-control", placeholder = "Descripción" })
+                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                    </div>
+                    <div>
+                        @Html.LabelFor(x => x.BackgroundColor)
+                        <div id="cp2" class="input-group colorpicker-component">
+                            @Html.TextBoxFor(x => x.BackgroundColor, new { @class = "form-control", placeholder = "Descripción", @Value = "#00AABB" })
+                            <span class="input-group-addon"><i></i></span>
+                        </div>
+                    </div>
+                    <div>
+                        @Html.LabelFor(x => x.Color)
+                        <div id="cp2c" class="input-group colorpicker-component">
+                            @Html.TextBoxFor(x => x.Color, new { @class = "form-control", placeholder = "Descripción", @Value = "#000" })
+                            <span class="input-group-addon"><i></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.3.3/js/bootstrap-colorpicker.min.js"></script>
+@section scripts
+{
+    <script type="text/javascript" language="javascript" src="~/Scripts/Pages/Configuracion/TipoIdentificacion.js"></script>
+}

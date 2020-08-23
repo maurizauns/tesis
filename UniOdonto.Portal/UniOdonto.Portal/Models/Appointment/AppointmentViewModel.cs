@@ -9,25 +9,25 @@ namespace UniOdonto.Models
         [Required(ErrorMessage = "Seleccione un paciente.")]
         [Display(Name = "Paciente")] 
         public Guid? PersonasId { get; set; }
-        public virtual PersonasViewModel Personas { get; set; }
+        public PersonasViewModel Personas { get; set; }
 
         public Guid UsuarioId { get; set; }
 
-        public virtual UsuarioViewModel Usuario { get; set; }
+        public UsuarioViewModel Usuario { get; set; }
 
         public Guid AgendasId { get; set; }
 
-        public virtual AgendasViewModel Agendas { get; set; }
+        public AgendasViewModel Agendas { get; set; }
 
         [Required(ErrorMessage = "Seleccione un {0}")]
         [Display(Name = "Tipo de Cita")]
         public Guid? TipoCitaId { get; set; }
-        public virtual TipoIdentificacionViewModel TipoCita { get; set; }
+        public TipoIdentificacionViewModel TipoCita { get; set; }
 
         [Required(ErrorMessage = "Seleccione un {0}")]
         [Display(Name = "Estado de Cita")]
         public Guid? EstadoCitaId { get; set; }
-        public virtual TipoIdentificacionViewModel EstadoCita { get; set; }
+        public TipoIdentificacionViewModel EstadoCita { get; set; }
 
         [Required(ErrorMessage = "Seleccione un {0}")]
         [Display(Name = "Fecha")]

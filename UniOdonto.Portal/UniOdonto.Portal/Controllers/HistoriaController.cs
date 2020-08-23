@@ -22,7 +22,10 @@ namespace UniOdonto.Portal.Controllers
         public ActionResult Index(Guid id)
         {
             ViewBag.id = id;
-            return View();
+            var personas = PersonaService.FirstOrDefault(x => x.Id == id);
+            var personasDto = Mapper.Map<PersonasDto>(personas);
+            ViewBag.NombreCompleto = personasDto.NombreCompleto;
+            return View(personasDto);
         }
 
         [HttpGet]

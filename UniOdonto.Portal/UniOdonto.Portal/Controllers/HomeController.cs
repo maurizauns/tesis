@@ -127,10 +127,24 @@ namespace UniOdonto.Portal.Controllers
                 HttpUtility.HtmlEncode(UltimaConsulta(item.PersonasId.Value)),
                 HttpUtility.HtmlEncode(item.AppointmentDate.ToString(Context.FormatoHora)),
                 HttpUtility.HtmlEncode(GridHelperExts.ActionsList("agendas-modal")
-                    .Add(GridHelperExts.EditAction(Url.Action("GetEntity"), item.Id, "agendasCallback"))
-                    .Add(GridHelperExts.AddOther(Url.Action("GetHorariosEntity"), item.Id, "horariosCallback"))
+                     .Add(EditAction(Url.Action("Personas","Personas", new {id = item.PersonasId.Value})))
+                     .Add(ConfiguracionAction(item.PersonasId))
                     .End())
             };
+        }
+
+        public IHtmlString ConfiguracionAction(object id = null)
+        {
+            var button = string.Format(@"<li class=""""><a title=""Historia Clínica"" target=""_blank"" data-toggle=""tooltip"" class=""btn btn-info btn-xs"" href=""{0}""><i class=""fa fa-comment-alt-medical""></i></a></li>",
+                            Url.Action("Index", "Historia", new { id }));
+            return MvcHtmlString.Create(button);
+        }
+
+        public IHtmlString EditAction(string url)
+        {
+            var button = string.Format(@"<li><a title=""Editar"" data-toggle=""tooltip"" target=""_blank"" class=""btn btn-primary btn-xs"" href=""{0}""><i class='glyphicon glyphicon-pencil'></i></a></li>",
+                            url);
+            return MvcHtmlString.Create(button);
         }
 
         protected override Appointment MapperModelToEntity(AppointmentViewModel viewModel)

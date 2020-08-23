@@ -1,0 +1,64 @@
+﻿
+@model List<UniOdonto.Models.ArchivosAdjuntosDetViewModel>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/lightgallery/dist/css/lightgallery.css" rel="stylesheet" />
+    <script src="https://cdn.rawgit.com/sachinchoolur/lightgallery.js/master/dist/js/lightgallery.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-pager.js/master/dist/lg-pager.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-autoplay.js/master/dist/lg-autoplay.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-share.js/master/dist/lg-share.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-fullscreen.js/master/dist/lg-fullscreen.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-zoom.js/master/dist/lg-zoom.js"></script>
+    <script src="https://cdn.jsdelivr.net/picturefill/2.3.1/picturefill.min.js"></script>
+    <link href="~/Content/lightgallery/contenido.css" rel="stylesheet" />
+
+</head>
+<body style="background-color: white; height: 100%;  margin-top: 0px;">
+    <div class="cont">
+        <div class="demo-gallery">
+            @if (Model.Where(x => !x.FileId.Contains("pdf")).Count() > 0)
+            {
+                <center>Imagenes</center>
+                <ul id="lightgallery">
+                    @foreach (var image in Model.Where(x => !x.FileId.Contains("pdf")))
+                    {
+                        <li data-responsive="/Content/Images/ArchivosAdjuntos/@image.FileId" data-src="/Content/Images/ArchivosAdjuntos/@image.FileId"
+                            data-sub-html="<h4>Fading Light</h4><p>Classic view from Rigwood Jetty on Coniston Water an old archive shot similar to an old post but a little later on.</p>" data-pinterest-text="Pin it" data-tweet-text="share on twitter ">
+                            <a href="">
+                                <img class="img-responsive" src="~/Content/Images/ArchivosAdjuntos/@image.FileId">
+                                <div class="demo-gallery-poster">
+                                    <img src="~/Content/Images/ArchivosAdjuntos/@image.FileId">
+                                </div>
+                            </a>
+                        </li>
+                    }
+                </ul>
+                <script>
+                    $(document).ready(function () {
+                        setTimeout(
+                            lightGallery(document.getElementById('lightgallery'))
+                            , 5000);
+                    });
+                </script>
+            }
+        </div>
+    </div>
+    @if (Model.Where(x => x.FileId.Contains("pdf")).Count() > 0)
+    {
+        <center>Archivos</center>
+        foreach (var image in Model)
+        {
+            if (image.FileId.Contains("pdf"))
+            {
+                <div data-thumb="/Content/Images/imagen-pdf.png">
+                    <iframe id="frames" style="position:relative;  width:100%; height:100%; left:0; right:0; top:0; bottom:0;" src="~/Content/Images/ArchivosAdjuntos/@image.FileId"></iframe>
+                </div>
+            }
+        }
+    }
+
+</body>
+</html>
+

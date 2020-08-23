@@ -58,5 +58,6 @@ namespace UniOdonto.DAL.Entidad
         {
             get { return string.Format("({4}) - {0} {1} {2} {3}", PrimerNombre != null ? PrimerNombre.ToUpper() : "", SegundoNombre != null ? SegundoNombre.ToUpper() : "", PrimerApellido != null ? PrimerApellido.ToUpper() : "", SegundoApellido != null ? SegundoApellido.ToUpper() : "", Identificacion); }
         }
+
     }
 }

@@ -31,7 +31,7 @@
         <div class="panel-heading row">
             @ViewBag.Title. @Html.ActionLink("(Inicio)", "Index", "Home", null, new { @class = "regresar" })
             <div style="display:inline-block; position:relative; float:right">
-                <div class="btn-group" style="margin-right:2mm">
+                @*<div class="btn-group" style="margin-right:2mm">
                     <a class="btn btn-default btn-sm text-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <i class="far fa-file-excel fa-lg" title="Exportar" data-toggle="tooltip"></i>
                         <span class="caret" style="border-top-color:black;"></span>
@@ -40,7 +40,7 @@
                         <li><a href="@Url.Action("Exportar")" title="Normal" data-toggle="tooltip">Excel</a></li>
                         <li><a href="@Url.Action("ExportarDetalle")" title="Detallado" data-toggle="tooltip">Excel Detallado</a></li>
                     </ul>
-                </div>
+                </div>*@
                 <a href="@Url.Action("Personas")" title="Nuevo" data-toggle="tooltip" class="pull-right btn btn-success btn-sm modal-crud">
                     <i class="fa fa-plus fa-lg"></i>
                 </a>
@@ -87,6 +87,8 @@
             </div>
             <div class="modal-body">
                 <form role="form" class="frmNewAgenda" name="frmNewAgenda" action='@Url.Action("Ingreso")'>
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(x => x.Id)
                     @Html.HiddenFor(x => x.AgendasId)
                     @Html.HiddenFor(x => x.UsuarioId)
                     @Html.HiddenFor(x => x.AppointmentDate)
@@ -129,6 +131,7 @@
                         <br />
                         <div class="col-md-12 form-group text-right hide" id="divEdit">
                             <a href="" id="btnConsultar" target="_blank" class="btn btn-primary btn-sm">Consultar</a>
+                            <a href="#" id="btnCancelar" class="btn btn-warning btn-sm">Eliminar Cita</a>
                         </div>
                     </div>
                 </form>

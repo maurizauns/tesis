@@ -19,6 +19,7 @@ namespace UniOdonto.DAL.Entidad
         public virtual Menu Parent { get; set; }
         public string icon { get; set; }
         public string iconColor { get; set; }
+        public string TipoMenu { get; set; }
         public virtual ICollection<ApplicationRole> Roles { get; set; }
 
         [NotMapped]

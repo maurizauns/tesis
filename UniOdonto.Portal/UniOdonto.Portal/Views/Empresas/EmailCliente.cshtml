@@ -62,10 +62,10 @@
                                             @Html.TextBoxFor(model => model.EmailPara, new { @class = "form-control" })
                                             @Html.ValidationMessageFor(model => model.EmailPara, "", new { @class = "text-danger" })
                                         </div>
-                                        <div class="col-md-4">
+                                        @*<div class="col-md-4">
                                             <span aria-hidden="true" class="glyphicon glyphicon-info-sign"></span>
                                             Nombre campo adicional en el Xml
-                                        </div>
+                                        </div>*@
                                     </div>
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.EmailParaAdicional, new { @class = "control-label col-md-3 text-right" })
@@ -99,36 +99,48 @@
                                         <div class="col-md-4">
                                             <span aria-hidden="true" class="glyphicon glyphicon-info-sign"></span>
                                             Mensaje que recibira el cliente en su correo electronico
-                                            <div class="row">
-                                                <div class="col-md-12"><code>&lt;NUMEROCOMPROBANTE&gt;</code></div>
-                                            </div>
 
                                             <div class="row">
-                                                <div class="col-md-12">Comodin para reemplazar por NumeroComprobante</div>
+                                                <div class="col-md-12"><code>&lt;TIPOCITA&gt;</code></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-12"><code>&lt;TIPOCOMPROBANTE&gt;</code></div>
+                                                <div class="col-md-12">Comodin para reemplazar por el tipo de cita</div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-12">Comodin para reemplazar por Tipo de Comprobante</div>
+                                                <div class="col-md-12"><code>&lt;ESTADOCITA&gt;</code></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-12"><code>&lt;LOGIN&gt;</code></div>
+                                                <div class="col-md-12">Comodin para reemplazar por el estado de cita</div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-12">Comodin para reemplazar por Url del Login</div>
+                                                <div class="col-md-12"><code>&lt;DOCTOR&gt;</code></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-12"><code>&lt;XML&gt;</code></div>
+                                                <div class="col-md-12">Comodin para reemplazar por el nombre del Doctor</div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-12">Comodin para reemplazar por Url del Xml</div>
+                                                <div class="col-md-12"><code>&lt;PACIENTE&gt;</code></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-12"><code>&lt;PDF&gt;</code></div>
+                                                <div class="col-md-12">Comodin para reemplazar por el nombre del Paciente</div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-12">Comodin para reemplazar por Url del Pdf</div>
+                                                <div class="col-md-12"><code>&lt;FECHAACTUAL&gt;</code></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">Comodin para reemplazar por la fecha actual</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12"><code>&lt;FECHACITA&gt;</code></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">Comodin para reemplazar por la fecha de cita</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12"><code>&lt;HORACITA&gt;</code></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">Comodin para reemplazar por la hora de cita</div>
                                             </div>
 
                                         </div>

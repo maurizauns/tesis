@@ -1,4 +1,11 @@
-﻿function Cantones(data) {
+﻿function provinciaCallback(data) {
+    $('#Id').val(data.Id);
+    $('#Codigo').val(data.Codigo);
+    $('#Descripcion').val(data.Descripcion);
+    $('#ProvinciasId option[value=' + data.ProvinciasId + "]").prop('selected', true);
+}
+
+function Cantones(data) {
     this.setAttributes(data);
 }
 

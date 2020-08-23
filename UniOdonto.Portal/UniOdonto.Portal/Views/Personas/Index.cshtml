@@ -17,11 +17,11 @@
                 <div class="btn-group" style="margin-right:2mm">
                     <a class="btn btn-default btn-sm text-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <i class="far fa-file-excel fa-lg" title="Exportar" data-toggle="tooltip"></i>
-                        <span class="caret" style="border-top-color:black;"></span>
+                        @*<span class="caret" style="border-top-color:black;"></span>*@
                     </a>
                     <ul class="excel-menu dropdown-menu pull-right" role="menu">
                         <li><a href="@Url.Action("Exportar")" title="Normal" data-toggle="tooltip">Excel</a></li>
-                        <li><a href="@Url.Action("ExportarDetalle")" title="Detallado" data-toggle="tooltip">Excel Detallado</a></li>
+                        @*<li><a href="@Url.Action("ExportarDetalle")" title="Detallado" data-toggle="tooltip">Excel Detallado</a></li>*@
                     </ul>
                 </div>
                 <a href="@Url.Action("Personas")" title="Nuevo" data-toggle="tooltip" class="pull-right btn btn-success btn-sm modal-crud">
@@ -38,11 +38,12 @@
                     @(Html.MyjqGrid("personas-grid", UniOdonto.Comun.Context.PageSize)
                     .AddColumn(new Column("NumeroPaciente").SetLabel("Número. HC").SetWidth(30).SetSortable(true).SetAlign(Align.Center))
                     .AddColumn(new Column("TipoIdentificacion.Descripcion").SetLabel("Tipo").SetWidth(30).SetSortable(true).SetAlign(Align.Center))
-                    .AddColumn(new Column("Identificacion").SetLabel("Identificacion").SetWidth(30).SetSortable(true).SetAlign(Align.Center))
-                    .AddColumn(new Column("FechaNacimiento").SetLabel("Fecha de Nacimiento").SetWidth(40).SetSortable(true))
-                    .AddColumn(new Column("TipoSangre").SetLabel("Sangre").SetWidth(15).SetSortable(true))
-                    .AddColumn(new Column("Provincias.Descripcion").SetLabel("Provincia - Ciudad").SetWidth(50).SetSortable(true))
-                    .AddColumn(new Column("SeguroMedico").SetLabel("Seguro Médico").SetWidth(30).SetSortable(true))
+                    .AddColumn(new Column("Identificacion").SetLabel("Identificación").SetWidth(30).SetSortable(true).SetAlign(Align.Center))
+                    .AddColumn(new Column("FechaNacimiento").SetLabel("Fecha de Nacimiento").SetWidth(45).SetSortable(true).SetAlign(Align.Center))
+                    .AddColumn(new Column("FechaNacimiento").SetLabel("Edad").SetWidth(20).SetSortable(true).SetAlign(Align.Center))
+                    .AddColumn(new Column("TipoSangre").SetLabel("Sangre").SetWidth(20).SetSortable(true).SetAlign(Align.Center))
+                    .AddColumn(new Column("Provincias.Descripcion").SetLabel("Provincia - Ciudad").SetWidth(70).SetSortable(true))
+                    .AddColumn(new Column("SeguroMedico").SetLabel("Seguro Médico").SetWidth(35).SetSortable(true))
                     .AddColumn(new Column("Sexo").SetLabel("Sexo").SetWidth(25).SetSortable(true))
                     .AddColumn(new Column("PrimerNombre").SetLabel("Nombres y Apellidos").SetSortable(false))
                     .AddColumn(new Column("Actions").SetFixedWidth(true).SetWidth(120).SetLabel("</br>").SetSortable(false).SetAlign(Align.Center))

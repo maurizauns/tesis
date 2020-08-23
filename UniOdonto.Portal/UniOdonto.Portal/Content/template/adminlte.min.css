@@ -15943,7 +15943,8 @@ textarea.form-control.is-warning {
 }
 
 .card-primary:not(.card-outline) > .card-header {
-    background-color: #007bff
+    /*background-color: #007bff*/
+    background-color: #17a2b8;
 }
 
     .card-primary:not(.card-outline) > .card-header, .card-primary:not(.card-outline) > .card-header a {
@@ -17445,7 +17446,8 @@ html.maximized-card {
 .card-header {
     background-color: transparent;
     border-bottom: 1px solid rgba(0,0,0,.125);
-    padding: .75rem 1.25rem;
+    /*padding: .75rem 1.25rem;*/
+    padding: .45rem 1.25rem;
     position: relative;
     border-top-left-radius: .25rem;
     border-top-right-radius: .25rem

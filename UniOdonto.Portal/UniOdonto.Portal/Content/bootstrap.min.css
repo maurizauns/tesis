@@ -6075,11 +6075,10 @@ a.list-group-item-danger, button.list-group-item-danger {
 }
 
     .panel-default > .panel-heading {
-           color: #F9F9F9;
-            background-color: #116eff;
-            border-color: #116eff;
-            height: 35px;
-
+        color: #F9F9F9;
+        background-color: #17a2b8;
+        border-color: #17a2b8;
+        height: 35px;
     }
 
         .panel-default > .panel-heading + .panel-collapse > .panel-body {

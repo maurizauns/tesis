@@ -12,15 +12,24 @@
 
     <link rel="icon" href="~/Content/Images/icono.ico" />
     <link rel="stylesheet" href="~/Content/template/fontawesome/css/all.css">
-    <link rel="stylesheet" href="~/Content/template/icheck-bootstrap/icheck-bootstrap.min.css">
+  
+
     <link rel="stylesheet" href="~/Content/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/template/adminlte.min.css">
+
     <link rel="stylesheet" href="~/Content/template/overlayScrollbars/css/OverlayScrollbars.min.css">
     @Scripts.Render("~/bundles/basico")
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script>
         google.load('visualization', '1', { packages: ['corechart'] });
     </script>
+    <style>
+        .ui-autocomplete > li.ui-state-focus {
+            background-color: #337ab7 !important;
+            color: #ffffff !important;
+            border: 0px;
+        }
+    </style>
 </head>
 <body class="sidebar-mini layout-fixed text-sm accent-lightblue sidebar-collapse" style="height: auto;">
 
@@ -30,7 +39,7 @@
     @Scripts.Render("~/bundles/util")
     @Scripts.Render("~/bundles/jqGrid")
 
-
+   
     <script src="~/Scripts/template/adminlte.js"></script>
     <script src="~/Scripts/template/demo.js"></script>
 
@@ -40,5 +49,5 @@
 
     @RenderSection("scripts", required: false)
 
-    </body>
+</body>
 </html>
